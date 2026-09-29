@@ -1,0 +1,9 @@
+# Mounts eco-scan into a dsh profile. Data dir stores daily snapshots for delta growth.
+- insert:
+    - id: eco-scan
+      name: dsh-plugin-eco-scan
+      config:
+        enabled: true
+        # dataDir: ~/.dsh/eco-scan
+        # tokenEnv: [GITHUB_TOKEN, GH_TOKEN]   # GitHub API token (60 req/h without)
+        topGrowth: 15        # rows in the high-growth table
