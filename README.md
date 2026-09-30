@@ -45,3 +45,10 @@ npm 包与仓库的匹配是名称启发式（`dsh-plugin-<x>` ↔ 仓库 `<x>`�
 - 细分/增长/快照为纯函数，12 个 node --test 全绿。
 - 真实扫描已在本机执行（结果见本仓库 early scan 记录）。
 - npm 包-仓库匹配启发式未全面校验。
+
+## 借鉴来源与差异（非盲目复制）
+
+| 借鉴来源 | 借鉴了什么 | 我们的差异 |
+|---|---|---|
+| [AdamPlatin123/dsh-plugin-radar](https://github.com/AdamPlatin123/dsh-plugin-radar)（1466★） | 「dsh 生态雷达」这个方向本身 | radar 是重基建（2.1 万候选、k8s 运行级实测、15 分钟快照）；本插件是**轻量在 harness 内**的细分市场分析器：赛道关键词细分、npm 周环比 live 榜、`增长率×√规模`评分、本地快照差值。数据口径与排名算法为独立设计，未参考其代码 |
+| OpenRouter npm range API | 用 downloads/range 做周环比的数据源用法 | — |
