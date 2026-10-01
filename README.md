@@ -1,5 +1,7 @@
 # dsh-plugin-eco-scan
 
+**EN** · Market scan of the dsh plugin ecosystem: stars, npm weekly downloads and release-asset download counts per repo, segmented into niches, with growth computed as a **delta between daily snapshots** rather than inferred from a single day (`/eco-scan`). · 12 `node --test` green · scanned real GitHub + npm data on this machine · the npm-package↔repo matching heuristic is not exhaustively checked.
+
 DeepSeek Harness (dsh) 插件：**插件生态市场扫描器**。抓取 dsh 插件生态（GitHub topic: dsh-plugin / dsh-plugins）的全部仓库，采集星标、npm 周下载、release 资产下载量三类真实数据，按细分赛道归类，把每日扫描写入快照，用**差值**算增长，找出高增长插件与高增长赛道。
 
 适合回答："dsh 生态里哪个赛道在涨？哪些插件是高增长标的？我下个插件该卡哪个位？"
@@ -38,8 +40,21 @@ npm 包与仓库的匹配是名称启发式（`dsh-plugin-<x>` ↔ 仓库 `<x>`�
 
 ## 安装
 
-克隆或 npm 安装到 profile 的 node_modules；源码安装先 `npm install`（prepare 构建出 lib/）。
+三步，实测于 `@deepseek-ai/dsh@0.1.7-alpha.1`（需 `pnpm` 在 PATH 上）：
 
+```sh
+# ① 装进 profile：dsh plugin 把参数原样转发给 pnpm，git 包会自动跑 prepare 构建 lib/
+dsh plugin --profile web add github:121212165/dsh-plugin-eco-scan
+```
+
+② 把本仓库根目录 `cordis.patch.yml` 的内容**并进** `$DSH_HOME/profiles/web/cordis.patch.yml`。
+该文件默认是 `[]`，所以要么整份替换，要么把 insert 条目并进同一个数组；**不要直接追加**——
+追加会形成两个 YAML 文档，启动即报
+`failed to parse overlay ... end of the stream or a document separator is expected`（本机实测踩过）。
+
+③ 重启 dsh。配置层与 client 半都要重启才生效（客户端按 boot 时算出的内容 rev 下发，硬刷新浏览器没用）。
+
+自检挂载：`dsh --profile web --dump-config | grep dsh-plugin-eco-scan`，应看到该条目。
 ## 验证状态
 
 - 细分/增长/快照为纯函数，12 个 node --test 全绿。
