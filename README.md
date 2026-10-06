@@ -1,5 +1,8 @@
 # dsh-plugin-eco-scan
 
+> 🧩 **dsh 插件家族**（22 件）：总目录 **[dsh-plugin-family](https://github.com/121212165/dsh-plugin-family)** ｜ 明星插件：**[ide-hub](https://github.com/121212165/dsh-plugin-ide-hub)** 跨 IDE 统一管理 · **[task-forge](https://github.com/121212165/dsh-plugin-task-forge)** 跨窗口无损交接 · **[quota](https://github.com/121212165/dsh-plugin-quota)** 实时用量仪表
+
+
 **EN** · Market scan of the dsh plugin ecosystem: stars, npm weekly downloads and release-asset download counts per repo, segmented into niches, with growth computed as a **delta between daily snapshots** rather than inferred from a single day (`/eco-scan`). · 12 `node --test` green · scanned real GitHub + npm data on this machine · the npm-package↔repo matching heuristic is not exhaustively checked.
 
 DeepSeek Harness (dsh) 插件：**插件生态市场扫描器**。抓取 dsh 插件生态（GitHub topic: dsh-plugin / dsh-plugins）的全部仓库，采集星标、npm 周下载、release 资产下载量三类真实数据，按细分赛道归类，把每日扫描写入快照，用**差值**算增长，找出高增长插件与高增长赛道。
