@@ -11,14 +11,6 @@
       "types": "./lib/types/index.d.ts",
       "default": "./lib/index.js"
     },
-    "./pricing": {
-      "types": "./lib/types/pricing/index.d.ts",
-      "default": "./lib/pricing/index.js"
-    },
-    "./ledger": {
-      "types": "./lib/types/ledger/index.d.ts",
-      "default": "./lib/ledger/index.js"
-    },
     "./package.json": "./package.json",
     "./locale/*": "./locale/*",
     "./icon.svg": "./icon.svg"
