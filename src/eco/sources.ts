@@ -6,14 +6,16 @@
  * to undefined instead of failing the scan. */
 
 export interface FetchOptions {
-  token?: string;
-  signal?: AbortSignal;
+  token?: string | undefined;
+  signal?: AbortSignal | undefined;
 }
 
 async function getJson(url: string, options: FetchOptions): Promise<unknown> {
   const headers: Record<string, string> = { 'User-Agent': 'dsh-plugin-eco-scan', Accept: 'application/vnd.github+json' };
   if (options.token) headers.Authorization = `Bearer ${options.token}`;
-  const response = await fetch(url, { headers, signal: options.signal });
+  const requestInit: RequestInit = { headers };
+  if (options.signal !== undefined) requestInit.signal = options.signal;
+  const response = await fetch(url, requestInit);
   if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
   return response.json();
 }

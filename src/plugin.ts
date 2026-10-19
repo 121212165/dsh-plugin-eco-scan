@@ -10,7 +10,7 @@ import type {} from '@deepseek-ai/dsh-commands';
 import type {} from '@deepseek-ai/dsh-tools';
 
 import { fetchTopicRepos, fetchNpmWeekly, readTokenFromEnv, type RawRepo } from './eco/sources.ts';
-import { segmentOf, segmentStats, renderSegments, SEGMENT_LABEL, type EcoRepo, type Segment } from './eco/segment.ts';
+import { segmentOf, segmentStats, renderSegments, type EcoRepo, type Segment } from './eco/segment.ts';
 import { rankGrowth, renderGrowth, renderSegmentsGrowth, renderLiveGrowth, rankLiveGrowth, type LiveGrowthRow } from './eco/growth.ts';
 import { fetchNpmRangeGrowth } from './eco/sources.ts';
 import { SnapshotStore } from './eco/snapshot.ts';

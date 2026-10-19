@@ -9,7 +9,7 @@ export interface EcoRepo {
   createdAt: string;
   pushedAt: string;
   /** npm weekly downloads when the repo publishes a package we can find */
-  npmWeekly?: number;
+  npmWeekly?: number | undefined;
   /** release asset download counts summed */
   releaseDownloads?: number;
 }
