@@ -43,12 +43,25 @@ export function growthRow(series: RepoSeries): GrowthRow {
   let previousPoint: SnapshotPoint | null = null;
   for (let index = points.length - 2; index >= 0; index--) {
     const candidate = points[index]!;
-    if ((candidate.npmWeekly ?? candidate.releaseDownloads ?? candidate.stars) !== undefined) {
+    const hasUsedMetric =
+      metric === 'npmWeekly'
+        ? candidate.npmWeekly !== undefined
+        : metric === 'releaseDownloads'
+          ? candidate.releaseDownloads !== undefined
+          : true; // stars is required on every point
+    if (hasUsedMetric) {
       previousPoint = candidate;
       break;
     }
   }
-  const previous = previousPoint ? ((previousPoint.npmWeekly ?? previousPoint.releaseDownloads ?? previousPoint.stars) as number) : null;
+  const previous =
+    previousPoint
+      ? ((metric === 'npmWeekly'
+          ? previousPoint.npmWeekly
+          : metric === 'releaseDownloads'
+            ? previousPoint.releaseDownloads
+            : previousPoint.stars) as number)
+      : null;
   const delta = previous === null ? null : latest - previous;
   const growthPct = previous !== null && previous > 0 ? delta! / previous : null;
   const spanDays = previousPoint ? Math.max(1, Math.round((Date.parse(latestPoint.date) - Date.parse(previousPoint.date)) / 86_400_000)) : null;
@@ -94,10 +107,12 @@ export function renderSegmentsGrowth(rows: GrowthRow[]): string {
   return stats.map((stat) => `  ${stat.segment.padEnd(22)} 中位增长 ${(stat.median * 100).toFixed(1)}%（${stat.count} 个插件）`).join('\n');
 }
 
-/** npm range-API backfill: last-7-day sum vs the 7 days before it. */
+/** npm range-API backfill: last-7-day sum vs the 7 days before it.
+ * Needs a full 14-day window; with fewer samples the "previous week" slice
+ * would be truncated, so growthPct is null instead of a wrong ratio. */
 export function weekGrowth(daily: number[]): { week: number; prev: number; growthPct: number | null } {
-  if (daily.length < 8) return { week: daily.reduce((a, b) => a + b, 0), prev: 0, growthPct: null };
   const week = daily.slice(-7).reduce((a, b) => a + b, 0);
+  if (daily.length < 14) return { week, prev: 0, growthPct: null };
   const prev = daily.slice(-14, -7).reduce((a, b) => a + b, 0);
   return { week, prev, growthPct: prev > 0 ? (week - prev) / prev : null };
 }
