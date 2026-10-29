@@ -27,6 +27,11 @@
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "catalog": {
+      "category": "扫描与研究",
+      "blurb": "dsh 插件生态市场扫描器：topic 全仓 + npm 周下载差值 + 增长评分",
+      "entries": "`/eco-scan` `eco_scan`"
     }
   },
   "engines": {
