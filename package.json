@@ -1,15 +1,22 @@
 {
   "name": "dsh-plugin-eco-scan",
-  "version": "0.1.0",
-  "description": "dsh plugin: scan the dsh plugin ecosystem — collect stars/npm downloads/release assets per plugin, segment the market, compute growth deltas from snapshots, and surface high-growth plugins and niches.",
+  "version": "0.2.0",
+  "description": "dsh plugin: scan the dsh plugin ecosystem — collect stars/npm downloads/release assets per plugin, segment the market, compute growth deltas from snapshots, score hot plugins, and export/alerts from a queryable SQLite intelligence store.",
   "type": "module",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./lib/types/index.d.ts",
+  "bin": {
+    "eco-core": "./lib/cli.js"
+  },
   "exports": {
     ".": {
       "types": "./lib/types/index.d.ts",
       "default": "./lib/index.js"
+    },
+    "./core": {
+      "types": "./lib/types/core/index.d.ts",
+      "default": "./lib/core/index.js"
     },
     "./package.json": "./package.json",
     "./locale/*": "./locale/*",
@@ -30,8 +37,8 @@
     },
     "catalog": {
       "category": "扫描与研究",
-      "blurb": "dsh 插件生态市场扫描器：topic 全仓 + npm 周下载差值 + 增长评分",
-      "entries": "`/eco-scan` `eco_scan`"
+      "blurb": "dsh 插件生态情报库：GitHub 语料 + npm 下载 + release 资产写入 SQLite，多标签赛道、鲁棒评分、差异/导出/告警",
+      "entries": "`/eco-scan` `/eco-top` `/eco-diff` `/eco-export` `eco_scan` `eco_query`"
     }
   },
   "engines": {
@@ -40,8 +47,11 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "npm run build",
-    "test": "node --test \"test/*.test.ts\"",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "test:core": "node --test \"test/core/**/*.test.ts\"",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/core/**\" \"test/core/**/*.test.ts\"",
     "typecheck": "tsc --noEmit",
+    "typecheck:core": "tsc --noEmit -p tsconfig.core.json",
     "check": "npm run typecheck && npm test && npm run build",
     "prepublishOnly": "npm run check"
   },
@@ -64,8 +74,8 @@
   "devDependencies": {
     "@deepseek-ai/cordis": "4.0.2",
     "@deepseek-ai/dsh-base": "^0.1.2-alpha.4",
-    "@deepseek-ai/schemastery": "3.18.2",
     "@deepseek-ai/dsh-tools": "^0.1.2-alpha.4",
+    "@deepseek-ai/schemastery": "3.18.2",
     "@types/node": "26.6.2",
     "typescript": "7.0.2"
   },
@@ -75,5 +85,9 @@
   "bugs": {
     "url": "https://github.com/121212165/dsh-plugin-eco-scan/issues"
   },
-  "icon": "./icon.svg"
+  "icon": "./icon.svg",
+  "dependencies": {
+    "@dsh-family/kit": "github:121212165/dsh-plugin-kit#v0.2.1",
+    "yaml": "^2.8.1"
+  }
 }

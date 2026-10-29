@@ -5,20 +5,15 @@
  * All fetches tolerate failure per-source: a dead source degrades that metric
  * to undefined instead of failing the scan. */
 
-export interface FetchOptions {
-  token?: string | undefined;
-  signal?: AbortSignal | undefined;
-}
+import { githubJson, readTokenFromEnv, type FetchOptions } from '@dsh-family/kit/kit/http';
 
-async function getJson(url: string, options: FetchOptions): Promise<unknown> {
-  const headers: Record<string, string> = { 'User-Agent': 'dsh-plugin-eco-scan', Accept: 'application/vnd.github+json' };
-  if (options.token) headers.Authorization = `Bearer ${options.token}`;
-  const requestInit: RequestInit = { headers };
-  if (options.signal !== undefined) requestInit.signal = options.signal;
-  const response = await fetch(url, requestInit);
-  if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
-  return response.json();
-}
+export { readTokenFromEnv };
+export type { FetchOptions };
+
+const USER_AGENT = 'dsh-plugin-eco-scan';
+
+const getJson = (url: string, options: FetchOptions): Promise<unknown> =>
+  githubJson(url, { ...options, userAgent: USER_AGENT });
 
 export interface RawRepo {
   full_name: string;
@@ -93,14 +88,6 @@ export async function fetchNpmWeekly(keywords: string[] = ['dsh-plugin', 'deepse
     }
   }
   return downloads;
-}
-
-export function readTokenFromEnv(envNames: string[]): string | undefined {
-  for (const name of envNames) {
-    const value = process.env[name]?.trim();
-    if (value) return value;
-  }
-  return undefined;
 }
 
 export async function fetchNpmRangeGrowth(names: string[], options: FetchOptions = {}): Promise<Map<string, { week: number; prev: number; growthPct: number | null }>> {

@@ -4,10 +4,9 @@
  *  - npm last-week downloads for packages matching dsh-plugin keywords
  * All fetches tolerate failure per-source: a dead source degrades that metric
  * to undefined instead of failing the scan. */
-export interface FetchOptions {
-    token?: string | undefined;
-    signal?: AbortSignal | undefined;
-}
+import { readTokenFromEnv, type FetchOptions } from '@dsh-family/kit/kit/http';
+export { readTokenFromEnv };
+export type { FetchOptions };
 export interface RawRepo {
     full_name: string;
     description: string | null;
@@ -21,7 +20,6 @@ export declare function fetchReleaseDownloads(fullName: string, options: FetchOp
 /** npm weekly downloads for every published package whose name or keywords tie
  * it to the dsh plugin ecosystem. */
 export declare function fetchNpmWeekly(keywords?: string[], options?: FetchOptions): Promise<Map<string, number>>;
-export declare function readTokenFromEnv(envNames: string[]): string | undefined;
 export declare function fetchNpmRangeGrowth(names: string[], options?: FetchOptions): Promise<Map<string, {
     week: number;
     prev: number;
