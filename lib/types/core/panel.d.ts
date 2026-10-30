@@ -4,12 +4,13 @@
  * scripts and no external assets, so it can be opened from disk or served by
  * any static file server without a build step. */
 import type { RepoPoint, SegmentHeatmap } from './history.ts';
-import type { OverviewRow, TopRow } from './types.ts';
+import type { DiffRow, OverviewRow, TopRow } from './types.ts';
 export interface PanelData {
     date: string | null;
     generatedAt: string;
     scores: TopRow[];
     segments: OverviewRow[];
+    diff: DiffRow[];
     stats: {
         repos: number;
         mapped: number;
@@ -21,8 +22,8 @@ export interface PanelData {
 }
 export declare function htmlEscape(value: unknown): string;
 export declare function pct(part: number, total: number): string;
-/** One polyline per unbroken run of observations; a null is a gap, not a zero.
- * Fewer than two observations renders an em dash instead of a fake line. */
-export declare function sparkline(values: readonly (number | null)[], width?: number, height?: number): string;
+/** Nulls remain gaps: dashed connectors mark interruptions without treating
+ * missing observations as zero or including them in the vertical scale. */
+export declare function sparkline(values: readonly (number | null)[]): string;
 export declare function renderPanel(data: PanelData): string;
 //# sourceMappingURL=panel.d.ts.map

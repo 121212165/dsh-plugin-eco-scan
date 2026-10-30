@@ -121,7 +121,7 @@ test('HTML is self-contained and escapes text taken from the database', () => {
   assert.ok(html.startsWith('<!doctype html>'));
   assert.ok(html.includes('&lt;script&gt;alert(2)&lt;/script&gt;'), 'segment labels are escaped');
   assert.ok(!html.includes('<script>alert('));
-  assert.ok(html.includes('class="bar"'));
+  assert.ok(html.includes('class="ranking"'));
   assert.ok(html.includes('npm 映射覆盖'));
   assert.ok(!/<link |<script /.test(html), 'no external assets or scripts');
 });
