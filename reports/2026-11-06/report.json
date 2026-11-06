@@ -1,429 +1,429 @@
 {
   "v": 2,
-  "generatedAt": "2026-11-06T12:56:36.723Z",
+  "generatedAt": "2026-11-06T15:05:26.147Z",
   "date": "2026-11-06",
   "coverage": {
-    "repos": 1215,
-    "mapped": 672,
-    "withWeekly": 556,
+    "repos": 33591,
+    "mapped": 1680,
+    "withWeekly": 1327,
     "withReleases": 250,
-    "mappedPct": 55.3,
-    "weeklyPct": 45.8
+    "mappedPct": 5,
+    "weeklyPct": 4
   },
   "segments": [
     {
       "segment": "framework-runtime",
-      "repos": 751,
-      "stars": 720646,
-      "weeklyDownloads": 2488610,
-      "medianStars": 58,
-      "multiLabel": 1.862849533954727
+      "repos": 17645,
+      "stars": 748799,
+      "weeklyDownloads": 2192356,
+      "medianStars": 1,
+      "multiLabel": 1.8175687163502408
     },
     {
       "segment": "ui-client",
-      "repos": 328,
-      "stars": 235773,
-      "weeklyDownloads": 1458247,
-      "medianStars": 64,
-      "multiLabel": 2.1646341463414633
+      "repos": 8272,
+      "stars": 247866,
+      "weeklyDownloads": 807608,
+      "medianStars": 0,
+      "multiLabel": 2.047147001934236
     },
     {
       "segment": "tools-devx",
-      "repos": 326,
-      "stars": 836287,
-      "weeklyDownloads": 796903,
-      "medianStars": 66,
-      "multiLabel": 2.058282208588957
+      "repos": 7125,
+      "stars": 848044,
+      "weeklyDownloads": 705393,
+      "medianStars": 0,
+      "multiLabel": 2.040561403508772
     },
     {
       "segment": "other",
-      "repos": 159,
-      "stars": 327843,
-      "weeklyDownloads": 542774,
-      "medianStars": 63,
+      "repos": 8215,
+      "stars": 337083,
+      "weeklyDownloads": 622743,
+      "medianStars": 0,
       "multiLabel": 1
     },
     {
       "segment": "search-knowledge",
-      "repos": 109,
-      "stars": 237542,
-      "weeklyDownloads": 472607,
-      "medianStars": 81,
-      "multiLabel": 2.44954128440367
+      "repos": 2402,
+      "stars": 240983,
+      "weeklyDownloads": 524152,
+      "medianStars": 0,
+      "multiLabel": 2.300999167360533
     },
     {
       "segment": "memory-context",
-      "repos": 125,
-      "stars": 200402,
-      "weeklyDownloads": 289591,
-      "medianStars": 101,
-      "multiLabel": 2.208
+      "repos": 2708,
+      "stars": 204535,
+      "weeklyDownloads": 265743,
+      "medianStars": 1,
+      "multiLabel": 2.1842688330871494
     },
     {
       "segment": "archive-export",
-      "repos": 67,
-      "stars": 14420,
-      "weeklyDownloads": 103720,
-      "medianStars": 54,
-      "multiLabel": 2.373134328358209
+      "repos": 1587,
+      "stars": 16435,
+      "weeklyDownloads": 191526,
+      "medianStars": 0,
+      "multiLabel": 2.2419659735349717
     },
     {
       "segment": "cost-budget",
-      "repos": 38,
-      "stars": 4725,
-      "weeklyDownloads": 81393,
-      "medianStars": 67,
-      "multiLabel": 2.526315789473684
+      "repos": 1496,
+      "stars": 6501,
+      "weeklyDownloads": 151164,
+      "medianStars": 0,
+      "multiLabel": 2.272727272727273
     },
     {
       "segment": "telemetry-analytics",
-      "repos": 52,
-      "stars": 24804,
-      "weeklyDownloads": 51866,
-      "medianStars": 92,
-      "multiLabel": 2.4615384615384617
+      "repos": 1375,
+      "stars": 26652,
+      "weeklyDownloads": 71997,
+      "medianStars": 0,
+      "multiLabel": 2.3607272727272726
     }
   ],
   "top": [
     {
+      "repoId": "minedalang/dsh-dafeiyu-life",
+      "segment": "memory-context",
+      "score": 44,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.94,
+      "cohort": "memory-context/new",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 5990,
+      "releaseDownloads": null,
+      "stars": 24,
+      "description": "让大肥鱼在 DSH 中长期生活：在B站社交、生活（未来扩展多平台），具有长期记忆、可塑造人格、自然好友关系"
+    },
+    {
+      "repoId": "cc19990113/dsh-plugin-codegraph",
+      "segment": "framework-runtime",
+      "score": 43.99,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.71,
+      "cohort": "framework-runtime/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 14528,
+      "releaseDownloads": null,
+      "stars": 13,
+      "description": "Structural code intelligence for DeepSeek Harness (dsh) — gives the agent codegraph and codegraph_index tools to find where a symbol is declared, what calls it, and what a change   reaches, from a tree-sitter index it builds itself. Compatible with the codegraph CLI's on-disk format."
+    },
+    {
+      "repoId": "cq-guojia/dsh-plugin-core",
+      "segment": "other",
+      "score": 43.99,
+      "velocity": 99.99,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.9,
+      "cohort": "other/new",
+      "rank": 5,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 18100,
+      "releaseDownloads": null,
+      "stars": 1,
+      "description": ""
+    },
+    {
+      "repoId": "dsh-market/dsh-market",
+      "segment": "framework-runtime",
+      "score": 43.99,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.74,
+      "cohort": "framework-runtime/young",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 305214,
+      "releaseDownloads": 6541,
+      "stars": 11127,
+      "description": "The plugin market inside DeepSeek Harness — browse, search, one-click install · DSH 可视化插件市场"
+    },
+    {
+      "repoId": "awesome-dsh-plugin/awesome-dsh-plugin",
+      "segment": "framework-runtime",
+      "score": 43.97,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.29,
+      "cohort": "framework-runtime/young",
+      "rank": 3,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 135663,
+      "releaseDownloads": 0,
+      "stars": 23167,
+      "description": "A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表"
+    },
+    {
       "repoId": "saos-3624/dsh-video-storyboard",
       "segment": "archive-export",
-      "score": 87.93,
+      "score": 43.96,
       "velocity": 99.82,
       "adoption": 100,
       "quality": 40,
-      "maintenance": 99.99,
+      "maintenance": 99.9,
       "cohort": "archive-export/new",
       "rank": 1,
       "insufficient": false,
-      "outlier": false,
+      "outlier": true,
       "npmWeekly": 18361,
       "releaseDownloads": 0,
-      "stars": 445,
+      "stars": 446,
       "description": "Scene-aware storyboard for DeepSeek Harness: 9-16 numbered cells with timestamps + transcript + an audio envelope, packed into ONE image (384 tokens). Two tools: video_storyboard and video_zoom."
     },
     {
       "repoId": "leerolling/dsh-boot-suite",
       "segment": "framework-runtime",
-      "score": 87.9,
+      "score": 43.95,
       "velocity": 100,
       "adoption": 100,
       "quality": 40,
-      "maintenance": 99,
+      "maintenance": 98.91,
       "cohort": "framework-runtime/new",
-      "rank": 1,
+      "rank": 3,
       "insufficient": false,
-      "outlier": false,
+      "outlier": true,
       "npmWeekly": 9870,
       "releaseDownloads": null,
       "stars": 75,
       "description": "DeepSeek Harness 开机动画 + 聊天壁纸，一个插件：六幕冷启动动画（真声台词/可交互）+ 开场视频/底图/大字横幅。双击 安装.cmd 即可，出问题双击 卸载.cmd。"
     },
     {
-      "repoId": "hellohub1212/dsh-windows-mcp",
-      "segment": "framework-runtime",
-      "score": 87.68,
+      "repoId": "lznnnnn1998/dsh-artcraft",
+      "segment": "other",
+      "score": 43.95,
       "velocity": 100,
       "adoption": 100,
       "quality": 40,
-      "maintenance": 96.84,
-      "cohort": "framework-runtime/new",
-      "rank": 2,
+      "maintenance": 98.99,
+      "cohort": "other/new",
+      "rank": 7,
       "insufficient": false,
-      "outlier": false,
+      "outlier": true,
+      "npmWeekly": 17241,
+      "releaseDownloads": null,
+      "stars": 4,
+      "description": "Every ArtCraft (storytold) crafting app as a DSH plugin — 12 Cordis plugins driving CADCraft, GridCraft, SoundCraft and 9 more headlessly, each over its own CLI and MCP server."
+    },
+    {
+      "repoId": "regrevia/dsh-inner-browser-use",
+      "segment": "framework-runtime",
+      "score": 43.93,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 98.56,
+      "cohort": "framework-runtime/new",
+      "rank": 4,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 10235,
+      "releaseDownloads": null,
+      "stars": 1,
+      "description": "Drive the DeepSeek Harness sidebar browser itself: a visible pointer, real clicks and typing, upload and download, site logins kept across sessions."
+    },
+    {
+      "repoId": "liguobao/ds-harness-remote",
+      "segment": "framework-runtime",
+      "score": 43.9,
+      "velocity": 99.55,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.82,
+      "cohort": "framework-runtime/young",
+      "rank": 4,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 17006,
+      "releaseDownloads": 10571,
+      "stars": 2044,
+      "description": "基于 DeepSeek Harness 插件机制构建的远程访问方案，通过低延迟、端到端加密的 P2P 网络，支持使用 PC、移动端 和 Web 随时访问本地设备上的DSH 、CodeX、Cursor、Claude Code等工作区。 (Built on DeepSeek Harness plugins, this low-latency, end-to-end encrypted P2P solution lets PC, mobile, and web clients access local DSH, Codex, Cursor, and Claude Code workspaces.)"
+    },
+    {
+      "repoId": "hellohub1212/dsh-windows-mcp",
+      "segment": "framework-runtime",
+      "score": 43.84,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 96.75,
+      "cohort": "framework-runtime/new",
+      "rank": 6,
+      "insufficient": false,
+      "outlier": true,
       "npmWeekly": 137752,
       "releaseDownloads": null,
-      "stars": 44,
+      "stars": 45,
       "description": "Windows desktop automation for DeepSeek Harness: the in-box MCP client bridge mounted against CursorTouch/Windows-MCP, with an off-by-default Computer Use switch and an in-app dependency installer."
     },
     {
-      "repoId": "2bingling/dsh-market",
-      "segment": "ui-client",
-      "score": 87.55,
+      "repoId": "bugtakue/dsh-ronge-adaptive-skill-archive",
+      "segment": "archive-export",
+      "score": 43.82,
       "velocity": 100,
-      "adoption": 98.7,
+      "adoption": 100,
       "quality": 40,
-      "maintenance": 99.41,
-      "cohort": "ui-client/young",
-      "rank": 1,
+      "maintenance": 96.44,
+      "cohort": "archive-export/new",
+      "rank": 2,
       "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 4474,
+      "outlier": true,
+      "npmWeekly": 5095,
       "releaseDownloads": null,
-      "stars": 195,
-      "description": "DeepSeek Harness 插件市场 · 持续收录 6000+ DSH 插件：中文搜索 + 实用五维评分 + 一键安装。Web 版与 DSH 侧边栏插件双形态。Plugin marketplace for DeepSeek Harness: 6000+ plugins, Chinese search, 5-dim scoring, one-click install."
+      "stars": 1,
+      "description": "Context-aware, self-evolving skill cockpit for DeepSeek Harness: recommendations with reasons, 10% exploration, live \"now using\", plan/immersive modes, experience memory, local safety scan, update diff/rollback, 6,399-skill index. MIT."
     },
     {
       "repoId": "tinqiao-oss/engramory",
       "segment": "memory-context",
-      "score": 87.52,
+      "score": 43.76,
       "velocity": 99.94,
       "adoption": 98.62,
       "quality": 40,
-      "maintenance": 99.53,
+      "maintenance": 99.44,
       "cohort": "memory-context/established",
       "rank": 1,
       "insufficient": false,
-      "outlier": false,
+      "outlier": true,
       "npmWeekly": 4447,
       "releaseDownloads": null,
       "stars": 201,
       "description": "Agent 通用长期记忆层：Agent 将重要信息按类型记录为多篇可读的 markdown 记忆文档，文档以链接形式列在限长索引中，索引随会话自动注入。DeepSeek Harness（dsh）有专用插件 dsh-engramory。"
     },
     {
-      "repoId": "webkubor/dsh-bloom-theme",
-      "segment": "ui-client",
-      "score": 82.34,
-      "velocity": 86.65,
-      "adoption": 98.95,
-      "quality": 40,
-      "maintenance": 99.94,
-      "cohort": "ui-client/young",
-      "rank": 2,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 4574,
-      "releaseDownloads": null,
-      "stars": 46,
-      "description": "DSH 主题插件：Bloom 莫兰迪中国风配色，OKLCH 调色、明暗双主题、顶栏一键切换，实测达 WCAG AA。 / A DSH theme plugin: Morandi Chinese-style palettes, OKLCH, light/dark, WCAG AA."
-    },
-    {
-      "repoId": "gezi-wen/sage-mem",
-      "segment": "memory-context",
-      "score": 81.85,
-      "velocity": 84.65,
+      "repoId": "htrp1486/dsh-one-click-polish",
+      "segment": "framework-runtime",
+      "score": 43.73,
+      "velocity": 100,
       "adoption": 100,
       "quality": 40,
-      "maintenance": 99.9,
-      "cohort": "memory-context/young",
+      "maintenance": 94.55,
+      "cohort": "framework-runtime/new",
+      "rank": 8,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 10609,
+      "releaseDownloads": null,
+      "stars": 0,
+      "description": "一键润色 / 扩写 / 自动驾驶 for DeepSeek Harness"
+    },
+    {
+      "repoId": "rannist/balance-dsh",
+      "segment": "cost-budget",
+      "score": 43.73,
+      "velocity": 99.06,
+      "adoption": 99.56,
+      "quality": 40,
+      "maintenance": 99.71,
+      "cohort": "cost-budget/young",
       "rank": 1,
       "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 6868,
+      "outlier": true,
+      "npmWeekly": 4816,
       "releaseDownloads": null,
-      "stars": 27,
-      "description": "Cross-session memory for DeepSeek Harness — plain markdown files, no database, no worker."
+      "stars": 2,
+      "description": "DSH 插件：显示 DeepSeek 账户余额 + 会话 token/费用，含高峰/空闲计费"
     },
     {
-      "repoId": "sikadi233-hub/minecraft-dev",
-      "segment": "tools-devx",
-      "score": 81.14,
-      "velocity": 91.4,
-      "adoption": 88.71,
+      "repoId": "dddmuc/dsh-as-aistudio",
+      "segment": "framework-runtime",
+      "score": 43.68,
+      "velocity": 99.44,
+      "adoption": 98.63,
       "quality": 40,
-      "maintenance": 99.63,
-      "cohort": "tools-devx/young",
-      "rank": 1,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 1911,
-      "releaseDownloads": null,
-      "stars": 40,
-      "description": "Minecraft dev for DeepSeek Harness (dsh): Paper/Spigot/Fabric/Forge/NeoForge across MC 1.7.10-26.3, offline API signature indexes, deterministic sharded pipeline (mc_arbitrate, 21 audit rules). Apache-2.0. ｜ 面向 DeepSeek Harness 的 Minecraft 开发：全时代插件与模组、18 份离线 API 索引、分片仲裁引擎 mc_arbitrate（21 条规则）。Apache-2.0。"
-    },
-    {
-      "repoId": "xohmai/dsh-session-delete",
-      "segment": "archive-export",
-      "score": 80.18,
-      "velocity": 91.74,
-      "adoption": 91.12,
-      "quality": 40,
-      "maintenance": 81.45,
-      "cohort": "archive-export/young",
-      "rank": 1,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 2347,
-      "releaseDownloads": null,
-      "stars": 46,
-      "description": "DeepSeek Harness 会话删除插件：设置页管理归档会话，真正删除磁盘日志（回收站可还原）+ 批量清理——官方归档只隐藏不删盘，这里补上。"
-    },
-    {
-      "repoId": "pgzxb/dsh-feishu",
-      "segment": "ui-client",
-      "score": 78.67,
-      "velocity": 91.5,
-      "adoption": 82.69,
-      "quality": 40,
-      "maintenance": 92.68,
-      "cohort": "ui-client/young",
-      "rank": 3,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 1144,
-      "releaseDownloads": null,
-      "stars": 37,
-      "description": "The Feishu UI for DeepSeek Harness  — a panel-driven control console: every slash command a button on the ⚙️ control-panel card, in-card approvals & questions, live streaming cards, one-QR setup. | DeepSeek Harness 的飞书 UI：面板驱动控制台——每个命令都是卡片按钮，卡内审批与提问，流式卡片，扫码一键配置。"
-    },
-    {
-      "repoId": "mexiaosqwq/dsh-web-mobile",
-      "segment": "ui-client",
-      "score": 78.47,
-      "velocity": 79.9,
-      "adoption": 95.05,
-      "quality": 40,
-      "maintenance": 99.99,
-      "cohort": "ui-client/young",
-      "rank": 4,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 3279,
-      "releaseDownloads": null,
-      "stars": 183,
-      "description": "DSH Web UI 移动端适配：窄屏好用，宽屏适用"
-    },
-    {
-      "repoId": "perrylink/dsh-plugin-guide",
-      "segment": "tools-devx",
-      "score": 77.9,
-      "velocity": 78.38,
-      "adoption": 95.24,
-      "quality": 40,
-      "maintenance": 99.75,
-      "cohort": "tools-devx/young",
-      "rank": 2,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 3334,
-      "releaseDownloads": null,
-      "stars": 65,
-      "description": "A practical guide to DSH plugin quality: ENTRY checks, FLOW journeys, and BOOST practices. Community guide; not a certification or ranking."
-    },
-    {
-      "repoId": "xiaolu511/dsh-hot-restart",
-      "segment": "archive-export",
-      "score": 77.9,
-      "velocity": 90.59,
-      "adoption": 80.06,
-      "quality": 40,
-      "maintenance": 96.43,
-      "cohort": "archive-export/new",
-      "rank": 2,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 914,
-      "releaseDownloads": null,
-      "stars": 9,
-      "description": "DSH 热重启插件：窗口内一个固定按钮，一键关闭并自动重开 DeepSeek Harness，全程零控制台窗口；内置自检系统，出问题点一下就能生成可直接定位的诊断报告 · Hot-restart plugin for DSH, with a built-in self-check that writes a one-file diagnostic report"
-    },
-    {
-      "repoId": "flymysql/dsh-remote",
-      "segment": "tools-devx",
-      "score": 77.16,
-      "velocity": 72.91,
-      "adoption": 100,
-      "quality": 40,
-      "maintenance": 99.99,
-      "cohort": "tools-devx/young",
-      "rank": 3,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 31053,
-      "releaseDownloads": null,
-      "stars": 258,
-      "description": "Remote-work assistant for DeepSeek Harness (DSH): SSH into any machine, pick a remote workspace, and work on it with 22 rw_* tools, conflict-aware SFTP mirror, embedded PTY terminal, port forwarding, and multi-hop jumps - under the same sandbox policy as a local session."
-    },
-    {
-      "repoId": "ltxlong/dsh-session-kit",
-      "segment": "archive-export",
-      "score": 77.12,
-      "velocity": 84.83,
-      "adoption": 84.68,
-      "quality": 40,
-      "maintenance": 97.86,
-      "cohort": "archive-export/young",
-      "rank": 2,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 1355,
-      "releaseDownloads": null,
-      "stars": 8,
-      "description": "会话管理菜单、归档管理、轮次级删除、重新生成、记忆管理、任务管理、话题导航。Conversation management menu, archive management, round-level deletion, regeneration, memory management, task management, topic navigation."
-    },
-    {
-      "repoId": "polang233/dsh-plugin-index",
-      "segment": "search-knowledge",
-      "score": 76.86,
-      "velocity": 74.52,
-      "adoption": 96.89,
-      "quality": 40,
-      "maintenance": 99.87,
-      "cohort": "search-knowledge/new",
-      "rank": 1,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 3835,
-      "releaseDownloads": null,
-      "stars": 183,
-      "description": "Open Plugin Market — Community plugin index for DeepSeek Harness (DSH).  照顾小开发者的插件索引、插件市场、开放插件市场"
-    },
-    {
-      "repoId": "orderg-x/dsh-design-studio",
-      "segment": "archive-export",
-      "score": 76.75,
-      "velocity": 78.07,
-      "adoption": 91.83,
-      "quality": 40,
-      "maintenance": 99.67,
-      "cohort": "archive-export/new",
-      "rank": 3,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 2493,
-      "releaseDownloads": null,
-      "stars": 30,
-      "description": "DSH 设计工作台：模型画的界面摆上画布，点一下就改。 · Design canvas for DeepSeek Harness (DSH): screens in device frames, click an element to edit it, versions, export, phone preview."
-    },
-    {
-      "repoId": "dayuanjiang/next-ai-draw-io",
-      "segment": "ui-client",
-      "score": 76.04,
-      "velocity": 70.16,
-      "adoption": 100,
-      "quality": 40,
-      "maintenance": 99.72,
-      "cohort": "ui-client/established",
-      "rank": 1,
-      "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 1406,
-      "releaseDownloads": 160473,
-      "stars": 36737,
-      "description": "Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, Codex and VS Code."
-    },
-    {
-      "repoId": "lsz-asd/dsh-plugin-session-delete",
-      "segment": "ui-client",
-      "score": 75.98,
-      "velocity": 91.74,
-      "adoption": 91.12,
-      "quality": 40,
-      "maintenance": 39.44,
-      "cohort": "ui-client/young",
+      "maintenance": 99.95,
+      "cohort": "framework-runtime/young",
       "rank": 5,
       "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 2347,
+      "outlier": true,
+      "npmWeekly": 4449,
       "releaseDownloads": null,
-      "stars": 50,
-      "description": "Delete DeepSeek Harness sessions from the UI: header danger button + sidebar session-row menu item (no conversation jump), risk-consent dialog with session name/id, stops running agents first, in-place list refresh without page reload. Works in web and the desktop client."
+      "stars": 3,
+      "description": "Google-AI-Studio 风格的 DeepSeek Harness 轮次控件：包含 edit-turn、rerun-turn、delete-turn、 markdown-bubble和log-trim。每个组件可单独使用；任意子集均可共存。Google-AI-Studio-style turn controls for DeepSeek Harness: includes edit-turn, rerun-turn, delete-turn, markdown-bubble and log-trim. Each component works on its own; any subset can coexist."
     },
     {
-      "repoId": "omdsh-dev/dsh-plugin-check",
-      "segment": "tools-devx",
-      "score": 74.16,
-      "velocity": 92.97,
-      "adoption": 78.93,
+      "repoId": "regrevia/dsh-mobile-use",
+      "segment": "ui-client",
+      "score": 43.36,
+      "velocity": 97.4,
+      "adoption": 100,
       "quality": 40,
-      "maintenance": 52.92,
-      "cohort": "tools-devx/young",
-      "rank": 4,
+      "maintenance": 97.6,
+      "cohort": "ui-client/new",
+      "rank": 3,
       "insufficient": false,
-      "outlier": false,
-      "npmWeekly": 830,
+      "outlier": true,
+      "npmWeekly": 6559,
       "releaseDownloads": null,
-      "stars": 26,
-      "description": "DSH 插件健康检查工具：扫描插件仓库的清单协议 / patch 格式 / 构建陷阱 / hub 收录状态，零依赖只读，注册 plugin_check 工具"
+      "stars": 4,
+      "description": "把真手机装进 DSH：右栏实时镜像可直接点、圈选标注带着圈图和控件回到会话，模型不截图也能读界面文本树（adb_ui 120 ms）。免 MCP、画面只走本机回环，需要宿主有 adb 与 ffmpeg。"
+    },
+    {
+      "repoId": "eightfs/dsh-git-push",
+      "segment": "tools-devx",
+      "score": 43.21,
+      "velocity": 99.17,
+      "adoption": 95.84,
+      "quality": 40,
+      "maintenance": 99.91,
+      "cohort": "tools-devx/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 3509,
+      "releaseDownloads": null,
+      "stars": 2,
+      "description": "DSH git 自动提交推送插件：扫描仓库 + 一键 commit/push（工具 + HTTP API）"
+    },
+    {
+      "repoId": "longmiaoo/dsh-native-browser",
+      "segment": "framework-runtime",
+      "score": 43.2,
+      "velocity": 99.97,
+      "adoption": 95.51,
+      "quality": 40,
+      "maintenance": 97.65,
+      "cohort": "framework-runtime/young",
+      "rank": 8,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 3410,
+      "releaseDownloads": null,
+      "stars": 4,
+      "description": "DSH 浏览器插件 (Browser): Codex-style native browser control in your signed-in Chrome — smooth virtual cursor, page reads, form filling, screenshots, human handoff for DeepSeek Harness."
+    },
+    {
+      "repoId": "xdtrees/dsh-xdpool",
+      "segment": "cost-budget",
+      "score": 43.05,
+      "velocity": 99.93,
+      "adoption": 93.84,
+      "quality": 40,
+      "maintenance": 99.75,
+      "cohort": "cost-budget/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": true,
+      "npmWeekly": 2959,
+      "releaseDownloads": 0,
+      "stars": 443,
+      "description": "把你能白嫖的模型额度接进 DSH 同一个池：WorkBuddy 多账号自动容错、十三家扫码登录、76 家免费额度聚合、用量看板、模型路由、本地 OpenAI 网关、积分自动化。"
     }
   ],
   "diff": [
@@ -438,11 +438,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 11111,
+        "stars": 11127,
         "npmWeekly": 305214,
         "releaseDownloads": 6541
       },
-      "starsDelta": 4286,
+      "starsDelta": 4302,
       "npmDelta": 304755,
       "releaseDelta": null
     },
@@ -457,11 +457,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 436343,
-        "npmWeekly": 1855,
+        "stars": 436471,
+        "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 139635,
+      "starsDelta": 139763,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -476,12 +476,12 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 23127,
-        "npmWeekly": 135166,
+        "stars": 23167,
+        "npmWeekly": 135663,
         "releaseDownloads": 0
       },
-      "starsDelta": 4047,
-      "npmDelta": 127855,
+      "starsDelta": 4087,
+      "npmDelta": 128352,
       "releaseDelta": null
     },
     {
@@ -495,11 +495,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 63394,
+        "stars": 63523,
         "npmWeekly": null,
         "releaseDownloads": 73957
       },
-      "starsDelta": 43140,
+      "starsDelta": 43269,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -514,11 +514,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 274548,
-        "npmWeekly": 186,
+        "stars": 274583,
+        "npmWeekly": 514,
         "releaseDownloads": 0
       },
-      "starsDelta": 23097,
+      "starsDelta": 23132,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -533,11 +533,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 94079,
+        "stars": 94084,
         "npmWeekly": 12016,
         "releaseDownloads": 39688
       },
-      "starsDelta": 9472,
+      "starsDelta": 9477,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -552,11 +552,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 81042,
+        "stars": 81046,
         "npmWeekly": null,
         "releaseDownloads": 90
       },
-      "starsDelta": 5271,
+      "starsDelta": 5275,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -571,11 +571,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 106233,
+        "stars": 106240,
         "npmWeekly": null,
         "releaseDownloads": 1127039
       },
-      "starsDelta": 4485,
+      "starsDelta": 4492,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -591,30 +591,11 @@
       "to": {
         "date": "2026-11-06",
         "stars": 5743,
-        "npmWeekly": 167224,
+        "npmWeekly": 167543,
         "releaseDownloads": 7053
       },
       "starsDelta": 4051,
       "npmDelta": null,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "2bingling/dsh-market",
-      "segment": "ui-client",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 154,
-        "npmWeekly": 459,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 195,
-        "npmWeekly": 4474,
-        "releaseDownloads": null
-      },
-      "starsDelta": 41,
-      "npmDelta": 4015,
       "releaseDelta": null
     },
     {
@@ -628,11 +609,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 5432,
+        "stars": 5451,
         "npmWeekly": 36614,
         "releaseDownloads": 892612
       },
-      "starsDelta": 3995,
+      "starsDelta": 4014,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -647,11 +628,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 35123,
-        "npmWeekly": 818,
+        "stars": 35134,
+        "npmWeekly": null,
         "releaseDownloads": 272750
       },
-      "starsDelta": 3971,
+      "starsDelta": 3982,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -666,30 +647,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 23420,
+        "stars": 23427,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 3380,
-      "npmDelta": null,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "dataelement/dsh-desktop",
-      "segment": "ui-client",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 14739,
-        "npmWeekly": null,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 17470,
-        "npmWeekly": 818,
-        "releaseDownloads": 140614
-      },
-      "starsDelta": 2731,
+      "starsDelta": 3387,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -704,11 +666,30 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 5392,
+        "stars": 5402,
         "npmWeekly": 46342,
         "releaseDownloads": 7474
       },
-      "starsDelta": 2727,
+      "starsDelta": 2737,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "dataelement/dsh-desktop",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 14739,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 17471,
+        "npmWeekly": null,
+        "releaseDownloads": 140614
+      },
+      "starsDelta": 2732,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -723,11 +704,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 4213,
-        "npmWeekly": 2577,
+        "stars": 4227,
+        "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 2614,
+      "starsDelta": 2628,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -742,11 +723,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 7062,
+        "stars": 7065,
         "npmWeekly": 19471,
         "releaseDownloads": 8975
       },
-      "starsDelta": 2369,
+      "starsDelta": 2372,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -761,30 +742,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 36669,
+        "stars": 36668,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 2219,
-      "npmDelta": null,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "bowenliang123/dsh-context",
-      "segment": "memory-context",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 2220,
-        "npmWeekly": null,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 4371,
-        "npmWeekly": 637,
-        "releaseDownloads": 1053
-      },
-      "starsDelta": 2151,
+      "starsDelta": 2218,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -799,11 +761,30 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 5676,
+        "stars": 5694,
         "npmWeekly": null,
         "releaseDownloads": 313
       },
-      "starsDelta": 2138,
+      "starsDelta": 2156,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "bowenliang123/dsh-context",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2220,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 4372,
+        "npmWeekly": null,
+        "releaseDownloads": 1053
+      },
+      "starsDelta": 2152,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -818,31 +799,12 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 6946,
+        "stars": 6947,
         "npmWeekly": 118467,
         "releaseDownloads": 44305
       },
-      "starsDelta": 1913,
+      "starsDelta": 1914,
       "npmDelta": null,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "anbeime/skill",
-      "segment": "tools-devx",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 8189,
-        "npmWeekly": 326,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 9233,
-        "npmWeekly": 2026,
-        "releaseDownloads": 0
-      },
-      "starsDelta": 1044,
-      "npmDelta": 1700,
       "releaseDelta": null
     },
     {
@@ -856,11 +818,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 7289,
+        "stars": 7299,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 1665,
+      "starsDelta": 1675,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -875,11 +837,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 41683,
+        "stars": 41686,
         "npmWeekly": null,
         "releaseDownloads": 5526
       },
-      "starsDelta": 1540,
+      "starsDelta": 1543,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -894,11 +856,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 10148,
+        "stars": 10151,
         "npmWeekly": null,
         "releaseDownloads": 9575
       },
-      "starsDelta": 1302,
+      "starsDelta": 1305,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -932,11 +894,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 2831,
+        "stars": 2835,
         "npmWeekly": null,
         "releaseDownloads": 16051
       },
-      "starsDelta": 1113,
+      "starsDelta": 1117,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -960,6 +922,25 @@
       "releaseDelta": null
     },
     {
+      "repoId": "anbeime/skill",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 8189,
+        "npmWeekly": 326,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 9234,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 1045,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
       "repoId": "tencent/browserskill",
       "segment": "tools-devx",
       "from": {
@@ -970,11 +951,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 10106,
+        "stars": 10107,
         "npmWeekly": null,
         "releaseDownloads": 4459955
       },
-      "starsDelta": 1031,
+      "starsDelta": 1032,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -989,11 +970,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 45412,
+        "stars": 45413,
         "npmWeekly": null,
         "releaseDownloads": 1623
       },
-      "starsDelta": 997,
+      "starsDelta": 998,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1008,11 +989,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 2796,
+        "stars": 2797,
         "npmWeekly": 6120,
         "releaseDownloads": 0
       },
-      "starsDelta": 992,
+      "starsDelta": 993,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1027,11 +1008,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 3744,
+        "stars": 3745,
         "npmWeekly": null,
         "releaseDownloads": 141481
       },
-      "starsDelta": 919,
+      "starsDelta": 920,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1046,11 +1027,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 35514,
+        "stars": 35517,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 913,
+      "starsDelta": 916,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1103,50 +1084,12 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 26415,
+        "stars": 26413,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 711,
+      "starsDelta": 709,
       "npmDelta": null,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "hust-open-atom-club/oh-dsh",
-      "segment": "ui-client",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 322,
-        "npmWeekly": 1145,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 324,
-        "npmWeekly": 1812,
-        "releaseDownloads": 18344
-      },
-      "starsDelta": 2,
-      "npmDelta": 667,
-      "releaseDelta": null
-    },
-    {
-      "repoId": "jingyunstudio/jingyun-dsh",
-      "segment": "tools-devx",
-      "from": {
-        "date": "2026-10-17",
-        "stars": 1007,
-        "npmWeekly": 1145,
-        "releaseDownloads": null
-      },
-      "to": {
-        "date": "2026-11-06",
-        "stars": 925,
-        "npmWeekly": 1812,
-        "releaseDownloads": 137
-      },
-      "starsDelta": -82,
-      "npmDelta": 667,
       "releaseDelta": null
     },
     {
@@ -1179,11 +1122,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 4808,
-        "npmWeekly": 801,
+        "stars": 4811,
+        "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 513,
+      "starsDelta": 516,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1198,11 +1141,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 1488,
-        "npmWeekly": 447,
+        "stars": 1489,
+        "npmWeekly": null,
         "releaseDownloads": 13998
       },
-      "starsDelta": 461,
+      "starsDelta": 462,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1236,11 +1179,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 12298,
+        "stars": 12299,
         "npmWeekly": null,
         "releaseDownloads": 0
       },
-      "starsDelta": 397,
+      "starsDelta": 398,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1255,11 +1198,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 7403,
-        "npmWeekly": 934,
+        "stars": 7404,
+        "npmWeekly": 1540,
         "releaseDownloads": 12958
       },
-      "starsDelta": 384,
+      "starsDelta": 385,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1274,11 +1217,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 13838,
+        "stars": 13837,
         "npmWeekly": null,
         "releaseDownloads": 6615
       },
-      "starsDelta": 382,
+      "starsDelta": 381,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1293,11 +1236,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 3499,
+        "stars": 3501,
         "npmWeekly": null,
         "releaseDownloads": 224907
       },
-      "starsDelta": 373,
+      "starsDelta": 375,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1312,11 +1255,11 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 1371,
-        "npmWeekly": 904,
+        "stars": 1372,
+        "npmWeekly": null,
         "releaseDownloads": 1015
       },
-      "starsDelta": 362,
+      "starsDelta": 363,
       "npmDelta": null,
       "releaseDelta": null
     },
@@ -1369,11 +1312,68 @@
       },
       "to": {
         "date": "2026-11-06",
-        "stars": 2390,
+        "stars": 2391,
         "npmWeekly": null,
         "releaseDownloads": 117329
       },
-      "starsDelta": 338,
+      "starsDelta": 339,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "plastic-labs/honcho",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 7651,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7975,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 324,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "nwflower/dsh-claude-style",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 176,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 493,
+        "npmWeekly": 11301,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 317,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "michengai/dsh-skills-manager",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 199,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 488,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 289,
       "npmDelta": null,
       "releaseDelta": null
     }

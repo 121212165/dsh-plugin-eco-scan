@@ -1,57 +1,52 @@
 # dsh 插件生态报告 2026-11-06
 
-生成时间：2026-11-06T12:56:35.328Z
+生成时间：2026-11-06T15:05:20.228Z
 
-覆盖：1215 仓库 · 已映射 npm 672（55.3%）· 有周下载 556 · 有 release 数据 250
+覆盖：33591 仓库 · 已映射 npm 1680（5%）· 有周下载 1327 · 有 release 数据 250
 
 ## 赛道
 
 | 赛道 | 仓库 | ★ | 周下载 | 中位 ★ |
 |---|---:|---:|---:|---:|
-| framework-runtime | 751 | 720646 | 2488610 | 58 |
-| ui-client | 328 | 235773 | 1458247 | 64 |
-| tools-devx | 326 | 836287 | 796903 | 66 |
-| other | 159 | 327843 | 542774 | 63 |
-| search-knowledge | 109 | 237542 | 472607 | 81 |
-| memory-context | 125 | 200402 | 289591 | 101 |
-| archive-export | 67 | 14420 | 103720 | 54 |
-| cost-budget | 38 | 4725 | 81393 | 67 |
-| telemetry-analytics | 52 | 24804 | 51866 | 92 |
+| framework-runtime | 17645 | 748799 | 2192356 | 1 |
+| ui-client | 8272 | 247866 | 807608 | 0 |
+| tools-devx | 7125 | 848044 | 705393 | 0 |
+| other | 8215 | 337083 | 622743 | 0 |
+| search-knowledge | 2402 | 240983 | 524152 | 0 |
+| memory-context | 2708 | 204535 | 265743 | 1 |
+| archive-export | 1587 | 16435 | 191526 | 0 |
+| cost-budget | 1496 | 6501 | 151164 | 0 |
+| telemetry-analytics | 1375 | 26652 | 71997 | 0 |
 
 ## Top
 
 | # | 仓库 | 赛道 | 分 | 速度 | 规模 | 质量 | 维护 | 周下载 |
 |---:|---|---|---:|---:|---:|---:|---:|---:|
-| 1 | saos-3624/dsh-video-storyboard | archive-export | 87.93 | 99.82 | 100 | 40 | 99.99 | 18361 |
-| 1 | leerolling/dsh-boot-suite | framework-runtime | 87.9 | 100 | 100 | 40 | 99 | 9870 |
-| 2 | hellohub1212/dsh-windows-mcp | framework-runtime | 87.68 | 100 | 100 | 40 | 96.84 | 137752 |
-| 1 | 2bingling/dsh-market | ui-client | 87.55 | 100 | 98.7 | 40 | 99.41 | 4474 |
-| 1 | tinqiao-oss/engramory | memory-context | 87.52 | 99.94 | 98.62 | 40 | 99.53 | 4447 |
-| 2 | webkubor/dsh-bloom-theme | ui-client | 82.34 | 86.65 | 98.95 | 40 | 99.94 | 4574 |
-| 1 | gezi-wen/sage-mem | memory-context | 81.85 | 84.65 | 100 | 40 | 99.9 | 6868 |
-| 1 | sikadi233-hub/minecraft-dev | tools-devx | 81.14 | 91.4 | 88.71 | 40 | 99.63 | 1911 |
-| 1 | xohmai/dsh-session-delete | archive-export | 80.18 | 91.74 | 91.12 | 40 | 81.45 | 2347 |
-| 3 | pgzxb/dsh-feishu | ui-client | 78.67 | 91.5 | 82.69 | 40 | 92.68 | 1144 |
-| 4 | mexiaosqwq/dsh-web-mobile | ui-client | 78.47 | 79.9 | 95.05 | 40 | 99.99 | 3279 |
-| 2 | perrylink/dsh-plugin-guide | tools-devx | 77.9 | 78.38 | 95.24 | 40 | 99.75 | 3334 |
-| 2 | xiaolu511/dsh-hot-restart | archive-export | 77.9 | 90.59 | 80.06 | 40 | 96.43 | 914 |
-| 3 | flymysql/dsh-remote | tools-devx | 77.16 | 72.91 | 100 | 40 | 99.99 | 31053 |
-| 2 | ltxlong/dsh-session-kit | archive-export | 77.12 | 84.83 | 84.68 | 40 | 97.86 | 1355 |
-| 1 | polang233/dsh-plugin-index | search-knowledge | 76.86 | 74.52 | 96.89 | 40 | 99.87 | 3835 |
-| 3 | orderg-x/dsh-design-studio | archive-export | 76.75 | 78.07 | 91.83 | 40 | 99.67 | 2493 |
-| 1 | dayuanjiang/next-ai-draw-io | ui-client | 76.04 | 70.16 | 100 | 40 | 99.72 | 1406 |
-| 5 | lsz-asd/dsh-plugin-session-delete | ui-client | 75.98 | 91.74 | 91.12 | 40 | 39.44 | 2347 |
-| 4 | omdsh-dev/dsh-plugin-check | tools-devx | 74.16 | 92.97 | 78.93 | 40 | 52.92 | 830 |
+| 1 | minedalang/dsh-dafeiyu-life | memory-context | 44 | 100 | 100 | 40 | 99.94 | 5990 |
+| 2 | cc19990113/dsh-plugin-codegraph | framework-runtime | 43.99 | 100 | 100 | 40 | 99.71 | 14528 |
+| 5 | cq-guojia/dsh-plugin-core | other | 43.99 | 99.99 | 100 | 40 | 99.9 | 18100 |
+| 1 | dsh-market/dsh-market | framework-runtime | 43.99 | 100 | 100 | 40 | 99.74 | 305214 |
+| 3 | awesome-dsh-plugin/awesome-dsh-plugin | framework-runtime | 43.97 | 100 | 100 | 40 | 99.29 | 135663 |
+| 1 | saos-3624/dsh-video-storyboard | archive-export | 43.96 | 99.82 | 100 | 40 | 99.9 | 18361 |
+| 3 | leerolling/dsh-boot-suite | framework-runtime | 43.95 | 100 | 100 | 40 | 98.91 | 9870 |
+| 7 | lznnnnn1998/dsh-artcraft | other | 43.95 | 100 | 100 | 40 | 98.99 | 17241 |
+| 4 | regrevia/dsh-inner-browser-use | framework-runtime | 43.93 | 100 | 100 | 40 | 98.56 | 10235 |
+| 4 | liguobao/ds-harness-remote | framework-runtime | 43.9 | 99.55 | 100 | 40 | 99.82 | 17006 |
+| 6 | hellohub1212/dsh-windows-mcp | framework-runtime | 43.84 | 100 | 100 | 40 | 96.75 | 137752 |
+| 2 | bugtakue/dsh-ronge-adaptive-skill-archive | archive-export | 43.82 | 100 | 100 | 40 | 96.44 | 5095 |
+| 1 | tinqiao-oss/engramory | memory-context | 43.76 | 99.94 | 98.62 | 40 | 99.44 | 4447 |
+| 8 | htrp1486/dsh-one-click-polish | framework-runtime | 43.73 | 100 | 100 | 40 | 94.55 | 10609 |
+| 1 | rannist/balance-dsh | cost-budget | 43.73 | 99.06 | 99.56 | 40 | 99.71 | 4816 |
+| 5 | dddmuc/dsh-as-aistudio | framework-runtime | 43.68 | 99.44 | 98.63 | 40 | 99.95 | 4449 |
+| 3 | regrevia/dsh-mobile-use | ui-client | 43.36 | 97.4 | 100 | 40 | 97.6 | 6559 |
+| 2 | eightfs/dsh-git-push | tools-devx | 43.21 | 99.17 | 95.84 | 40 | 99.91 | 3509 |
+| 8 | longmiaoo/dsh-native-browser | framework-runtime | 43.2 | 99.97 | 95.51 | 40 | 97.65 | 3410 |
+| 2 | xdtrees/dsh-xdpool | cost-budget | 43.05 | 99.93 | 93.84 | 40 | 99.75 | 2959 |
 
 ## 变化
 
 | 仓库 | 周下载 Δ | ★ Δ |
 |---|---:|---:|
-| dsh-market/dsh-market | 304755 | 4286 |
-| awesome-dsh-plugin/awesome-dsh-plugin | 127855 | 4047 |
-| 2bingling/dsh-market | 4015 | 41 |
-| anbeime/skill | 1700 | 1044 |
-| hust-open-atom-club/oh-dsh | 667 | 2 |
-| jingyunstudio/jingyun-dsh | 667 | -82 |
+| dsh-market/dsh-market | 304755 | 4302 |
+| awesome-dsh-plugin/awesome-dsh-plugin | 128352 | 4087 |
 | clearailhc/clearai-dsh | -204 | -266 |
-| yxxbc/dsh-balance-plugin | -6118 | 2 |

@@ -1,0 +1,1144 @@
+{
+  "generatedAt": "2026-11-06T13:27:29.878Z",
+  "today": "2026-11-06",
+  "queries": [
+    "topic:dsh-plugin",
+    "topic:dsh-plugins",
+    "dsh-plugin in:name",
+    "dsh-plugins in:name",
+    "dsh-plugin in:description",
+    "dsh-plugins in:description",
+    "cordis plugin in:description",
+    "deepseek-harness dsh-plugin in:description"
+  ],
+  "buckets": [
+    {
+      "query": "topic:dsh-plugin created:2015-12-05..2021-05-21",
+      "count": 9,
+      "base": "topic:dsh-plugin",
+      "start": "2015-12-05",
+      "end": "2021-05-21"
+    },
+    {
+      "query": "topic:dsh-plugin created:2021-05-22..2024-02-13",
+      "count": 13,
+      "base": "topic:dsh-plugin",
+      "start": "2021-05-22",
+      "end": "2024-02-13"
+    },
+    {
+      "query": "topic:dsh-plugin created:2024-02-14..2025-06-26",
+      "count": 13,
+      "base": "topic:dsh-plugin",
+      "start": "2024-02-14",
+      "end": "2025-06-26"
+    },
+    {
+      "query": "topic:dsh-plugin created:2025-06-27..2026-03-02",
+      "count": 58,
+      "base": "topic:dsh-plugin",
+      "start": "2025-06-27",
+      "end": "2026-03-02"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-03-03..2026-07-05",
+      "count": 246,
+      "base": "topic:dsh-plugin",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-07-06..2026-08-05",
+      "count": 177,
+      "base": "topic:dsh-plugin",
+      "start": "2026-07-06",
+      "end": "2026-08-05"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-06..2026-08-13",
+      "count": 783,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-06",
+      "end": "2026-08-13"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:0..0",
+      "count": 335,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "0..0"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:1..2",
+      "count": 729,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "1..2"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:3..5",
+      "count": 338,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "3..5"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:6..10",
+      "count": 152,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "6..10"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:11..20",
+      "count": 109,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "11..20"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:21..50",
+      "count": 81,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "21..50"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:51..100",
+      "count": 28,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "51..100"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:101..200",
+      "count": 23,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "101..200"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:201..500",
+      "count": 19,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "201..500"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:501..1000",
+      "count": 5,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "501..1000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:1001..2000",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "1001..2000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:2001..5000",
+      "count": 7,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "2001..5000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:5001..10000",
+      "count": 2,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "5001..10000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-14..2026-08-14 stars:>=10001",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-14",
+      "end": "2026-08-14",
+      "stars": "10001..*"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:0..0",
+      "count": 534,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "0..0"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:1..2",
+      "count": 516,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "1..2"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:3..5",
+      "count": 192,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "3..5"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:6..10",
+      "count": 118,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "6..10"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:11..20",
+      "count": 54,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "11..20"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:21..50",
+      "count": 50,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "21..50"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:51..100",
+      "count": 24,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "51..100"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:101..200",
+      "count": 10,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "101..200"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:201..500",
+      "count": 5,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "201..500"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:501..1000",
+      "count": 6,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "501..1000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:1001..2000",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "1001..2000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-15..2026-08-15 stars:2001..5000",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-15",
+      "end": "2026-08-15",
+      "stars": "2001..5000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:0..0",
+      "count": 626,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "0..0"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:1..2",
+      "count": 497,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "1..2"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:3..5",
+      "count": 142,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "3..5"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:6..10",
+      "count": 79,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "6..10"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:11..20",
+      "count": 49,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "11..20"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:21..50",
+      "count": 43,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "21..50"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:51..100",
+      "count": 9,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "51..100"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:101..200",
+      "count": 5,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "101..200"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:201..500",
+      "count": 3,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "201..500"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:501..1000",
+      "count": 4,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "501..1000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:1001..2000",
+      "count": 2,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "1001..2000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-16..2026-08-16 stars:5001..10000",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-16",
+      "end": "2026-08-16",
+      "stars": "5001..10000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-17..2026-08-17",
+      "count": 921,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-17",
+      "end": "2026-08-17"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-18..2026-08-18",
+      "count": 645,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-18",
+      "end": "2026-08-18"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-19..2026-08-19",
+      "count": 726,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-19",
+      "end": "2026-08-19"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:0..0",
+      "count": 999,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "0..0"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:1..2",
+      "count": 169,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "1..2"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:3..5",
+      "count": 67,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "3..5"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:6..10",
+      "count": 24,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "6..10"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:11..20",
+      "count": 9,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "11..20"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:21..50",
+      "count": 11,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "21..50"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:51..100",
+      "count": 3,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "51..100"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:101..200",
+      "count": 6,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "101..200"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:201..500",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "201..500"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-20..2026-08-20 stars:501..1000",
+      "count": 1,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-20",
+      "end": "2026-08-20",
+      "stars": "501..1000"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-21..2026-08-21",
+      "count": 578,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-21",
+      "end": "2026-08-21"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-22..2026-08-23",
+      "count": 618,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-22",
+      "end": "2026-08-23"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-24..2026-08-25",
+      "count": 591,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-24",
+      "end": "2026-08-25"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-26..2026-08-27",
+      "count": 532,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-26",
+      "end": "2026-08-27"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-28..2026-08-29",
+      "count": 584,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-28",
+      "end": "2026-08-29"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-08-30..2026-09-02",
+      "count": 658,
+      "base": "topic:dsh-plugin",
+      "start": "2026-08-30",
+      "end": "2026-09-02"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-03..2026-09-05",
+      "count": 408,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-03",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-06..2026-09-09",
+      "count": 444,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-06",
+      "end": "2026-09-09"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-10..2026-09-13",
+      "count": 628,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-10",
+      "end": "2026-09-13"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-14..2026-09-21",
+      "count": 956,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-14",
+      "end": "2026-09-21"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-22..2026-09-25",
+      "count": 480,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-22",
+      "end": "2026-09-25"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-26..2026-09-29",
+      "count": 590,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-26",
+      "end": "2026-09-29"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-09-30..2026-10-03",
+      "count": 814,
+      "base": "topic:dsh-plugin",
+      "start": "2026-09-30",
+      "end": "2026-10-03"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-04..2026-10-06",
+      "count": 446,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-04",
+      "end": "2026-10-06"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-07..2026-10-10",
+      "count": 753,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-07",
+      "end": "2026-10-10"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-11..2026-10-14",
+      "count": 692,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-11",
+      "end": "2026-10-14"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-15..2026-10-16",
+      "count": 471,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-15",
+      "end": "2026-10-16"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-17..2026-10-18",
+      "count": 654,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-17",
+      "end": "2026-10-18"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-19..2026-10-20",
+      "count": 753,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-19",
+      "end": "2026-10-20"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-21..2026-10-22",
+      "count": 702,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-21",
+      "end": "2026-10-22"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-23..2026-10-24",
+      "count": 753,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-23",
+      "end": "2026-10-24"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-25..2026-10-26",
+      "count": 693,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-25",
+      "end": "2026-10-26"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-27..2026-10-28",
+      "count": 761,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-27",
+      "end": "2026-10-28"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-29..2026-10-30",
+      "count": 777,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-29",
+      "end": "2026-10-30"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-10-31..2026-11-01",
+      "count": 691,
+      "base": "topic:dsh-plugin",
+      "start": "2026-10-31",
+      "end": "2026-11-01"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-11-02..2026-11-03",
+      "count": 785,
+      "base": "topic:dsh-plugin",
+      "start": "2026-11-02",
+      "end": "2026-11-03"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-11-04..2026-11-05",
+      "count": 842,
+      "base": "topic:dsh-plugin",
+      "start": "2026-11-04",
+      "end": "2026-11-05"
+    },
+    {
+      "query": "topic:dsh-plugin created:2026-11-06..2026-11-06",
+      "count": 276,
+      "base": "topic:dsh-plugin",
+      "start": "2026-11-06",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "topic:dsh-plugins created:2021-05-22..2024-02-13",
+      "count": 1,
+      "base": "topic:dsh-plugins",
+      "start": "2021-05-22",
+      "end": "2024-02-13"
+    },
+    {
+      "query": "topic:dsh-plugins created:2024-02-14..2025-06-26",
+      "count": 3,
+      "base": "topic:dsh-plugins",
+      "start": "2024-02-14",
+      "end": "2025-06-26"
+    },
+    {
+      "query": "topic:dsh-plugins created:2025-06-27..2026-03-02",
+      "count": 4,
+      "base": "topic:dsh-plugins",
+      "start": "2025-06-27",
+      "end": "2026-03-02"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-03-03..2026-07-05",
+      "count": 33,
+      "base": "topic:dsh-plugins",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-07-06..2026-08-05",
+      "count": 13,
+      "base": "topic:dsh-plugins",
+      "start": "2026-07-06",
+      "end": "2026-08-05"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-08-06..2026-08-13",
+      "count": 66,
+      "base": "topic:dsh-plugins",
+      "start": "2026-08-06",
+      "end": "2026-08-13"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-08-14..2026-08-17",
+      "count": 821,
+      "base": "topic:dsh-plugins",
+      "start": "2026-08-14",
+      "end": "2026-08-17"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-08-18..2026-08-21",
+      "count": 308,
+      "base": "topic:dsh-plugins",
+      "start": "2026-08-18",
+      "end": "2026-08-21"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-08-22..2026-09-05",
+      "count": 402,
+      "base": "topic:dsh-plugins",
+      "start": "2026-08-22",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-09-06..2026-10-06",
+      "count": 404,
+      "base": "topic:dsh-plugins",
+      "start": "2026-09-06",
+      "end": "2026-10-06"
+    },
+    {
+      "query": "topic:dsh-plugins created:2026-10-07..2026-11-06",
+      "count": 612,
+      "base": "topic:dsh-plugins",
+      "start": "2026-10-07",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "dsh-plugin in:name created:2005-01-01..2015-12-04",
+      "count": 4,
+      "base": "dsh-plugin in:name",
+      "start": "2005-01-01",
+      "end": "2015-12-04"
+    },
+    {
+      "query": "dsh-plugin in:name created:2015-12-05..2021-05-21",
+      "count": 3,
+      "base": "dsh-plugin in:name",
+      "start": "2015-12-05",
+      "end": "2021-05-21"
+    },
+    {
+      "query": "dsh-plugin in:name created:2021-05-22..2024-02-13",
+      "count": 4,
+      "base": "dsh-plugin in:name",
+      "start": "2021-05-22",
+      "end": "2024-02-13"
+    },
+    {
+      "query": "dsh-plugin in:name created:2025-06-27..2026-03-02",
+      "count": 1,
+      "base": "dsh-plugin in:name",
+      "start": "2025-06-27",
+      "end": "2026-03-02"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-03-03..2026-07-05",
+      "count": 3,
+      "base": "dsh-plugin in:name",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-07-06..2026-08-05",
+      "count": 2,
+      "base": "dsh-plugin in:name",
+      "start": "2026-07-06",
+      "end": "2026-08-05"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-08-06..2026-08-13",
+      "count": 102,
+      "base": "dsh-plugin in:name",
+      "start": "2026-08-06",
+      "end": "2026-08-13"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-08-14..2026-08-15",
+      "count": 695,
+      "base": "dsh-plugin in:name",
+      "start": "2026-08-14",
+      "end": "2026-08-15"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-08-16..2026-08-17",
+      "count": 449,
+      "base": "dsh-plugin in:name",
+      "start": "2026-08-16",
+      "end": "2026-08-17"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-08-18..2026-08-21",
+      "count": 460,
+      "base": "dsh-plugin in:name",
+      "start": "2026-08-18",
+      "end": "2026-08-21"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-08-22..2026-09-05",
+      "count": 701,
+      "base": "dsh-plugin in:name",
+      "start": "2026-08-22",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-09-06..2026-09-21",
+      "count": 494,
+      "base": "dsh-plugin in:name",
+      "start": "2026-09-06",
+      "end": "2026-09-21"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-09-22..2026-10-06",
+      "count": 545,
+      "base": "dsh-plugin in:name",
+      "start": "2026-09-22",
+      "end": "2026-10-06"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-10-07..2026-10-22",
+      "count": 842,
+      "base": "dsh-plugin in:name",
+      "start": "2026-10-07",
+      "end": "2026-10-22"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-10-23..2026-10-30",
+      "count": 608,
+      "base": "dsh-plugin in:name",
+      "start": "2026-10-23",
+      "end": "2026-10-30"
+    },
+    {
+      "query": "dsh-plugin in:name created:2026-10-31..2026-11-06",
+      "count": 632,
+      "base": "dsh-plugin in:name",
+      "start": "2026-10-31",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "dsh-plugins in:name created:2005-01-01..2015-12-04",
+      "count": 1,
+      "base": "dsh-plugins in:name",
+      "start": "2005-01-01",
+      "end": "2015-12-04"
+    },
+    {
+      "query": "dsh-plugins in:name created:2015-12-05..2021-05-21",
+      "count": 1,
+      "base": "dsh-plugins in:name",
+      "start": "2015-12-05",
+      "end": "2021-05-21"
+    },
+    {
+      "query": "dsh-plugins in:name created:2026-03-03..2026-07-05",
+      "count": 2,
+      "base": "dsh-plugins in:name",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "dsh-plugins in:name created:2026-07-06..2026-09-05",
+      "count": 454,
+      "base": "dsh-plugins in:name",
+      "start": "2026-07-06",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "dsh-plugins in:name created:2026-09-06..2026-11-06",
+      "count": 726,
+      "base": "dsh-plugins in:name",
+      "start": "2026-09-06",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "dsh-plugin in:description created:2021-05-22..2024-02-13",
+      "count": 3,
+      "base": "dsh-plugin in:description",
+      "start": "2021-05-22",
+      "end": "2024-02-13"
+    },
+    {
+      "query": "dsh-plugin in:description created:2025-06-27..2026-03-02",
+      "count": 2,
+      "base": "dsh-plugin in:description",
+      "start": "2025-06-27",
+      "end": "2026-03-02"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-03-03..2026-07-05",
+      "count": 9,
+      "base": "dsh-plugin in:description",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-07-06..2026-08-05",
+      "count": 16,
+      "base": "dsh-plugin in:description",
+      "start": "2026-07-06",
+      "end": "2026-08-05"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-06..2026-08-13",
+      "count": 144,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-06",
+      "end": "2026-08-13"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-14..2026-08-15",
+      "count": 800,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-14",
+      "end": "2026-08-15"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-16..2026-08-17",
+      "count": 567,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-16",
+      "end": "2026-08-17"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-18..2026-08-21",
+      "count": 633,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-18",
+      "end": "2026-08-21"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-22..2026-08-29",
+      "count": 666,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-22",
+      "end": "2026-08-29"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-08-30..2026-09-05",
+      "count": 361,
+      "base": "dsh-plugin in:description",
+      "start": "2026-08-30",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-09-06..2026-09-21",
+      "count": 670,
+      "base": "dsh-plugin in:description",
+      "start": "2026-09-06",
+      "end": "2026-09-21"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-09-22..2026-10-06",
+      "count": 758,
+      "base": "dsh-plugin in:description",
+      "start": "2026-09-22",
+      "end": "2026-10-06"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-10-07..2026-10-14",
+      "count": 456,
+      "base": "dsh-plugin in:description",
+      "start": "2026-10-07",
+      "end": "2026-10-14"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-10-15..2026-10-22",
+      "count": 693,
+      "base": "dsh-plugin in:description",
+      "start": "2026-10-15",
+      "end": "2026-10-22"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-10-23..2026-10-30",
+      "count": 687,
+      "base": "dsh-plugin in:description",
+      "start": "2026-10-23",
+      "end": "2026-10-30"
+    },
+    {
+      "query": "dsh-plugin in:description created:2026-10-31..2026-11-06",
+      "count": 698,
+      "base": "dsh-plugin in:description",
+      "start": "2026-10-31",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "dsh-plugins in:description created:2021-05-22..2024-02-13",
+      "count": 3,
+      "base": "dsh-plugins in:description",
+      "start": "2021-05-22",
+      "end": "2024-02-13"
+    },
+    {
+      "query": "dsh-plugins in:description created:2025-06-27..2026-03-02",
+      "count": 2,
+      "base": "dsh-plugins in:description",
+      "start": "2025-06-27",
+      "end": "2026-03-02"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-03-03..2026-07-05",
+      "count": 9,
+      "base": "dsh-plugins in:description",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-07-06..2026-08-05",
+      "count": 16,
+      "base": "dsh-plugins in:description",
+      "start": "2026-07-06",
+      "end": "2026-08-05"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-06..2026-08-13",
+      "count": 144,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-06",
+      "end": "2026-08-13"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-14..2026-08-15",
+      "count": 800,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-14",
+      "end": "2026-08-15"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-16..2026-08-17",
+      "count": 567,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-16",
+      "end": "2026-08-17"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-18..2026-08-21",
+      "count": 634,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-18",
+      "end": "2026-08-21"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-22..2026-08-29",
+      "count": 666,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-22",
+      "end": "2026-08-29"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-08-30..2026-09-05",
+      "count": 362,
+      "base": "dsh-plugins in:description",
+      "start": "2026-08-30",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-09-06..2026-09-21",
+      "count": 672,
+      "base": "dsh-plugins in:description",
+      "start": "2026-09-06",
+      "end": "2026-09-21"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-09-22..2026-10-06",
+      "count": 758,
+      "base": "dsh-plugins in:description",
+      "start": "2026-09-22",
+      "end": "2026-10-06"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-10-07..2026-10-14",
+      "count": 457,
+      "base": "dsh-plugins in:description",
+      "start": "2026-10-07",
+      "end": "2026-10-14"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-10-15..2026-10-22",
+      "count": 693,
+      "base": "dsh-plugins in:description",
+      "start": "2026-10-15",
+      "end": "2026-10-22"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-10-23..2026-10-30",
+      "count": 687,
+      "base": "dsh-plugins in:description",
+      "start": "2026-10-23",
+      "end": "2026-10-30"
+    },
+    {
+      "query": "dsh-plugins in:description created:2026-10-31..2026-11-06",
+      "count": 699,
+      "base": "dsh-plugins in:description",
+      "start": "2026-10-31",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "cordis plugin in:description created:2005-01-01..2026-11-06",
+      "count": 456,
+      "base": "cordis plugin in:description",
+      "start": "2005-01-01",
+      "end": "2026-11-06"
+    },
+    {
+      "query": "deepseek-harness dsh-plugin in:description created:2026-03-03..2026-07-05",
+      "count": 3,
+      "base": "deepseek-harness dsh-plugin in:description",
+      "start": "2026-03-03",
+      "end": "2026-07-05"
+    },
+    {
+      "query": "deepseek-harness dsh-plugin in:description created:2026-07-06..2026-09-05",
+      "count": 550,
+      "base": "deepseek-harness dsh-plugin in:description",
+      "start": "2026-07-06",
+      "end": "2026-09-05"
+    },
+    {
+      "query": "deepseek-harness dsh-plugin in:description created:2026-09-06..2026-11-06",
+      "count": 457,
+      "base": "deepseek-harness dsh-plugin in:description",
+      "start": "2026-09-06",
+      "end": "2026-11-06"
+    }
+  ],
+  "bucketCount": 154,
+  "sumCounts": 52806
+}
