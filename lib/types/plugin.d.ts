@@ -22,36 +22,36 @@ export interface Config {
     scheduleAlerts: boolean;
     scheduleOnStart: boolean;
 }
-export declare const Config: Schema<Schemastery.ObjectS<{
-    enabled: Schema<boolean, boolean>;
-    dataDir: Schema<string, string>;
-    tokenEnv: Schema<string[], string[]>;
-    topGrowth: Schema<number, number>;
-    ecoVersion: Schema<string, string>;
-    autoMigrate: Schema<boolean, boolean>;
-    resume: Schema<boolean, boolean>;
-    releaseBudget: Schema<number, number>;
-    detailsTtlHours: Schema<number, number>;
-    releaseTtlHours: Schema<number, number>;
-    alertsWebhook: Schema<string, string>;
-    schedule: Schema<string, string>;
-    scheduleAlerts: Schema<boolean, boolean>;
-    scheduleOnStart: Schema<boolean, boolean>;
-}>, Schemastery.ObjectT<{
-    enabled: Schema<boolean, boolean>;
-    dataDir: Schema<string, string>;
-    tokenEnv: Schema<string[], string[]>;
-    topGrowth: Schema<number, number>;
-    ecoVersion: Schema<string, string>;
-    autoMigrate: Schema<boolean, boolean>;
-    resume: Schema<boolean, boolean>;
-    releaseBudget: Schema<number, number>;
-    detailsTtlHours: Schema<number, number>;
-    releaseTtlHours: Schema<number, number>;
-    alertsWebhook: Schema<string, string>;
-    schedule: Schema<string, string>;
-    scheduleAlerts: Schema<boolean, boolean>;
-    scheduleOnStart: Schema<boolean, boolean>;
-}>>;
+export declare const Config: Schema<Schemastery.ObjectS<NoInfer<{
+    enabled: Schema<boolean, boolean, "defined">;
+    dataDir: Schema<string, string, "plain">;
+    tokenEnv: Schema<string[], string[], "defined">;
+    topGrowth: Schema<number, number, "defined">;
+    ecoVersion: Schema<string, string, "defined">;
+    autoMigrate: Schema<boolean, boolean, "defined">;
+    resume: Schema<boolean, boolean, "defined">;
+    releaseBudget: Schema<number, number, "defined">;
+    detailsTtlHours: Schema<number, number, "defined">;
+    releaseTtlHours: Schema<number, number, "defined">;
+    alertsWebhook: Schema<string, string, "plain">;
+    schedule: Schema<string, string, "defined">;
+    scheduleAlerts: Schema<boolean, boolean, "defined">;
+    scheduleOnStart: Schema<boolean, boolean, "defined">;
+}>>, Schemastery.ObjectT<NoInfer<{
+    enabled: Schema<boolean, boolean, "defined">;
+    dataDir: Schema<string, string, "plain">;
+    tokenEnv: Schema<string[], string[], "defined">;
+    topGrowth: Schema<number, number, "defined">;
+    ecoVersion: Schema<string, string, "defined">;
+    autoMigrate: Schema<boolean, boolean, "defined">;
+    resume: Schema<boolean, boolean, "defined">;
+    releaseBudget: Schema<number, number, "defined">;
+    detailsTtlHours: Schema<number, number, "defined">;
+    releaseTtlHours: Schema<number, number, "defined">;
+    alertsWebhook: Schema<string, string, "plain">;
+    schedule: Schema<string, string, "defined">;
+    scheduleAlerts: Schema<boolean, boolean, "defined">;
+    scheduleOnStart: Schema<boolean, boolean, "defined">;
+}>>, "plain">;
 export declare function apply(ctx: Context, configInput: Config): void;
 //# sourceMappingURL=plugin.d.ts.map
