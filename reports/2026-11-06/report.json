@@ -1,0 +1,1381 @@
+{
+  "v": 2,
+  "generatedAt": "2026-11-06T12:56:36.723Z",
+  "date": "2026-11-06",
+  "coverage": {
+    "repos": 1215,
+    "mapped": 672,
+    "withWeekly": 556,
+    "withReleases": 250,
+    "mappedPct": 55.3,
+    "weeklyPct": 45.8
+  },
+  "segments": [
+    {
+      "segment": "framework-runtime",
+      "repos": 751,
+      "stars": 720646,
+      "weeklyDownloads": 2488610,
+      "medianStars": 58,
+      "multiLabel": 1.862849533954727
+    },
+    {
+      "segment": "ui-client",
+      "repos": 328,
+      "stars": 235773,
+      "weeklyDownloads": 1458247,
+      "medianStars": 64,
+      "multiLabel": 2.1646341463414633
+    },
+    {
+      "segment": "tools-devx",
+      "repos": 326,
+      "stars": 836287,
+      "weeklyDownloads": 796903,
+      "medianStars": 66,
+      "multiLabel": 2.058282208588957
+    },
+    {
+      "segment": "other",
+      "repos": 159,
+      "stars": 327843,
+      "weeklyDownloads": 542774,
+      "medianStars": 63,
+      "multiLabel": 1
+    },
+    {
+      "segment": "search-knowledge",
+      "repos": 109,
+      "stars": 237542,
+      "weeklyDownloads": 472607,
+      "medianStars": 81,
+      "multiLabel": 2.44954128440367
+    },
+    {
+      "segment": "memory-context",
+      "repos": 125,
+      "stars": 200402,
+      "weeklyDownloads": 289591,
+      "medianStars": 101,
+      "multiLabel": 2.208
+    },
+    {
+      "segment": "archive-export",
+      "repos": 67,
+      "stars": 14420,
+      "weeklyDownloads": 103720,
+      "medianStars": 54,
+      "multiLabel": 2.373134328358209
+    },
+    {
+      "segment": "cost-budget",
+      "repos": 38,
+      "stars": 4725,
+      "weeklyDownloads": 81393,
+      "medianStars": 67,
+      "multiLabel": 2.526315789473684
+    },
+    {
+      "segment": "telemetry-analytics",
+      "repos": 52,
+      "stars": 24804,
+      "weeklyDownloads": 51866,
+      "medianStars": 92,
+      "multiLabel": 2.4615384615384617
+    }
+  ],
+  "top": [
+    {
+      "repoId": "saos-3624/dsh-video-storyboard",
+      "segment": "archive-export",
+      "score": 87.93,
+      "velocity": 99.82,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.99,
+      "cohort": "archive-export/new",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 18361,
+      "releaseDownloads": 0,
+      "stars": 445,
+      "description": "Scene-aware storyboard for DeepSeek Harness: 9-16 numbered cells with timestamps + transcript + an audio envelope, packed into ONE image (384 tokens). Two tools: video_storyboard and video_zoom."
+    },
+    {
+      "repoId": "leerolling/dsh-boot-suite",
+      "segment": "framework-runtime",
+      "score": 87.9,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99,
+      "cohort": "framework-runtime/new",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 9870,
+      "releaseDownloads": null,
+      "stars": 75,
+      "description": "DeepSeek Harness 开机动画 + 聊天壁纸，一个插件：六幕冷启动动画（真声台词/可交互）+ 开场视频/底图/大字横幅。双击 安装.cmd 即可，出问题双击 卸载.cmd。"
+    },
+    {
+      "repoId": "hellohub1212/dsh-windows-mcp",
+      "segment": "framework-runtime",
+      "score": 87.68,
+      "velocity": 100,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 96.84,
+      "cohort": "framework-runtime/new",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 137752,
+      "releaseDownloads": null,
+      "stars": 44,
+      "description": "Windows desktop automation for DeepSeek Harness: the in-box MCP client bridge mounted against CursorTouch/Windows-MCP, with an off-by-default Computer Use switch and an in-app dependency installer."
+    },
+    {
+      "repoId": "2bingling/dsh-market",
+      "segment": "ui-client",
+      "score": 87.55,
+      "velocity": 100,
+      "adoption": 98.7,
+      "quality": 40,
+      "maintenance": 99.41,
+      "cohort": "ui-client/young",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 4474,
+      "releaseDownloads": null,
+      "stars": 195,
+      "description": "DeepSeek Harness 插件市场 · 持续收录 6000+ DSH 插件：中文搜索 + 实用五维评分 + 一键安装。Web 版与 DSH 侧边栏插件双形态。Plugin marketplace for DeepSeek Harness: 6000+ plugins, Chinese search, 5-dim scoring, one-click install."
+    },
+    {
+      "repoId": "tinqiao-oss/engramory",
+      "segment": "memory-context",
+      "score": 87.52,
+      "velocity": 99.94,
+      "adoption": 98.62,
+      "quality": 40,
+      "maintenance": 99.53,
+      "cohort": "memory-context/established",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 4447,
+      "releaseDownloads": null,
+      "stars": 201,
+      "description": "Agent 通用长期记忆层：Agent 将重要信息按类型记录为多篇可读的 markdown 记忆文档，文档以链接形式列在限长索引中，索引随会话自动注入。DeepSeek Harness（dsh）有专用插件 dsh-engramory。"
+    },
+    {
+      "repoId": "webkubor/dsh-bloom-theme",
+      "segment": "ui-client",
+      "score": 82.34,
+      "velocity": 86.65,
+      "adoption": 98.95,
+      "quality": 40,
+      "maintenance": 99.94,
+      "cohort": "ui-client/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 4574,
+      "releaseDownloads": null,
+      "stars": 46,
+      "description": "DSH 主题插件：Bloom 莫兰迪中国风配色，OKLCH 调色、明暗双主题、顶栏一键切换，实测达 WCAG AA。 / A DSH theme plugin: Morandi Chinese-style palettes, OKLCH, light/dark, WCAG AA."
+    },
+    {
+      "repoId": "gezi-wen/sage-mem",
+      "segment": "memory-context",
+      "score": 81.85,
+      "velocity": 84.65,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.9,
+      "cohort": "memory-context/young",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 6868,
+      "releaseDownloads": null,
+      "stars": 27,
+      "description": "Cross-session memory for DeepSeek Harness — plain markdown files, no database, no worker."
+    },
+    {
+      "repoId": "sikadi233-hub/minecraft-dev",
+      "segment": "tools-devx",
+      "score": 81.14,
+      "velocity": 91.4,
+      "adoption": 88.71,
+      "quality": 40,
+      "maintenance": 99.63,
+      "cohort": "tools-devx/young",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 1911,
+      "releaseDownloads": null,
+      "stars": 40,
+      "description": "Minecraft dev for DeepSeek Harness (dsh): Paper/Spigot/Fabric/Forge/NeoForge across MC 1.7.10-26.3, offline API signature indexes, deterministic sharded pipeline (mc_arbitrate, 21 audit rules). Apache-2.0. ｜ 面向 DeepSeek Harness 的 Minecraft 开发：全时代插件与模组、18 份离线 API 索引、分片仲裁引擎 mc_arbitrate（21 条规则）。Apache-2.0。"
+    },
+    {
+      "repoId": "xohmai/dsh-session-delete",
+      "segment": "archive-export",
+      "score": 80.18,
+      "velocity": 91.74,
+      "adoption": 91.12,
+      "quality": 40,
+      "maintenance": 81.45,
+      "cohort": "archive-export/young",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 2347,
+      "releaseDownloads": null,
+      "stars": 46,
+      "description": "DeepSeek Harness 会话删除插件：设置页管理归档会话，真正删除磁盘日志（回收站可还原）+ 批量清理——官方归档只隐藏不删盘，这里补上。"
+    },
+    {
+      "repoId": "pgzxb/dsh-feishu",
+      "segment": "ui-client",
+      "score": 78.67,
+      "velocity": 91.5,
+      "adoption": 82.69,
+      "quality": 40,
+      "maintenance": 92.68,
+      "cohort": "ui-client/young",
+      "rank": 3,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 1144,
+      "releaseDownloads": null,
+      "stars": 37,
+      "description": "The Feishu UI for DeepSeek Harness  — a panel-driven control console: every slash command a button on the ⚙️ control-panel card, in-card approvals & questions, live streaming cards, one-QR setup. | DeepSeek Harness 的飞书 UI：面板驱动控制台——每个命令都是卡片按钮，卡内审批与提问，流式卡片，扫码一键配置。"
+    },
+    {
+      "repoId": "mexiaosqwq/dsh-web-mobile",
+      "segment": "ui-client",
+      "score": 78.47,
+      "velocity": 79.9,
+      "adoption": 95.05,
+      "quality": 40,
+      "maintenance": 99.99,
+      "cohort": "ui-client/young",
+      "rank": 4,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 3279,
+      "releaseDownloads": null,
+      "stars": 183,
+      "description": "DSH Web UI 移动端适配：窄屏好用，宽屏适用"
+    },
+    {
+      "repoId": "perrylink/dsh-plugin-guide",
+      "segment": "tools-devx",
+      "score": 77.9,
+      "velocity": 78.38,
+      "adoption": 95.24,
+      "quality": 40,
+      "maintenance": 99.75,
+      "cohort": "tools-devx/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 3334,
+      "releaseDownloads": null,
+      "stars": 65,
+      "description": "A practical guide to DSH plugin quality: ENTRY checks, FLOW journeys, and BOOST practices. Community guide; not a certification or ranking."
+    },
+    {
+      "repoId": "xiaolu511/dsh-hot-restart",
+      "segment": "archive-export",
+      "score": 77.9,
+      "velocity": 90.59,
+      "adoption": 80.06,
+      "quality": 40,
+      "maintenance": 96.43,
+      "cohort": "archive-export/new",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 914,
+      "releaseDownloads": null,
+      "stars": 9,
+      "description": "DSH 热重启插件：窗口内一个固定按钮，一键关闭并自动重开 DeepSeek Harness，全程零控制台窗口；内置自检系统，出问题点一下就能生成可直接定位的诊断报告 · Hot-restart plugin for DSH, with a built-in self-check that writes a one-file diagnostic report"
+    },
+    {
+      "repoId": "flymysql/dsh-remote",
+      "segment": "tools-devx",
+      "score": 77.16,
+      "velocity": 72.91,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.99,
+      "cohort": "tools-devx/young",
+      "rank": 3,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 31053,
+      "releaseDownloads": null,
+      "stars": 258,
+      "description": "Remote-work assistant for DeepSeek Harness (DSH): SSH into any machine, pick a remote workspace, and work on it with 22 rw_* tools, conflict-aware SFTP mirror, embedded PTY terminal, port forwarding, and multi-hop jumps - under the same sandbox policy as a local session."
+    },
+    {
+      "repoId": "ltxlong/dsh-session-kit",
+      "segment": "archive-export",
+      "score": 77.12,
+      "velocity": 84.83,
+      "adoption": 84.68,
+      "quality": 40,
+      "maintenance": 97.86,
+      "cohort": "archive-export/young",
+      "rank": 2,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 1355,
+      "releaseDownloads": null,
+      "stars": 8,
+      "description": "会话管理菜单、归档管理、轮次级删除、重新生成、记忆管理、任务管理、话题导航。Conversation management menu, archive management, round-level deletion, regeneration, memory management, task management, topic navigation."
+    },
+    {
+      "repoId": "polang233/dsh-plugin-index",
+      "segment": "search-knowledge",
+      "score": 76.86,
+      "velocity": 74.52,
+      "adoption": 96.89,
+      "quality": 40,
+      "maintenance": 99.87,
+      "cohort": "search-knowledge/new",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 3835,
+      "releaseDownloads": null,
+      "stars": 183,
+      "description": "Open Plugin Market — Community plugin index for DeepSeek Harness (DSH).  照顾小开发者的插件索引、插件市场、开放插件市场"
+    },
+    {
+      "repoId": "orderg-x/dsh-design-studio",
+      "segment": "archive-export",
+      "score": 76.75,
+      "velocity": 78.07,
+      "adoption": 91.83,
+      "quality": 40,
+      "maintenance": 99.67,
+      "cohort": "archive-export/new",
+      "rank": 3,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 2493,
+      "releaseDownloads": null,
+      "stars": 30,
+      "description": "DSH 设计工作台：模型画的界面摆上画布，点一下就改。 · Design canvas for DeepSeek Harness (DSH): screens in device frames, click an element to edit it, versions, export, phone preview."
+    },
+    {
+      "repoId": "dayuanjiang/next-ai-draw-io",
+      "segment": "ui-client",
+      "score": 76.04,
+      "velocity": 70.16,
+      "adoption": 100,
+      "quality": 40,
+      "maintenance": 99.72,
+      "cohort": "ui-client/established",
+      "rank": 1,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 1406,
+      "releaseDownloads": 160473,
+      "stars": 36737,
+      "description": "Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, Codex and VS Code."
+    },
+    {
+      "repoId": "lsz-asd/dsh-plugin-session-delete",
+      "segment": "ui-client",
+      "score": 75.98,
+      "velocity": 91.74,
+      "adoption": 91.12,
+      "quality": 40,
+      "maintenance": 39.44,
+      "cohort": "ui-client/young",
+      "rank": 5,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 2347,
+      "releaseDownloads": null,
+      "stars": 50,
+      "description": "Delete DeepSeek Harness sessions from the UI: header danger button + sidebar session-row menu item (no conversation jump), risk-consent dialog with session name/id, stops running agents first, in-place list refresh without page reload. Works in web and the desktop client."
+    },
+    {
+      "repoId": "omdsh-dev/dsh-plugin-check",
+      "segment": "tools-devx",
+      "score": 74.16,
+      "velocity": 92.97,
+      "adoption": 78.93,
+      "quality": 40,
+      "maintenance": 52.92,
+      "cohort": "tools-devx/young",
+      "rank": 4,
+      "insufficient": false,
+      "outlier": false,
+      "npmWeekly": 830,
+      "releaseDownloads": null,
+      "stars": 26,
+      "description": "DSH 插件健康检查工具：扫描插件仓库的清单协议 / patch 格式 / 构建陷阱 / hub 收录状态，零依赖只读，注册 plugin_check 工具"
+    }
+  ],
+  "diff": [
+    {
+      "repoId": "dsh-market/dsh-market",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 6825,
+        "npmWeekly": 459,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 11111,
+        "npmWeekly": 305214,
+        "releaseDownloads": 6541
+      },
+      "starsDelta": 4286,
+      "npmDelta": 304755,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "morluto/rea",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 296708,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 436343,
+        "npmWeekly": 1855,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 139635,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "awesome-dsh-plugin/awesome-dsh-plugin",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 19080,
+        "npmWeekly": 7311,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 23127,
+        "npmWeekly": 135166,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 4047,
+      "npmDelta": 127855,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "ebony-vinyl/dsh-our-free-model",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 20254,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 63394,
+        "npmWeekly": null,
+        "releaseDownloads": 73957
+      },
+      "starsDelta": 43140,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "deepseek-ai/deepseek-harness",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 251451,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 274548,
+        "npmWeekly": 186,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 23097,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "tt-a1i/archify",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 84607,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 94079,
+        "npmWeekly": 12016,
+        "releaseDownloads": 39688
+      },
+      "starsDelta": 9472,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "ruvnet/ruflo",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 75771,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 81042,
+        "npmWeekly": null,
+        "releaseDownloads": 90
+      },
+      "starsDelta": 5271,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "nexu-io/open-design",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 101748,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 106233,
+        "npmWeekly": null,
+        "releaseDownloads": 1127039
+      },
+      "starsDelta": 4485,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "pc2005-cloud/dsh-pet",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1692,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 5743,
+        "npmWeekly": 167224,
+        "releaseDownloads": 7053
+      },
+      "starsDelta": 4051,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "2bingling/dsh-market",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 154,
+        "npmWeekly": 459,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 195,
+        "npmWeekly": 4474,
+        "releaseDownloads": null
+      },
+      "starsDelta": 41,
+      "npmDelta": 4015,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "elysia395/dsh-wallpaper-engine",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1437,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 5432,
+        "npmWeekly": 36614,
+        "releaseDownloads": 892612
+      },
+      "starsDelta": 3995,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "anywhere-labs/dsh-desktop",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 31152,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 35123,
+        "npmWeekly": 818,
+        "releaseDownloads": 272750
+      },
+      "starsDelta": 3971,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "walkinglabs/learn-harness-engineering",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 20040,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 23420,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 3380,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "dataelement/dsh-desktop",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 14739,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 17470,
+        "npmWeekly": 818,
+        "releaseDownloads": 140614
+      },
+      "starsDelta": 2731,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "t-auto/dsh-ops",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2665,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 5392,
+        "npmWeekly": 46342,
+        "releaseDownloads": 7474
+      },
+      "starsDelta": 2727,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "ranxianglei/billion-context",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1599,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 4213,
+        "npmWeekly": 2577,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 2614,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "ccch1mneyyy/dsh-tui",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 4693,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7062,
+        "npmWeekly": 19471,
+        "releaseDownloads": 8975
+      },
+      "starsDelta": 2369,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "tencent/weknora",
+      "segment": "search-knowledge",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 34450,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 36669,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 2219,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "bowenliang123/dsh-context",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2220,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 4371,
+        "npmWeekly": 637,
+        "releaseDownloads": 1053
+      },
+      "starsDelta": 2151,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "qingyuna/answer-me-with-html",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 3538,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 5676,
+        "npmWeekly": null,
+        "releaseDownloads": 313
+      },
+      "starsDelta": 2138,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "meteornox/deepseek-balance-whale-widget",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 5033,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 6946,
+        "npmWeekly": 118467,
+        "releaseDownloads": 44305
+      },
+      "starsDelta": 1913,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "anbeime/skill",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 8189,
+        "npmWeekly": 326,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 9233,
+        "npmWeekly": 2026,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 1044,
+      "npmDelta": 1700,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "superdesigndev/treg",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 5624,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7289,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 1665,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "volcengine/openviking",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 40143,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 41683,
+        "npmWeekly": null,
+        "releaseDownloads": 5526
+      },
+      "starsDelta": 1540,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "zhu1090093659/dsh-web",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 8846,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 10148,
+        "npmWeekly": null,
+        "releaseDownloads": 9575
+      },
+      "starsDelta": 1302,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "xmanrui/dsh-im",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2070,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 3297,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 1227,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "anywhere-labs/agents-anywhere",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1718,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 2831,
+        "npmWeekly": null,
+        "releaseDownloads": 16051
+      },
+      "starsDelta": 1113,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "dingminhua/dsh-connect-workbuddy",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 149,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 1226,
+        "npmWeekly": 27218,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 1077,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "tencent/browserskill",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 9075,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 10106,
+        "npmWeekly": null,
+        "releaseDownloads": 4459955
+      },
+      "starsDelta": 1031,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "reactive-resume/reactive-resume",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 44415,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 45412,
+        "npmWeekly": null,
+        "releaseDownloads": 1623
+      },
+      "starsDelta": 997,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "shaobeichen/dsh-pocket",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1804,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 2796,
+        "npmWeekly": 6120,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 992,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "gcwing/openbitfun",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2825,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 3744,
+        "npmWeekly": null,
+        "releaseDownloads": 141481
+      },
+      "starsDelta": 919,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "freestylefly/awesome-gpt-image-2",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 34601,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 35514,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 913,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "zseven-w/openpencil",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 6180,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7091,
+        "npmWeekly": null,
+        "releaseDownloads": 75931
+      },
+      "starsDelta": 911,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "omdsh-dev/dsh-better-sidebar",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 4221,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 4945,
+        "npmWeekly": null,
+        "releaseDownloads": 10
+      },
+      "starsDelta": 724,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "titanwings/distilly",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 25704,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 26415,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 711,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "hust-open-atom-club/oh-dsh",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 322,
+        "npmWeekly": 1145,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 324,
+        "npmWeekly": 1812,
+        "releaseDownloads": 18344
+      },
+      "starsDelta": 2,
+      "npmDelta": 667,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "jingyunstudio/jingyun-dsh",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1007,
+        "npmWeekly": 1145,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 925,
+        "npmWeekly": 1812,
+        "releaseDownloads": 137
+      },
+      "starsDelta": -82,
+      "npmDelta": 667,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "nanmicoder/dsh-agent-teams",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2202,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 2736,
+        "npmWeekly": null,
+        "releaseDownloads": 227
+      },
+      "starsDelta": 534,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "liustack/modlens",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 4295,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 4808,
+        "npmWeekly": 801,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 513,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "flizzywine/dsh-tavern",
+      "segment": "other",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1027,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 1488,
+        "npmWeekly": 447,
+        "releaseDownloads": 13998
+      },
+      "starsDelta": 461,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "small-tailqwq/dsh-deep-whale",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2645,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 3051,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 406,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "memtensor/memos",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 11901,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 12298,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 397,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "devin-axis/ipollowork",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 7019,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7403,
+        "npmWeekly": 934,
+        "releaseDownloads": 12958
+      },
+      "starsDelta": 384,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "evermind-ai/everos",
+      "segment": "memory-context",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 13456,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 13838,
+        "npmWeekly": null,
+        "releaseDownloads": 6615
+      },
+      "starsDelta": 382,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "dsh-tauri/deepseek-harness-desktop",
+      "segment": "framework-runtime",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 3126,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 3499,
+        "npmWeekly": null,
+        "releaseDownloads": 224907
+      },
+      "starsDelta": 373,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "miaotofu01/study-mate",
+      "segment": "search-knowledge",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 1009,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 1371,
+        "npmWeekly": 904,
+        "releaseDownloads": 1015
+      },
+      "starsDelta": 362,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "lingfengqaq/webnovel-writer",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 7527,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 7881,
+        "npmWeekly": null,
+        "releaseDownloads": 2437
+      },
+      "starsDelta": 354,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "alisa0808/vox-director",
+      "segment": "tools-devx",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2309,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 2661,
+        "npmWeekly": null,
+        "releaseDownloads": 0
+      },
+      "starsDelta": 352,
+      "npmDelta": null,
+      "releaseDelta": null
+    },
+    {
+      "repoId": "ebony-vinyl/eac-desktop",
+      "segment": "ui-client",
+      "from": {
+        "date": "2026-10-17",
+        "stars": 2052,
+        "npmWeekly": null,
+        "releaseDownloads": null
+      },
+      "to": {
+        "date": "2026-11-06",
+        "stars": 2390,
+        "npmWeekly": null,
+        "releaseDownloads": 117329
+      },
+      "starsDelta": 338,
+      "npmDelta": null,
+      "releaseDelta": null
+    }
+  ]
+}

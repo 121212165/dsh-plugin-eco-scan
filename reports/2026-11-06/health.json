@@ -1,0 +1,87 @@
+{
+  "dbPath": "C:\\Users\\lenovo\\.dsh\\eco-scan\\eco.db",
+  "schemaVersion": 2,
+  "repos": 1215,
+  "snapshots": 1955,
+  "npmPackages": 324,
+  "mappings": 683,
+  "lastScan": {
+    "id": 3,
+    "scanDate": "2026-11-06",
+    "repoCount": 1200,
+    "durationMs": 566603,
+    "status": "partial",
+    "error": "corpus: graphql: HTTP 502 for https://api.github.com/graphql: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n; npm: HTTP 429 for https://api.npmjs.org/downloads/point/last-week/@q253595422/dsh-imagegen-video: {\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1015/\",\"title\":\"Error 1015: You are being rate limited\",\"status\":429,\"detail\":\"You are; npm: HTTP 429 for https://api.npmjs.org/downloads/point/last-week/@sunshaobei/dsh-session-manager: {\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1015/\",\"title\":\"Error 1015: You are being rate limited\",\"status\":429,\"detail\":\"You are; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request; npm: circuit open for api.npmjs.org — skipping request",
+    "stage": "done",
+    "checkpoint": {
+      "done": [
+        "corpus",
+        "details",
+        "npm",
+        "releases",
+        "snapshot"
+      ],
+      "date": "2026-11-06"
+    },
+    "createdAt": "2026-11-06T12:46:18.372Z"
+  },
+  "dates": [
+    "2026-09-29",
+    "2026-09-30",
+    "2026-10-02",
+    "2026-10-17",
+    "2026-11-06"
+  ],
+  "recentErrors": [
+    {
+      "scanDate": "2026-11-06",
+      "stage": "releases",
+      "message": "releases: The operation was aborted due to timeout"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "releases",
+      "message": "releases: The operation was aborted due to timeout"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "releases",
+      "message": "releases: The operation was aborted due to timeout"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "releases",
+      "message": "releases: The operation was aborted due to timeout"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "releases",
+      "message": "releases: The operation was aborted due to timeout"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "npm",
+      "message": "npm: circuit open for api.npmjs.org — skipping request"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "npm",
+      "message": "npm: circuit open for api.npmjs.org — skipping request"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "npm",
+      "message": "npm: circuit open for api.npmjs.org — skipping request"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "npm",
+      "message": "npm: circuit open for api.npmjs.org — skipping request"
+    },
+    {
+      "scanDate": "2026-11-06",
+      "stage": "npm",
+      "message": "npm: circuit open for api.npmjs.org — skipping request"
+    }
+  ]
+}
