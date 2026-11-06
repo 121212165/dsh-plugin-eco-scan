@@ -1,7 +1,8 @@
 /** Report exporters. One dataset, five surfaces: JSON for agents, JSONL for
  * the v1-compatible audit trail, CSV for spreadsheets, Markdown for notes, and
  * a self-contained HTML page (inline CSS, no assets) for sharing. */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync } from 'node:fs';
+import { writeFileAtomic } from '@dsh-family/kit/kit/fs';
 import { join } from 'node:path';
 import type { EcoDb } from './db.ts';
 import { coverage, diffRows, overview, scoredSet, snapshotExportRows, topRows, type SnapshotExportRow } from './queries.ts';
@@ -75,7 +76,7 @@ function writeIfRequested(
   mkdirSync(dir, { recursive: true });
   const stamp = generatedAt.replace(/[:.]/g, '-').slice(0, 19);
   const path = join(dir, input.stable ? 'panel.html' : `eco-${date ?? 'empty'}-${stamp}.${format}`);
-  writeFileSync(path, content, 'utf8');
+  writeFileAtomic(path, content);
   return path;
 }
 

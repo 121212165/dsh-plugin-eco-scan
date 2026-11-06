@@ -1,11 +1,16 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { test } from 'node:test';
+import fs, { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { syncBuiltinESMExports } from 'node:module';
+import { dirname, join } from 'node:path';
+import { afterEach, beforeEach, mock, test } from 'node:test';
 
-import { buildExport } from '../../src/core/exporters.ts';
+import { buildExport, buildPanel } from '../../src/core/exporters.ts';
 import { putMapping, upsertNpmPackage, writeSnapshot } from '../../src/core/storage.ts';
 import { seedRepo, tempDb, work } from './helpers.ts';
+
+const generatedAt = '2026-10-29T12:34:56.000Z';
+beforeEach(() => mock.timers.enable({ apis: ['Date'], now: new Date(generatedAt) }));
+afterEach(() => mock.timers.reset());
 
 function seed() {
   const { db } = tempDb();
@@ -147,3 +152,123 @@ test('an empty database still produces a well-formed report', () => {
   assert.equal(buildExport({ db, format: 'jsonl' }).content, '');
   assert.ok(buildExport({ db, format: 'md' }).content.includes('(no snapshot)'));
 });
+
+for (const format of ['json', 'jsonl', 'csv', 'md', 'html'] as const) {
+  test(`${format} writes deterministic empty and populated exports with the correct extension`, () => {
+    const { db: empty } = tempDb();
+    const dataDir = join(work, `formats-${format}`);
+    for (const [db, date] of [[empty, null], [seed(), '2026-10-29']] as const) {
+      const result = buildExport({ db, format, dataDir });
+      assert.equal(result.format, format);
+      assert.equal(result.date, date);
+      assert.equal(result.path, join(dataDir, 'exports', `eco-${date ?? 'empty'}-2026-10-29T12-34-56.${format}`));
+      assert.equal(readFileSync(result.path!, 'utf8'), result.content);
+      assert.equal(buildExport({ db, format, generatedAt }).content, result.content);
+      if (!date && format === 'csv') assert.equal(result.content.split('\n').length, 1);
+      if (!date && format === 'html') assert.match(result.content, /还没有快照/);
+      if (!date && format === 'md') assert.ok(!result.content.includes('## 变化'));
+      if (!date && format === 'json') {
+        const report = JSON.parse(result.content);
+        assert.equal(report.generatedAt, generatedAt);
+        assert.deepEqual(report.coverage, { repos: 0, mapped: 0, withWeekly: 0, withReleases: 0, mappedPct: 0, weeklyPct: 0 });
+      }
+    }
+    assert.equal(readdirSync(join(dataDir, 'exports')).length, 2, 'successful writes leave no temporary file');
+  });
+}
+
+test('explicit dates and clamped top limits do not truncate the JSONL audit trail', () => {
+  const db = seed();
+  for (const date of ['2026-10-28', '2026-10-29']) {
+    writeSnapshot(db, { repoId: 'bob/beta', date, stars: 30, npmWeekly: 100, releaseDownloads: null, segment: 'tools-devx', segmentConfidence: 0.8 });
+  }
+  for (const limit of [-1, 0, 1, 2]) {
+    const report = JSON.parse(buildExport({ db, format: 'json', limit }).content);
+    assert.equal(report.top.length, Math.max(1, limit));
+    const audit = buildExport({ db, format: 'jsonl', limit, date: '2026-10-28' }).content.split('\n').map((line) => JSON.parse(line));
+    assert.equal(audit.length, 2);
+    assert.ok(audit.every((row) => row.date === '2026-10-28'));
+    assert.equal(audit.find((row) => row.fullName === 'alice/alpha').npmWeekly, 100);
+  }
+  const older = JSON.parse(buildExport({ db, format: 'json', date: '2026-10-28' }).content);
+  assert.equal(older.date, '2026-10-28');
+  assert.equal(older.top[0].npmWeekly, 100);
+  const missing = JSON.parse(buildExport({ db, format: 'json', date: '2026-01-01' }).content);
+  assert.equal(missing.date, '2026-01-01');
+  assert.deepEqual(missing.top, []);
+  assert.deepEqual(missing.diff, []);
+});
+
+test('CSV handles commas, quotes, newlines and null metrics; Markdown escapes table cells', () => {
+  const db = seed();
+  seedRepo(db, 'alice/alpha', { description: 'comma, "quoted"\nnext line' });
+  writeSnapshot(db, {
+    repoId: 'alice/alpha', date: '2026-10-29', stars: 120, npmWeekly: 200,
+    releaseDownloads: null, segment: 'cost|budget\nnext', segmentConfidence: 0.9,
+  });
+  const csv = buildExport({ db, format: 'csv' }).content;
+  assert.match(csv, /,200,,/);
+  assert.ok(csv.endsWith(',false,false,"comma, ""quoted""\nnext line"'));
+  assert.ok(csv.includes('"cost|budget\nnext"'));
+  const md = buildExport({ db, format: 'md' }).content;
+  assert.ok(md.includes('| cost\\|budget next |'));
+  assert.ok(!md.includes('cost|budget\nnext'));
+  assert.ok(md.includes('| alice/alpha | 100 | 20 |'));
+  assert.ok(!md.includes('| bob/beta |'), 'rows without an npm baseline are excluded from top and delta tables');
+});
+
+test('stable panel replacement renames a complete sibling file over the old report', (t) => {
+  const db = seed();
+  const dataDir = join(work, 'atomic-panel');
+  const first = buildPanel(db, { dataDir, generatedAt });
+  assert.ok(first.path);
+  const expected = buildPanel(db, { date: '2026-10-28', limit: 1, generatedAt: '2026-10-29T13:00:00.000Z' }).content;
+  const rename = fs.renameSync;
+  const spy = t.mock.method(fs, 'renameSync', (...args: Parameters<typeof fs.renameSync>) => {
+    const [from, to] = args;
+    assert.equal(to, first.path);
+    assert.notEqual(from, to);
+    assert.equal(dirname(String(from)), dirname(String(to)), 'rename stays on the same filesystem');
+    assert.equal(readFileSync(to, 'utf8'), first.content, 'old report survives until the rename');
+    assert.equal(readFileSync(from, 'utf8'), expected, 'new report is complete before replacing the target');
+    rename(...args);
+  });
+  syncBuiltinESMExports();
+  try {
+    const second = buildPanel(db, { dataDir, date: '2026-10-28', limit: 1, generatedAt: '2026-10-29T13:00:00.000Z' });
+    assert.equal(second.path, first.path);
+    assert.equal(spy.mock.callCount(), 1);
+    assert.equal(readFileSync(second.path!, 'utf8'), expected);
+    assert.deepEqual(readdirSync(dirname(second.path!)), ['panel.html']);
+  } finally {
+    spy.mock.restore();
+    syncBuiltinESMExports();
+  }
+});
+
+for (const stage of ['write', 'rename'] as const) {
+  test(`failed ${stage} preserves the previous export and propagates the error`, (t) => {
+    const db = seed();
+    const dataDir = join(work, `atomic-failure-${stage}`);
+    const first = buildExport({ db, format: 'json', dataDir, generatedAt });
+    assert.ok(first.path);
+    const error = new Error(`injected ${stage} failure`);
+    const write = fs.writeFileSync;
+    const spy = stage === 'write'
+      ? t.mock.method(fs, 'writeFileSync', (...args: Parameters<typeof fs.writeFileSync>) => {
+          write(args[0], 'partial report', 'utf8');
+          throw error;
+        })
+      : t.mock.method(fs, 'renameSync', () => { throw error; });
+    syncBuiltinESMExports();
+    try {
+      assert.throws(() => buildExport({ db, format: 'json', dataDir, generatedAt }), (caught) => caught === error);
+      assert.equal(spy.mock.callCount(), 1);
+      assert.equal(readFileSync(first.path, 'utf8'), first.content);
+      assert.doesNotThrow(() => JSON.parse(readFileSync(first.path!, 'utf8')));
+    } finally {
+      spy.mock.restore();
+      syncBuiltinESMExports();
+    }
+  });
+}
