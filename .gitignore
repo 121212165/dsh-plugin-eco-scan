@@ -1,2 +1,5 @@
 node_modules/
 package-lock.json
+
+# 扫描报表是运行数据，不随源码发布；历史上已入库的文件保留在 git 历史，工作副本留在磁盘。
+reports/
