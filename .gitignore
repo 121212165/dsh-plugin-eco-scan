@@ -3,3 +3,16 @@ package-lock.json
 
 # 扫描报表是运行数据，不随源码发布；历史上已入库的文件保留在 git 历史，工作副本留在磁盘。
 reports/
+
+# tools/eco-report 的运行产物与中间缓存（源码在 tools/eco-report/）
+tools/eco-report/dashboard.html
+tools/eco-report/full-ranking.*
+tools/eco-report/tags-summary.json
+tools/eco-report/scoring-diff.json
+tools/eco-report/npm-search-cache.json
+tools/eco-report/npm-map-expand-report.json
+tools/eco-report/enrichment-candidates*.json
+tools/eco-report/generic-repos.json
+tools/eco-report/pilot-readme-cache.json
+tools/eco-report/npm-keywords-cache.json
+tools/eco-report/wechat*.png

@@ -53,7 +53,9 @@
     "typecheck": "tsc --noEmit",
     "typecheck:core": "tsc --noEmit -p tsconfig.core.json",
     "check": "npm run typecheck && npm test && npm run build",
-    "prepublishOnly": "npm run check"
+    "prepublishOnly": "npm run check",
+    "test:report": "node --test \"tools/eco-report/test/*.test.mjs\"",
+    "eco-report": "node --experimental-sqlite tools/eco-report/build_dashboard.mjs"
   },
   "keywords": [
     "dsh",

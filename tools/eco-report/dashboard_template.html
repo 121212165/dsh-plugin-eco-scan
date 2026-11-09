@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSH 插件生态 · 全量排名与增长跑道</title>
+<style>
+  :root{--ink:#1f2329;--sub:#646a73;--line:#e7e9ed;--brand:#2b5cff;--brand2:#6f8bff;--card:#f7f8fa;--gold:#b8860b;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef0f3;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;}
+  .hero{background:linear-gradient(135deg,#101833,#1d2b5c 55%,#2b5cff);color:#fff;padding:34px 22px 26px;}
+  .wrap{max-width:1180px;margin:0 auto;}
+  .hero h1{margin:0 0 8px;font-size:26px;font-weight:800;letter-spacing:.5px;}
+  .hero .sub{font-size:13px;color:#b9c4e8;line-height:1.7;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px;}
+  .kpi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;}
+  .kpi b{display:block;font-size:24px;font-weight:800;}
+  .kpi span{font-size:12px;color:#c6cff0;}
+  main{max-width:1180px;margin:0 auto;padding:24px 18px 70px;}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px;box-shadow:0 2px 12px rgba(20,30,60,.05);}
+  .panel h2{margin:0 0 6px;font-size:18px;}
+  .panel .lead{font-size:13px;color:var(--sub);line-height:1.7;margin:0 0 16px;}
+  .heat{overflow-x:auto;}
+  table{border-collapse:collapse;width:100%;}
+  .heat table{width:auto;min-width:100%;}
+  .heat th,.heat td{padding:3px 4px;font-size:11px;text-align:center;white-space:nowrap;}
+  .heat th.rowh{text-align:left;padding-right:10px;font-weight:600;color:var(--ink);font-size:12px;}
+  .heat td.cell{border-radius:3px;min-width:22px;height:20px;color:#0b1b4a;}
+  .heat th.wk{color:var(--sub);font-weight:500;writing-mode:vertical-rl;text-orientation:mixed;height:64px;vertical-align:bottom;}
+  .lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+  .lane{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+  .lane .t{font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center;}
+  .lane .fam{font-size:11px;color:var(--sub);font-weight:500;}
+  .lane .row{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-top:6px;}
+  .lane .row b{color:var(--ink);}
+  .lane .top{margin-top:8px;font-size:11px;color:var(--sub);word-break:break-all;}
+  .ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px;}
+  .ctrl input[type=search],.ctrl select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff;color:var(--ink);}
+  .ctrl input[type=search]{flex:1;min-width:200px;}
+  .ctrl label{font-size:12px;color:var(--sub);display:flex;align-items:center;gap:5px;cursor:pointer;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--sub);}
+  .chip.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600;}
+  .chip small{opacity:.7;margin-left:4px;}
+  table.rank{font-size:13px;}
+  table.rank th{position:sticky;top:0;background:#f2f4f8;text-align:left;padding:9px 8px;font-size:12px;color:var(--sub);cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--line);}
+  table.rank th.num{text-align:right;}
+  table.rank td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.rank td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  table.rank tr:hover td{background:#fafbff;}
+  .repo{font-weight:600;word-break:break-all;}
+  .repo .arch{font-size:10px;color:#b8860b;border:1px solid #e8d9a8;border-radius:4px;padding:0 4px;margin-left:6px;font-weight:500;}
+  .repo .enr{font-size:10px;color:#1a7f37;border:1px solid #bfe3cb;border-radius:4px;padding:0 4px;margin-left:6px;font-weight:500;}
+  .tg{display:inline-block;background:#eef2ff;color:#2b5cff;border-radius:4px;padding:1px 6px;font-size:11px;margin:1px 3px 1px 0;}
+  .tg.alt{background:#f2f4f8;color:#4b5563;}
+  .pos{color:#1a7f37;} .neg{color:#c0392b;} .na{color:#a0a4ab;}
+  .pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--sub);}
+  .pager button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;}
+  .pager button:disabled{opacity:.4;cursor:default;}
+  .pager input{width:70px;border:1px solid var(--line);border-radius:8px;padding:6px;font-size:13px;text-align:center;}
+  .count{font-size:12px;color:var(--sub);margin-left:auto;}
+  .note{font-size:12px;color:var(--sub);line-height:1.8;}
+  .note b{color:var(--ink);}
+  .matrix{overflow-x:auto;}
+  .matrix table{width:auto;min-width:100%;}
+  .matrix th,.matrix td{padding:4px 6px;font-size:11px;text-align:center;white-space:nowrap;}
+  .matrix th.rowh{text-align:left;font-weight:600;font-size:12px;padding-right:10px;color:var(--ink);}
+  .matrix th.rowh .pt{color:#a0a4ab;font-weight:400;margin-left:5px;}
+  .matrix th.cap{color:var(--sub);font-weight:500;writing-mode:vertical-rl;text-orientation:mixed;height:74px;vertical-align:bottom;}
+  .matrix th.cap.gen{color:#b8860b;}
+  .matrix td.mcell{border-radius:3px;min-width:30px;height:24px;cursor:pointer;color:#0b1b4a;font-variant-numeric:tabular-nums;}
+  .matrix td.mcell:hover{outline:2px solid var(--brand);outline-offset:-2px;}
+  .matrix td.mcell.gen{background:#fff7e6;color:#8a6d1a;font-weight:600;}
+  .pairbanner{display:none;align-items:center;gap:12px;background:#eef2ff;border:1px solid #d6deff;border-radius:8px;padding:8px 12px;margin:0 0 12px;font-size:13px;color:var(--ink);}
+  .pairbanner button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:12px;color:var(--sub);}
+  @media(max-width:640px){ .hero h1{font-size:20px;} .panel{padding:14px;} table.rank th:nth-child(9),table.rank td:nth-child(9){display:none;} }
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap">
+  <h1>DSH 插件生态 · 全量排名与增长跑道</h1>
+  <div class="sub" id="sub"></div>
+  <div class="kpis" id="kpis"></div>
+</div></div>
+<main>
+  <div class="panel">
+    <h2>01 · 增长跑道：标签 × 周新增</h2>
+    <p class="lead">每一行是一个细分标签，每一列是一周；格子越深，说明那一周新创建、且带该标签的仓库越多。用来回答：生态正在往哪些跑道里长。</p>
+    <div class="heat" id="heat"></div>
+  </div>
+
+  <div class="panel">
+    <h2>02 · 标签跑道</h2>
+    <p class="lead">按近 30 天新仓数量排序。规模看仓库数，速度看新仓占比，牵引看周下载与环比中位数。</p>
+    <div class="lanes" id="lanes"></div>
+  </div>
+
+  <div class="panel">
+    <h2>02b · 星标增速（快照真差分）</h2>
+    <p class="lead" id="velNote"></p>
+    <div class="lanes" id="velocity"></div>
+  </div>
+
+  <div class="panel">
+    <h2>03 · 大类 × 能力 下钻矩阵</h2>
+    <p class="lead">五个大标签（智能体 / 会话 / 技能 / 工作区 / 模型）本身只是"提到某概念"，真正的细分靠能力标签。格子里是<b>同时带这两个标签</b>的仓库数，颜色越深越多；点任意格子下钻到下方榜单。最右「仅通用」列＝提到该大类、却没有任何能力标签的仓库（信息缺口，待补 README/npm 信号）。</p>
+    <div class="matrix" id="matrix"></div>
+  </div>
+
+  <div class="panel" id="rankPanel">
+    <h2>04 · 全量排名（全部 <span id="totalRows"></span> 个仓库）</h2>
+    <p class="lead" id="formula"></p>
+    <div class="pairbanner" id="pairBanner"></div>
+    <div class="ctrl">
+      <input type="search" id="q" placeholder="搜索仓库名（owner/name）…">
+      <select id="fam"><option value="">全部家族</option></select>
+      <select id="sort">
+        <option value="score">按综合指数</option>
+        <option value="stars">按 Star 数</option>
+        <option value="weekly">按周下载</option>
+        <option value="growth">按环比增长</option>
+        <option value="vel">按星标增速</option>
+        <option value="age">按创建时间（新→旧）</option>
+        <option value="act">按活跃度</option>
+      </select>
+      <label><input type="checkbox" id="noarch" checked> 排除归档</label>
+      <label><input type="checkbox" id="onlyw"> 仅看有下载</label>
+      <label title="只显示 coverage<0.5、信号不足的仓库"><input type="checkbox" id="lowsig"> 低信号视图</label>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div style="overflow-x:auto;">
+      <table class="rank">
+        <thead><tr>
+          <th data-k="rank">#</th>
+          <th data-k="repo">仓库</th>
+          <th data-k="tags">标签</th>
+          <th data-k="score" class="num">综合</th>
+          <th data-k="cov" class="num" title="coverage：星 0.4 + 下载 0.3 + 增长 0.2 + 活跃 0.1 中已有项的权重和">覆盖</th>
+          <th data-k="stars" class="num">★</th>
+          <th data-k="vel" class="num" title="相邻两次快照的星标差分（星/天）">★/天</th>
+          <th data-k="weekly" class="num">周下载</th>
+          <th data-k="growth" class="num">环比</th>
+          <th data-k="age" class="num">年龄</th>
+          <th data-k="act" class="num">活跃</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </div>
+
+  <div class="panel note" id="note"></div>
+</main>
+<script>window.__DATA__ = /*__DATA__*/;</script>
+<script>/*__APP__*/</script>
+</body>
+</html>
