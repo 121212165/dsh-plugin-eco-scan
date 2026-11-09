@@ -16,7 +16,7 @@
 node --experimental-sqlite tools/eco-report/build_dashboard.mjs
 ```
 
-产物写在 `tools/eco-report/`（`dashboard.html`、`full-ranking.json`、`full-ranking.csv`、`tags-summary.json`、`scoring-diff.json`），同时复制一份到 `reports/<最新扫描日>/`；`ECO_REPO_DIR` 可改后者根目录。
+产物写在 `tools/eco-report/`（`dashboard.html`、`full-ranking.json`、`full-ranking.csv`、`tags-summary.json`、`scoring-diff.json`），同时复制一份到 `reports/<最新扫描日>/`；`ECO_REPO_DIR` 可改公开仓根目录（默认 `dsh-plugin-eco-scan`）。
 
 ## 完整周更流程
 

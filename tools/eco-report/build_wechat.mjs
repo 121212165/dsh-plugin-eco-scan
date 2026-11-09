@@ -1,7 +1,7 @@
 // WeChat article from the CURRENT build (full-ranking.json) plus the
 // recomputed potential board (potential-v4.json). Run after build_dashboard:
 //   node --experimental-sqlite build_wechat.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
@@ -155,6 +155,7 @@ const page = `<!doctype html>
 
 const repoRoot = process.env.ECO_REPO_DIR || 'C:/Users/lenovo/.zcode/workspace/default/dsh-plugin-eco-scan';
 const repoOut = join(repoRoot, 'reports', DATE, 'wechat.html');
+mkdirSync(join(repoRoot, 'reports', DATE), { recursive: true });
 writeFileSync(repoOut, page, 'utf8');
 writeFileSync(join(here, 'wechat.html'), page, 'utf8');
 writeFileSync(join(here, 'wechat-article.html'), article.trim(), 'utf8');
