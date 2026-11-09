@@ -1,10 +1,19 @@
+// WeChat article from the CURRENT build (full-ranking.json) plus the
+// recomputed potential board (potential-v4.json). Run after build_dashboard:
+//   node --experimental-sqlite build_wechat.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DatabaseSync } from 'node:sqlite';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const pot = JSON.parse(readFileSync(join(here, 'potential-v3.json'), 'utf8'));
-const top = JSON.parse(readFileSync(join(here, 'top.json'), 'utf8'));
+const DATA_DIR = process.env.ECO_DATA_DIR || join(process.env.USERPROFILE || process.env.HOME, '.dsh', 'eco-scan');
+const rank = JSON.parse(readFileSync(join(here, 'full-ranking.json'), 'utf8'));
+const pot = JSON.parse(readFileSync(join(here, 'potential-v4.json'), 'utf8'));
+const DATE = rank.date;
+const COUNTS = rank.counts;
+const db = new DatabaseSync(join(DATA_DIR, 'eco.db'), { readOnly: true });
+const descOf = new Map(db.prepare('SELECT id, description FROM repos').all().map((r) => [r.id, r.description || '']));
 
 const fmt = (n) => (n == null ? '—' : Number(n).toLocaleString('en-US'));
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -53,25 +62,35 @@ const potCards = pot.ranked.slice(0, N).map((r, i) => {
   return card(i, r.repoId, r.potential.toFixed(1),
     chip(BRAND_BG, BRAND, `★ ${fmt(r.stars)}`) + chip(CARD, INK, `周下载 ${fmt(r.weekly)}`) +
     chip(CARD, INK, `环比 ${g}`) + chip(CARD, INK, `${Math.round(r.ageDays)} 天`),
-    clip(r.description), i < 3 ? GOLD : BRAND);
+    clip(r.description || descOf.get(r.repoId)), i < 3 ? GOLD : BRAND);
 }).join('');
 
-const rankCards = top.rows.slice(0, N).map((r, i) => {
-  return card(i, r.repoId, Number(r.score).toFixed(1),
-    chip(BRAND_BG, BRAND, `★ ${fmt(r.stars)}`) + chip(CARD, INK, `周下载 ${fmt(r.npmWeekly)}`) +
-    chip(CARD, INK, esc(segName[r.segment] || r.segment)),
-    clip(r.description), i < 3 ? GOLD : BRAND);
+const rankRows = rank.rows.filter((r) => !r.archived).slice(0, N);
+const rankCards = rankRows.map((r, i) => {
+  const vel = r.starVel != null ? chip(CARD, INK, `★速 +${r.starVel.toFixed(1)}/天`) : '';
+  return card(i, r.repo, Number(r.score).toFixed(1),
+    chip(BRAND_BG, BRAND, `★ ${fmt(r.stars)}`) + chip(CARD, INK, `周下载 ${fmt(r.weekly)}`) +
+    vel + chip(CARD, INK, esc(segName[r.segment] || r.segment)),
+    clip(descOf.get(r.repo)), i < 3 ? GOLD : BRAND);
 }).join('');
 
 const article = `
 <section id="wx-article" style="margin:0 auto;padding:24px 18px 40px;max-width:677px;background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif;color:${INK};">
-  ${p(`margin:0 0 6px;font-size:22px;font-weight:800;line-height:1.4;color:${INK};`, 'DeepSeek Harness 插件生态 · 双榜')}
-  ${p(`margin:0 0 4px;font-size:12px;color:${SUB};`, '数据快照 2026-11-06 · 全语料 33,576 仓')}
-  ${boardHead('01', '潜力榜 Top ' + N, `新兴项目动量排序 · 候选 ${fmt(pot.counts.eligible)} → 可评分 ${fmt(pot.counts.ranked)}`)}
-  ${potCards}
-  ${boardHead('02', '综合排名榜 Top ' + N, 'velocity / adoption / quality / maintenance 加权综合分')}
-  ${rankCards}
-  ${p(`margin:24px 0 0;font-size:12px;color:${SUB};text-align:center;`, '· 数据出处 github.com/121212165/dsh-plugin-eco-scan ·')}
+  <section id="wx-head" style="margin:0 0 4px;">
+    ${p(`margin:0 0 6px;font-size:22px;font-weight:800;line-height:1.4;color:${INK};`, 'DeepSeek Harness 插件生态 · 双榜')}
+    ${p(`margin:0 0 4px;font-size:12px;color:${SUB};`, `数据快照 ${DATE} · 全语料 ${fmt(COUNTS.repos)} 仓 · 主榜 ${fmt(COUNTS.mainRows)} 仓`)}
+  </section>
+  <section id="wx-potential">
+    ${boardHead('01', '潜力榜 Top ' + N, `新兴项目动量排序 · 候选 ${fmt(pot.counts.eligible)} → 可评分 ${fmt(pot.counts.ranked)} · 动量/星速/下载/近期增量/新鲜度加权`)}
+    ${potCards}
+  </section>
+  <section id="wx-ranking">
+    ${boardHead('02', '综合排名榜 Top ' + N, '星标 40% + 周下载 30% + 环比 20% + 活跃 10% 百分位加权，缺项按覆盖率以中性先验填补；主榜要求覆盖率 ≥0.4')}
+    ${rankCards}
+  </section>
+  <section id="wx-foot">
+    ${p(`margin:24px 0 0;font-size:12px;color:${SUB};text-align:center;`, `· 数据出处 github.com/121212165/dsh-plugin-eco-scan · 快照 ${DATE} ·`)}
+  </section>
 </section>`;
 
 const page = `<!doctype html>
@@ -79,7 +98,7 @@ const page = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>公众号发文 · DSH 插件双榜</title>
+<title>公众号发文 · DSH 插件双榜 ${DATE}</title>
 <style>
   body{margin:0;background:#eceef1;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;}
   .bar{position:sticky;top:0;z-index:10;background:#1f2329;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.15);}
@@ -93,7 +112,7 @@ const page = `<!doctype html>
 </head>
 <body>
   <div class="bar">
-    <h1>公众号发文 · 双榜</h1>
+    <h1>公众号发文 · 双榜 ${DATE}</h1>
     <button id="copy">一键复制到公众号</button>
     <button id="copyPlain" class="sec">复制纯文本</button>
     <span id="status"></span>
@@ -134,8 +153,9 @@ const page = `<!doctype html>
 </body>
 </html>`;
 
-const repoOut = 'C:/Users/lenovo/.zcode/workspace/default/dsh-plugin-eco-scan/reports/2026-11-06/wechat.html';
+const repoRoot = process.env.ECO_REPO_DIR || 'C:/Users/lenovo/.zcode/workspace/default/dsh-plugin-eco-scan';
+const repoOut = join(repoRoot, 'reports', DATE, 'wechat.html');
 writeFileSync(repoOut, page, 'utf8');
 writeFileSync(join(here, 'wechat.html'), page, 'utf8');
 writeFileSync(join(here, 'wechat-article.html'), article.trim(), 'utf8');
-console.log('written', repoOut, 'bytes', Buffer.byteLength(page));
+console.log('written', repoOut, 'bytes', Buffer.byteLength(page), 'date', DATE, 'rankTop1', rankRows[0]?.repo, 'potTop1', pot.ranked[0]?.repoId);

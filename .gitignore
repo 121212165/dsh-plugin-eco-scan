@@ -16,3 +16,6 @@ tools/eco-report/generic-repos.json
 tools/eco-report/pilot-readme-cache.json
 tools/eco-report/npm-keywords-cache.json
 tools/eco-report/wechat*.png
+tools/eco-report/potential-v4.json
+tools/eco-report/npm-search-cache*.json
+tools/eco-report/wechat-*.png

@@ -46,7 +46,7 @@ async function fetchPage(text, from) {
       const j = await res.json();
       const objects = (j.objects || []).map((o) => ({
         name: o.package?.name,
-        weekly: o.package?.downloads?.weekly ?? null,
+        weekly: o.downloads?.weekly ?? null,
         repo: o.package?.links?.repository || o.package?.npm?.repository || null,
         keywords: o.package?.keywords || [],
       }));
@@ -145,13 +145,70 @@ if (!WRITE) {
 const knownNames = new Set(db.prepare('SELECT name FROM npm_packages').all().map((r) => r.name));
 const need = [...new Set([...candidates.values()].map((c) => c.npmName))].filter((n) => !knownNames.has(n));
 console.log('packages needing stats', need.length);
-const { HttpClient, fetchDownloadStats } = await import(pathToFileURL('C:/Users/lenovo/.zcode/workspace/default/dsh-plugin-eco-scan/lib/core/index.js').href);
-const http = new HttpClient({ userAgent: 'dsh-eco-report' });
+const { downloadWindows } = await import(pathToFileURL('C:/Users/lenovo/.zcode/workspace/default/dsh-plugin-eco-scan/lib/core/index.js').href);
+const win = downloadWindows(new Date());
 const knownWeekly = new Map([...index].filter(([, p]) => p.weekly != null).map(([n, p]) => [n, p.weekly]));
-const stats = await fetchDownloadStats(http, need, { knownWeekly, concurrency: 4, bulkConcurrency: 3, scopedBudget: 300 });
-console.log('stats fetched', stats.size, 'of', need.length);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// The shared collector packs ~100 names into one point URL, which Cloudflare
+// answers with 1015/429 in bursts. Use small chunks with backoff; when a chunk
+// still fails, keep the search index's own weekly count rather than dropping
+// the mapping entirely.
+// The search index already carries a weekly count per package (result-level
+// `downloads.weekly`), so the point API is only a fallback for packages the
+// index reports without one. Bulk calls are unreliable here: scoped names in a
+// comma list yield HTTP 400 and bursts yield 429.
+async function pointNames(chunk, window) {
+  const url = `https://api.npmjs.org/downloads/point/${window.start}:${window.end}/${chunk.join(',')}`;
+  let lastErr = '';
+  for (let attempt = 0; attempt < 4; attempt++) {
+    if (attempt) await sleep(4000 * attempt);
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(30000), headers: { 'user-agent': 'dsh-eco-report' } });
+      if (res.status === 429) { lastErr = 'HTTP 429'; continue; }
+      if (!res.ok) return { err: 'HTTP ' + res.status };
+      const j = await res.json();
+      const map = new Map();
+      for (const n of chunk) {
+        const e = j[n];
+        if (e && typeof e.downloads === 'number') map.set(n, e.downloads);
+      }
+      return { map };
+    } catch (e) { lastErr = String(e); }
+  }
+  return { err: lastErr || 'HTTP 429' };
+}
+const stats = new Map();
+const statErrors = [];
+const nowIsoStats = new Date().toISOString();
+const pending = need.filter((n) => knownWeekly.get(n) == null);
+for (const n of need) {
+  const w = knownWeekly.get(n);
+  if (w != null) stats.set(n, { name: n, weekly: w, prev: null, growthPct: null, fetchedAt: nowIsoStats });
+}
+// Only unnamed packages (index had no count) spend point requests, capped.
+const BUDGET = 200;
+for (const n of pending.slice(0, BUDGET)) {
+  const r = await pointNames([n], win.week);
+  if (r.map?.has(n)) {
+    stats.set(n, { name: n, weekly: r.map.get(n), prev: null, growthPct: null, fetchedAt: nowIsoStats });
+  } else if (r.err) statErrors.push(`${n}: ${r.err}`);
+  await sleep(200);
+}
+if (pending.length > BUDGET) statErrors.push(`${pending.length - BUDGET} packages without index weekly skipped (budget)`);
+console.log('index weekly', stats.size, 'pending', pending.length);
+console.log('stats fetched', stats.size, 'of', need.length, 'errors', statErrors.length);
 
 const nowIso = new Date().toISOString();
+// Refresh weekly counts for packages we already knew about; otherwise their
+// snapshot value stays at the previous sweep's vintage while new mappings move.
+const refreshPkg = db.prepare('UPDATE npm_packages SET weekly_downloads=?, fetched_at=? WHERE name=?');
+let refreshedPkgs = 0;
+for (const [name, pkg] of index) {
+  if (pkg.weekly == null || !knownNames.has(name)) continue;
+  refreshPkg.run(pkg.weekly, nowIso, name);
+  refreshedPkgs++;
+}
+console.log('refreshed packages', refreshedPkgs);
 const insPkg = db.prepare(`INSERT INTO npm_packages(name, weekly_downloads, range_week, range_prev, growth_pct, fetched_at)
   VALUES(?,?,?,?,?,?)
   ON CONFLICT(name) DO UPDATE SET weekly_downloads=excluded.weekly_downloads, range_week=excluded.range_week,
@@ -190,6 +247,8 @@ const mainTotal = db.prepare('SELECT COUNT(*) n FROM snapshots WHERE scan_date=?
 const report = {
   date: DATE, indexedPackages: index.size, registryLinkMatches: linkHits, heuristicMatches: heuristicHits,
   newMappings: mapWrites, packagesWithStats: stats.size,
+  refreshedPackages: refreshedPkgs,
+  downloadErrors: statErrors.length, downloadErrorSample: statErrors.slice(0, 3),
   weeklyPositive: { before: null, after, total, coveragePct: +(after / total * 100).toFixed(2) },
   mainScope: { weeklyPositive: main, total: mainTotal, coveragePct: +(main / mainTotal * 100).toFixed(2) },
 };
