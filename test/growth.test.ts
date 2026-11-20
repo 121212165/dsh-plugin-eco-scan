@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { growthRow, rankGrowth, rankLiveGrowth, renderGrowth, renderLiveGrowth, renderSegmentsGrowth, weekGrowth, type RepoSeries } from '../src/eco/growth.ts';
+import { weekGrowthFrom } from '../src/eco/sources.ts';
 
 const series = (fullName: string, segment: string, points: RepoSeries['points']): RepoSeries => ({ fullName, segment, points });
 
@@ -107,6 +108,24 @@ test('weekGrowth handles empty, short, zero-baseline and longer-than-14-day wind
   assert.deepEqual(weekGrowth([...Array(7).fill(0), ...Array(7).fill(2)]), { week: 14, prev: 0, growthPct: null });
   assert.deepEqual(weekGrowth([9999, ...Array(7).fill(4), ...Array(7).fill(2)]), { week: 14, prev: 28, growthPct: -0.5 });
   assert.deepEqual(weekGrowth([...Array(7).fill(4), ...Array(7).fill(0)]), { week: 0, prev: 28, growthPct: -1 });
+});
+
+// Issue #1 regression: the eco source path used to keep a duplicate `< 8` guard.
+test('eco source weekGrowthFrom requires a full 14-day window (8 samples => null)', () => {
+  const daily = Array.from({ length: 8 }, (_, i) => i + 1);
+  assert.deepEqual(weekGrowthFrom(daily), { week: daily.slice(-7).reduce((a, b) => a + b, 0), prev: 0, growthPct: null });
+  assert.equal(weekGrowthFrom(daily).growthPct, null);
+});
+
+// Issue #1 regression: a metric switch must not divide npm downloads by stars.
+test('issue #1: npmWeekly -> stars switch never computes a cross-metric growthPct', () => {
+  const row = growthRow(series('a/switch', 'other', [
+    { date: '2026-09-28', stars: 10, npmWeekly: 100 },
+    { date: '2026-09-29', stars: 20 }, // latest has no npmWeekly -> metric = stars
+  ]));
+  assert.equal(row.metric, 'stars');
+  assert.equal(row.previous, 10);   // stars baseline, NOT npmWeekly=100
+  assert.equal(row.growthPct, 1);   // (20-10)/10, not (20-100)/100
 });
 
 for (const metric of ['npmWeekly', 'releaseDownloads'] as const) {

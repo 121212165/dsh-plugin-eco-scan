@@ -6,6 +6,7 @@
  * to undefined instead of failing the scan. */
 
 import { githubJson, readTokenFromEnv, type FetchOptions } from '@dsh-family/kit/kit/http';
+import { weekGrowth } from './growth.ts';
 
 export { readTokenFromEnv };
 export type { FetchOptions };
@@ -109,9 +110,7 @@ export async function fetchNpmRangeGrowth(names: string[], options: FetchOptions
   return out;
 }
 
-function weekGrowthFrom(daily: number[]): { week: number; prev: number; growthPct: number | null } {
-  if (daily.length < 8) return { week: daily.reduce((a, b) => a + b, 0), prev: 0, growthPct: null };
-  const week = daily.slice(-7).reduce((a, b) => a + b, 0);
-  const prev = daily.slice(-14, -7).reduce((a, b) => a + b, 0);
-  return { week, prev, growthPct: prev > 0 ? (week - prev) / prev : null };
-}
+/** Thin alias so the eco source path and the growth engine share ONE 14-day
+ * window rule. Previously this was a duplicate with a `< 8` guard, which let
+ * an 8–13 day series divide a full week by a truncated 1–6 day "previous week". */
+export const weekGrowthFrom = weekGrowth;

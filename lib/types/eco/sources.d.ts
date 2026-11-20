@@ -5,6 +5,7 @@
  * All fetches tolerate failure per-source: a dead source degrades that metric
  * to undefined instead of failing the scan. */
 import { readTokenFromEnv, type FetchOptions } from '@dsh-family/kit/kit/http';
+import { weekGrowth } from './growth.ts';
 export { readTokenFromEnv };
 export type { FetchOptions };
 export interface RawRepo {
@@ -25,4 +26,8 @@ export declare function fetchNpmRangeGrowth(names: string[], options?: FetchOpti
     prev: number;
     growthPct: number | null;
 }>>;
+/** Thin alias so the eco source path and the growth engine share ONE 14-day
+ * window rule. Previously this was a duplicate with a `< 8` guard, which let
+ * an 8–13 day series divide a full week by a truncated 1–6 day "previous week". */
+export declare const weekGrowthFrom: typeof weekGrowth;
 //# sourceMappingURL=sources.d.ts.map
