@@ -114,68 +114,114 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
   - [低信号] 18874530790/dsh-default-full-permission score=55 cov=0.1 age=2d wk=null
   - [低信号] 1997liuyh-boop/dsh-desktop-tools score=55 cov=0.1 age=6d wk=null
 
+## FARM / DEDUP VIEW (issue #20)
+
+> 农场阈值：单账号仓库数 > 100。去重视图按归一化 basename 聚类（去 `dsh-` / `plugin` / 版本 / 标点）；提供 `dedupView()` 与 `applyVerificationFilter()` 两种一键收敛方式。
+
+- 农场账号=5 ｜ 农场仓库=1905 ｜ 全局 basename 重复簇=3346 ｜ 同作者近似名簇=49
+
+农场分区（owner / 仓库数 / 有周下载数）：
+  - uckkk: 1296 仓，其中 3 仓有下载
+  - xby-skill: 187 仓，其中 0 仓有下载
+  - perrylink: 181 仓，其中 137 仓有下载
+  - feely0208: 136 仓，其中 29 仓有下载
+  - omdsh-dev: 105 仓，其中 19 仓有下载
+
+全局 basename 撞名 Top10（basename / 仓数 / 不同 owner 数 / 最高分）：
+  - plugins: 740 仓, owners=740, score≤91.6 — e.g. klarkxy/dsh-plugins, delthin/dsh-plugins, zhiqiangme/dsh-plugins
+  - desktop: 113 仓, owners=113, score≤74.9 — e.g. dataelement/dsh-desktop, anywhere-labs/dsh-desktop, vibeinging/dsh-desktop
+  - memory: 94 仓, owners=94, score≤90.1 — e.g. max-null/dsh-memory, furongjun-1999/dsh-memory, annkun/dsh-memory
+  - sessiondelete: 79 仓, owners=79, score≤76.8 — e.g. xrn1997/dsh-session-delete, linusteller/dsh-session-delete, xohmai/dsh-session-delete
+  - pluginmanager: 74 仓, owners=74, score≤70 — e.g. liaoyuanxinghuo/dsh-plugin-manager, liqichen/dsh-plugin-manager, pelydeng/dsh-plugin-manager
+  - pluginmarket: 72 仓, owners=72, score≤77.7 — e.g. losebird/dsh-plugin-market, 99galaxy/dsh-plugin-market, chnjames/dsh-plugin-market
+  - deepseekharnessdesktop: 58 仓, owners=58, score≤74.9 — e.g. dsh-tauri/deepseek-harness-desktop, ningbainb/deepseek-harness-desktop, chokwinlee/deepseek-harness-desktop
+  - notify: 55 仓, owners=55, score≤73.8 — e.g. bittersmilezzz/dsh-notify, linbin-mk/dsh-notify, yaorenliang/dsh-notify
+  - pluginindex: 48 仓, owners=48, score≤79.2 — e.g. polang233/dsh-plugin-index, ymck-x/dsh-plugin-index, gitmfq/dsh-plugin-index
+  - balance: 46 仓, owners=46, score≤70.8 — e.g. crazywoola/dsh-balance, yxxbc/dsh-balance-plugin, twotwopiggy/dsh-balance
+
+同作者近似名 Top8：
+  - kush-coder/autopiloteacdesktop: 7 仓, score≤54.6
+  - uckkk/base: 6 仓, score≤48.7
+  - perrylink/pluginupgrade: 3 仓, score≤58.7
+  - eternalnight996/memoryeternal: 2 仓, score≤96.2
+  - blank-not-black/remote: 2 仓, score≤92.9
+  - hiai-gg/docsmint: 2 仓, score≤89.9
+  - zseven-w/openpencil: 2 仓, score≤82.4
+  - mrpulor-gh/nuphusmcp: 2 仓, score≤80.7
+
+## VERIFICATION BADGES (issue #20)
+
+| 徽章 | 含义 | 全库仓数 |
+|---|---|---|
+| ✅ 已验证 | 有周下载 + 有 star + 非农场 | 4564 |
+| ⚠ 弱信号 | 仅有下载或仅有 star + 非农场 | 14146 |
+| ⚠ 未验证 | 无下载、无 star、非农场 | 17934 |
+| 🚫 农场 | 单账号仓库数 > 100 | 1905 |
+
+一键过滤：`applyVerificationFilter(rows, ownerCounts, {requireDownloads:true, requireStars:false, excludeFarm:true})`；CLI：`node data/dedup.mjs --filter --downloads --no-farm --limit 20`。
+
 ## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
-> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。
-1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
-2. zilliztech/memsearch | score=99.1 | ★=2883 | wk=13548 | grow=123.5 | age=280d | seg=5 | cov=1 | enr=0 | tags=[记忆,知识库/RAG,搜索/检索,文档/笔记]
-3. tt-a1i/archify | score=98.8 | ★=96845 | wk=16124 | grow=40.3 | age=215d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,网页界面,编码/代码,智能体]
-4. woniuniuniu/dsh-media-desk | score=98.8 | ★=1402 | wk=8119 | grow=74.1 | age=14d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,工作区]
-5. flymysql/dsh-remote | score=98.8 | ★=291 | wk=79516 | grow=76.8 | age=94d | seg=2 | cov=1 | enr=0 | tags=[搜索/检索,远程/隧道,工作区,Git/提交]
-6. fourzkw/dsh-drawai | score=98.7 | ★=667 | wk=7817 | grow=92.4 | age=61d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,模型接入]
-7. ikalus1988/misakanet | score=98.7 | ★=561 | wk=4360 | grow=257.4 | age=200d | seg=3 | cov=1 | enr=0 | tags=[记忆,MCP,Git/提交,编码/代码]
-8. ebony-vinyl/dsh-our-free-model | score=98.4 | ★=76025 | wk=20708 | grow=25.7 | age=52d | seg=3 | cov=1 | enr=0 | tags=[模型接入,成本/额度,统计/监控]
-9. t-auto/dsh-ops | score=98.4 | ★=5850 | wk=73476 | grow=26.9 | age=39d | seg=2 | cov=1 | enr=0 | tags=[自动化,成本/额度,统计/监控,设计/排版]
-10. michengai/dsh-codex-ui | score=98.3 | ★=297 | wk=24226 | grow=41 | age=93d | seg=1 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,会话管理,工作区]
-11. ssamurias/dsh-fish | score=98 | ★=155 | wk=5620 | grow=92.1 | age=22d | seg=1 | cov=1 | enr=0 | tags=[人格/陪伴,文档/笔记,社交/IM,网页界面]
-12. xdtrees/dsh-xdpool | score=97.7 | ★=531 | wk=4734 | grow=34.6 | age=73d | seg=7 | cov=1 | enr=0 | tags=[自动化,模型接入,路由/网关,成本/额度]
-13. jialaoliu/dsh-baton | score=97.7 | ★=230 | wk=4372 | grow=83.5 | age=29d | seg=0 | cov=1 | enr=0 | tags=[MCP,编码/代码,智能体,模型接入]
-14. omdsh-dev/dsh-better-sidebar | score=97.6 | ★=5182 | wk=96487 | grow=11.8 | age=100d | seg=2 | cov=1 | enr=0 | tags=[会话管理,工作区,Git/提交,文件/目录]
-15. wnluo/dsh-mobile-plugin | score=97.6 | ★=61 | wk=58280 | grow=60 | age=36d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,移动端]
-16. dingminhua/dsh-connect-workbuddy | score=97.5 | ★=1649 | wk=34342 | grow=12.3 | age=79d | seg=0 | cov=1 | enr=0 | tags=[模型接入,成本/额度,插件市场,安装/管理]
-17. tranquillitatis-lab/dsh-live-compact | score=97.5 | ★=288 | wk=4146 | grow=37.5 | age=13d | seg=5 | cov=1 | enr=0 | tags=[上下文/压缩]
-18. chromoany/dsh-notify-me | score=97.5 | ★=136 | wk=7531 | grow=40.9 | age=68d | seg=1 | cov=1 | enr=0 | tags=[网页界面,桌面客户端,通知/提醒]
-19. songoao25/dsh-bottom-info-bar | score=97.5 | ★=61 | wk=20551 | grow=64.4 | age=93d | seg=7 | cov=1 | enr=0 | tags=[精选清单,网页界面,会话管理,模型接入]
-20. duhu2000/dsh-mcp-connector | score=97.4 | ★=130 | wk=12624 | grow=29.4 | age=87d | seg=0 | cov=1 | enr=0 | tags=[搜索/检索,MCP,模型接入,安全]
-21. drscrewdriver/dsh-browser-cdp | score=97.4 | ★=45 | wk=9607 | grow=138.7 | age=54d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,浏览器,远程/隧道,自动化]
-22. ebony-vinyl/eac-design-world | score=97.2 | ★=1550 | wk=3538 | grow=46.3 | age=30d | seg=6 | cov=1 | enr=0 | tags=[视频/分镜,MCP,工作区,编码/代码]
-23. dddmuc/dsh-free-search | score=97.2 | ★=1223 | wk=39301 | grow=10.1 | age=93d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,模型接入,成本/额度]
-24. poco-ai/agentero-dsh-plugin | score=97.2 | ★=227 | wk=4206 | grow=50 | age=17d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,文档/笔记,会话管理,智能体]
-25. wsl043/dsh-codex-subscription | score=97.1 | ★=489 | wk=10764 | grow=13.8 | age=94d | seg=7 | cov=1 | enr=0 | tags=[图像/绘图,搜索/检索,远程/隧道,移动端]
-26. aik358/dsh-auto-memory | score=97.1 | ★=202 | wk=3191 | grow=64.8 | age=94d | seg=5 | cov=1 | enr=0 | tags=[记忆,上下文/压缩,自动化,技能/Prompt]
-27. fei2411/ds-bot | score=97 | ★=7958 | wk=21813 | grow=8.1 | age=39d | seg=0 | cov=1 | enr=0 | tags=[智能体]
-28. liguobao/ds-harness-remote | score=97 | ★=2986 | wk=30117 | grow=7.8 | age=93d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,移动端,网页界面,工作区]
-29. sirilee/dsh-rewind | score=97 | ★=273 | wk=14207 | grow=15.3 | age=91d | seg=6 | cov=1 | enr=0 | tags=[图像/绘图,知识库/RAG,会话管理,工作区]
-30. orderg-x/dsh-design-studio | score=97 | ★=78 | wk=4931 | grow=49.3 | age=28d | seg=1 | cov=1 | enr=0 | tags=[图像/绘图,网页界面,桌面客户端,工作区]
-31. saya-ch/dsh-mobile | score=96.9 | ★=862 | wk=8954 | grow=10.9 | age=93d | seg=1 | cov=1 | enr=0 | tags=[屏幕感知,远程/隧道,移动端,网页界面]
-32. 2026heshao/dsh-armory | score=96.9 | ★=123 | wk=2913 | grow=60.8 | age=37d | seg=2 | cov=1 | enr=0 | tags=[MCP,网页界面,技能/Prompt,模型接入]
-33. literaf/dsh-ai4scholar | score=96.8 | ★=49 | wk=3897 | grow=71.7 | age=92d | seg=0 | cov=1 | enr=0 | tags=[搜索/检索,文档/笔记]
-34. lishize20040802-rgb/dsh-deep-ptc-mode | score=96.8 | ★=48 | wk=5273 | grow=61.9 | age=19d | seg=1 | cov=1 | enr=0 | tags=[图像/绘图,上下文/压缩,远程/隧道,网页界面]
-35. op7418/dsh-guizang-design | score=96.7 | ★=922 | wk=9039 | grow=25.8 | age=16d | seg=2 | cov=1 | enr=0 | tags=[网页界面,工作流,技能/Prompt,设计/排版]
-36. nwflower/dsh-chat-import | score=96.7 | ★=315 | wk=5383 | grow=14.4 | age=94d | seg=6 | cov=1 | enr=0 | tags=[会话管理,自动化,编码/代码,文件/目录]
-37. perrylink/dsh-auto-review | score=96.7 | ★=249 | wk=2071 | grow=76.6 | age=94d | seg=0 | cov=1 | enr=0 | tags=[会话管理,自动化,Shell/执行,编码/代码]
-38. topmindspace/dsh-super-kanban | score=96.7 | ★=107 | wk=2311 | grow=82.3 | age=11d | seg=0 | cov=1 | enr=0 | tags=[会话管理,工作区,设计/排版,安装/管理]
-39. liujiangnanchenjbguo/dsh-gufa-code | score=96.5 | ★=44 | wk=11085 | grow=44.2 | age=11d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,会话管理,Git/提交,编码/代码]
-40. hkkz9522/dsh-session-manager | score=96.4 | ★=122 | wk=3741 | grow=24.9 | age=92d | seg=6 | cov=1 | enr=0 | tags=[会话管理,工作区,智能体,导出/归档]
-41. aa728848/dsh-chatgpt-subscription | score=96.4 | ★=98 | wk=6375 | grow=17.8 | age=94d | seg=3 | cov=1 | enr=0 | tags=[成本/额度]
-42. xingxingbk-git/dsh-deepseek-chat | score=96.4 | ★=36 | wk=3333 | grow=113.9 | age=38d | seg=0 | cov=1 | enr=0 | tags=[桌面客户端,会话管理,Git/提交,插件市场]
-43. yu-tao-li/dsh-computer-use-win | score=96.3 | ★=752 | wk=10649 | grow=6.6 | age=91d | seg=0 | cov=1 | enr=0 | tags=[MCP,桌面客户端,自动化]
-44. mexiaosqwq/dsh-web-mobile | score=96.3 | ★=191 | wk=5244 | grow=13.6 | age=93d | seg=1 | cov=1 | enr=0 | tags=[移动端,网页界面,设计/排版]
-45. hyhmrright/brooks-lint | score=96.2 | ★=1578 | wk=1563 | grow=50.7 | age=235d | seg=2 | cov=1 | enr=0 | tags=[命令行,Git/提交,编码/代码,智能体]
-46. anionex/dsh-vision-toolkit | score=96.2 | ★=945 | wk=3184 | grow=12.9 | age=94d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,屏幕感知,视觉/多模态,网页界面]
-47. eternalnight996/memory-eternal | score=96.2 | ★=189 | wk=5228 | grow=11.3 | age=77d | seg=5 | cov=1 | enr=0 | tags=[记忆,MCP,编码/代码,智能体]
-48. liustack/modsearch | score=96.1 | ★=989 | wk=21924 | grow=4.6 | age=267d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,编码/代码,智能体]
-49. q253595422/dsh-imagegen-video | score=96.1 | ★=103 | wk=3176 | grow=19.4 | age=31d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,图像/绘图,工作区,工作流]
-50. asktheway/dsh-auto-memory | score=96 | ★=132 | wk=3609 | grow=15.2 | age=54d | seg=5 | cov=1 | enr=0 | tags=[记忆,文档/笔记,自动化,编码/代码]
-51. aliboder/dsh-music-panel | score=95.9 | ★=32 | wk=20041 | grow=24.7 | age=11d | seg=1 | cov=1 | enr=0 | tags=[语音/音频,网页界面,工作区]
-52. sixtysevenlf/dsh-blender-plugin | score=95.8 | ★=2122 | wk=4897 | grow=6.4 | age=63d | seg=2 | cov=1 | enr=0 | tags=[终端 TUI,桌面客户端,自动化,技能/Prompt]
-53. microqian2th/dsh-codex-effort-slider | score=95.8 | ★=275 | wk=2851 | grow=12.9 | age=42d | seg=0 | cov=1 | enr=0 | tags=[桌面客户端,模型接入]
-54. perrylink/dsh-permission-rules | score=95.8 | ★=136 | wk=2221 | grow=30.5 | age=94d | seg=2 | cov=1 | enr=0 | tags=[会话管理,工作区,Shell/执行,编码/代码]
-55. songoao25/dsh-chatgpt-sub | score=95.8 | ★=50 | wk=2582 | grow=59.7 | age=92d | seg=7 | cov=1 | enr=0 | tags=[精选清单,会话管理,模型接入,成本/额度]
-56. omdsh-dev/dsh-llm-fallbacks | score=95.8 | ★=26 | wk=3572 | grow=65.1 | age=100d | seg=3 | cov=1 | enr=0 | tags=[智能体,模型接入]
-57. slow-stack/mneme | score=95.7 | ★=235 | wk=3840 | grow=8.7 | age=94d | seg=0 | cov=1 | enr=0 | tags=[记忆,知识库/RAG,搜索/检索,MCP]
-58. drscrewdriver/dsh-prime-memory | score=95.7 | ★=33 | wk=7038 | grow=22.8 | age=76d | seg=5 | cov=1 | enr=0 | tags=[记忆,插件市场]
-59. dingminhua/dsh-connect-qoder | score=95.6 | ★=68 | wk=5046 | grow=17.4 | age=36d | seg=0 | cov=1 | enr=0 | tags=[模型接入,路由/网关,成本/额度,插件市场]
-60. perrylink/dsh-doublecheck | score=95.6 | ★=58 | wk=2109 | grow=66.9 | age=94d | seg=0 | cov=1 | enr=0 | tags=[编码/代码,技能/Prompt,安全,插件市场]
+> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。
+1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
+2. zilliztech/memsearch | score=99.1 | ★=2883 | wk=13548 | grow=123.5 | age=280d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,知识库/RAG,搜索/检索,文档/笔记]
+3. tt-a1i/archify | score=98.8 | ★=96845 | wk=16124 | grow=40.3 | age=215d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,网页界面,编码/代码,智能体]
+4. woniuniuniu/dsh-media-desk | score=98.8 | ★=1402 | wk=8119 | grow=74.1 | age=14d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,工作区]
+5. flymysql/dsh-remote | score=98.8 | ★=291 | wk=79516 | grow=76.8 | age=94d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,远程/隧道,工作区,Git/提交]
+6. fourzkw/dsh-drawai | score=98.7 | ★=667 | wk=7817 | grow=92.4 | age=61d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,模型接入]
+7. ikalus1988/misakanet | score=98.7 | ★=561 | wk=4360 | grow=257.4 | age=200d | seg=3 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,MCP,Git/提交,编码/代码]
+8. ebony-vinyl/dsh-our-free-model | score=98.4 | ★=76025 | wk=20708 | grow=25.7 | age=52d | seg=3 | cov=1 | enr=0 | ✅ 已验证 | tags=[模型接入,成本/额度,统计/监控]
+9. t-auto/dsh-ops | score=98.4 | ★=5850 | wk=73476 | grow=26.9 | age=39d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[自动化,成本/额度,统计/监控,设计/排版]
+10. michengai/dsh-codex-ui | score=98.3 | ★=297 | wk=24226 | grow=41 | age=93d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,网页界面,会话管理,工作区]
+11. ssamurias/dsh-fish | score=98 | ★=155 | wk=5620 | grow=92.1 | age=22d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[人格/陪伴,文档/笔记,社交/IM,网页界面]
+12. xdtrees/dsh-xdpool | score=97.7 | ★=531 | wk=4734 | grow=34.6 | age=73d | seg=7 | cov=1 | enr=0 | ✅ 已验证 | tags=[自动化,模型接入,路由/网关,成本/额度]
+13. jialaoliu/dsh-baton | score=97.7 | ★=230 | wk=4372 | grow=83.5 | age=29d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[MCP,编码/代码,智能体,模型接入]
+14. omdsh-dev/dsh-better-sidebar | score=97.6 | ★=5182 | wk=96487 | grow=11.8 | age=100d | seg=2 | cov=1 | enr=0 | 🚫 农场 | tags=[会话管理,工作区,Git/提交,文件/目录]
+15. wnluo/dsh-mobile-plugin | score=97.6 | ★=61 | wk=58280 | grow=60 | age=36d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[远程/隧道,移动端]
+16. dingminhua/dsh-connect-workbuddy | score=97.5 | ★=1649 | wk=34342 | grow=12.3 | age=79d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[模型接入,成本/额度,插件市场,安装/管理]
+17. tranquillitatis-lab/dsh-live-compact | score=97.5 | ★=288 | wk=4146 | grow=37.5 | age=13d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[上下文/压缩]
+18. chromoany/dsh-notify-me | score=97.5 | ★=136 | wk=7531 | grow=40.9 | age=68d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,通知/提醒]
+19. songoao25/dsh-bottom-info-bar | score=97.5 | ★=61 | wk=20551 | grow=64.4 | age=93d | seg=7 | cov=1 | enr=0 | ✅ 已验证 | tags=[精选清单,网页界面,会话管理,模型接入]
+20. duhu2000/dsh-mcp-connector | score=97.4 | ★=130 | wk=12624 | grow=29.4 | age=87d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,MCP,模型接入,安全]
+21. drscrewdriver/dsh-browser-cdp | score=97.4 | ★=45 | wk=9607 | grow=138.7 | age=54d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,浏览器,远程/隧道,自动化]
+22. ebony-vinyl/eac-design-world | score=97.2 | ★=1550 | wk=3538 | grow=46.3 | age=30d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,MCP,工作区,编码/代码]
+23. dddmuc/dsh-free-search | score=97.2 | ★=1223 | wk=39301 | grow=10.1 | age=93d | seg=4 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,网页界面,模型接入,成本/额度]
+24. poco-ai/agentero-dsh-plugin | score=97.2 | ★=227 | wk=4206 | grow=50 | age=17d | seg=4 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,文档/笔记,会话管理,智能体]
+25. wsl043/dsh-codex-subscription | score=97.1 | ★=489 | wk=10764 | grow=13.8 | age=94d | seg=7 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,搜索/检索,远程/隧道,移动端]
+26. aik358/dsh-auto-memory | score=97.1 | ★=202 | wk=3191 | grow=64.8 | age=94d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,上下文/压缩,自动化,技能/Prompt]
+27. fei2411/ds-bot | score=97 | ★=7958 | wk=21813 | grow=8.1 | age=39d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[智能体]
+28. liguobao/ds-harness-remote | score=97 | ★=2986 | wk=30117 | grow=7.8 | age=93d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[远程/隧道,移动端,网页界面,工作区]
+29. sirilee/dsh-rewind | score=97 | ★=273 | wk=14207 | grow=15.3 | age=91d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,知识库/RAG,会话管理,工作区]
+30. orderg-x/dsh-design-studio | score=97 | ★=78 | wk=4931 | grow=49.3 | age=28d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,网页界面,桌面客户端,工作区]
+31. saya-ch/dsh-mobile | score=96.9 | ★=862 | wk=8954 | grow=10.9 | age=93d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[屏幕感知,远程/隧道,移动端,网页界面]
+32. 2026heshao/dsh-armory | score=96.9 | ★=123 | wk=2913 | grow=60.8 | age=37d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[MCP,网页界面,技能/Prompt,模型接入]
+33. literaf/dsh-ai4scholar | score=96.8 | ★=49 | wk=3897 | grow=71.7 | age=92d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,文档/笔记]
+34. lishize20040802-rgb/dsh-deep-ptc-mode | score=96.8 | ★=48 | wk=5273 | grow=61.9 | age=19d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,上下文/压缩,远程/隧道,网页界面]
+35. op7418/dsh-guizang-design | score=96.7 | ★=922 | wk=9039 | grow=25.8 | age=16d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,工作流,技能/Prompt,设计/排版]
+36. nwflower/dsh-chat-import | score=96.7 | ★=315 | wk=5383 | grow=14.4 | age=94d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[会话管理,自动化,编码/代码,文件/目录]
+37. perrylink/dsh-auto-review | score=96.7 | ★=249 | wk=2071 | grow=76.6 | age=94d | seg=0 | cov=1 | enr=0 | 🚫 农场 | tags=[会话管理,自动化,Shell/执行,编码/代码]
+38. topmindspace/dsh-super-kanban | score=96.7 | ★=107 | wk=2311 | grow=82.3 | age=11d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[会话管理,工作区,设计/排版,安装/管理]
+39. liujiangnanchenjbguo/dsh-gufa-code | score=96.5 | ★=44 | wk=11085 | grow=44.2 | age=11d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[远程/隧道,会话管理,Git/提交,编码/代码]
+40. hkkz9522/dsh-session-manager | score=96.4 | ★=122 | wk=3741 | grow=24.9 | age=92d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[会话管理,工作区,智能体,导出/归档]
+41. aa728848/dsh-chatgpt-subscription | score=96.4 | ★=98 | wk=6375 | grow=17.8 | age=94d | seg=3 | cov=1 | enr=0 | ✅ 已验证 | tags=[成本/额度]
+42. xingxingbk-git/dsh-deepseek-chat | score=96.4 | ★=36 | wk=3333 | grow=113.9 | age=38d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[桌面客户端,会话管理,Git/提交,插件市场]
+43. yu-tao-li/dsh-computer-use-win | score=96.3 | ★=752 | wk=10649 | grow=6.6 | age=91d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[MCP,桌面客户端,自动化]
+44. mexiaosqwq/dsh-web-mobile | score=96.3 | ★=191 | wk=5244 | grow=13.6 | age=93d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[移动端,网页界面,设计/排版]
+45. hyhmrright/brooks-lint | score=96.2 | ★=1578 | wk=1563 | grow=50.7 | age=235d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[命令行,Git/提交,编码/代码,智能体]
+46. anionex/dsh-vision-toolkit | score=96.2 | ★=945 | wk=3184 | grow=12.9 | age=94d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[图像/绘图,屏幕感知,视觉/多模态,网页界面]
+47. eternalnight996/memory-eternal | score=96.2 | ★=189 | wk=5228 | grow=11.3 | age=77d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,MCP,编码/代码,智能体]
+48. liustack/modsearch | score=96.1 | ★=989 | wk=21924 | grow=4.6 | age=267d | seg=4 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,网页界面,编码/代码,智能体]
+49. q253595422/dsh-imagegen-video | score=96.1 | ★=103 | wk=3176 | grow=19.4 | age=31d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,图像/绘图,工作区,工作流]
+50. asktheway/dsh-auto-memory | score=96 | ★=132 | wk=3609 | grow=15.2 | age=54d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,文档/笔记,自动化,编码/代码]
+51. aliboder/dsh-music-panel | score=95.9 | ★=32 | wk=20041 | grow=24.7 | age=11d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[语音/音频,网页界面,工作区]
+52. sixtysevenlf/dsh-blender-plugin | score=95.8 | ★=2122 | wk=4897 | grow=6.4 | age=63d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[终端 TUI,桌面客户端,自动化,技能/Prompt]
+53. microqian2th/dsh-codex-effort-slider | score=95.8 | ★=275 | wk=2851 | grow=12.9 | age=42d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[桌面客户端,模型接入]
+54. perrylink/dsh-permission-rules | score=95.8 | ★=136 | wk=2221 | grow=30.5 | age=94d | seg=2 | cov=1 | enr=0 | 🚫 农场 | tags=[会话管理,工作区,Shell/执行,编码/代码]
+55. songoao25/dsh-chatgpt-sub | score=95.8 | ★=50 | wk=2582 | grow=59.7 | age=92d | seg=7 | cov=1 | enr=0 | ✅ 已验证 | tags=[精选清单,会话管理,模型接入,成本/额度]
+56. omdsh-dev/dsh-llm-fallbacks | score=95.8 | ★=26 | wk=3572 | grow=65.1 | age=100d | seg=3 | cov=1 | enr=0 | 🚫 农场 | tags=[智能体,模型接入]
+57. slow-stack/mneme | score=95.7 | ★=235 | wk=3840 | grow=8.7 | age=94d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,知识库/RAG,搜索/检索,MCP]
+58. drscrewdriver/dsh-prime-memory | score=95.7 | ★=33 | wk=7038 | grow=22.8 | age=76d | seg=5 | cov=1 | enr=0 | ✅ 已验证 | tags=[记忆,插件市场]
+59. dingminhua/dsh-connect-qoder | score=95.6 | ★=68 | wk=5046 | grow=17.4 | age=36d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[模型接入,路由/网关,成本/额度,插件市场]
+60. perrylink/dsh-doublecheck | score=95.6 | ★=58 | wk=2109 | grow=66.9 | age=94d | seg=0 | cov=1 | enr=0 | 🚫 农场 | tags=[编码/代码,技能/Prompt,安全,插件市场]
 
 ## ENRICHED SAMPLES (row[10]=1, label + summary)
 - **drscrewdriver/dsh-brief-sidebar** [score=93.4, cov=1]

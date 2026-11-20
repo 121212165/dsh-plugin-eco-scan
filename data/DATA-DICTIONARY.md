@@ -66,6 +66,14 @@
 - **榜单质量门禁（issue #19）**：主榜 / 推荐表先剔除 `row[8]=archived` 与 `row[11]=coverage<0.4`，再按 score 全局降序。门禁由 `data/quality-gate.mjs` 的 `passesQualityGate` / `mainBoard` 实现；`digest.md` 的 `## QUALITY GATE SELF-CHECK` 打印 `archived`、`lowSignal`、交集、排除合计、可入榜数，并断言「归档入榜=0、低信号入榜=0」。当前快照：归档 415、coverage<0.4 为 19,524、门禁排除 19,524+415−交集。
 - Top60 榜单 = **全局 score 排序**（见 `digest.mjs` 的 `topByScore`），不再按 `r[10]===1 || r[2]>2000` 过滤；`topByScore` 保留为无门禁参照函数，实际发布的主榜是门禁后的 `mainBoard`
 
+## 4b. 农场与重复簇去重口径（issue #20）
+
+- 实现在 `data/dedup.mjs`，digest 输出 `## FARM / DEDUP VIEW` 与 `## VERIFICATION BADGES` 两节。
+- **农场**：单账号 `row[17]=owner` 仓库数 > 100（`FARM_OWNER_THRESHOLD`）即降权并单列「农场」分区，不进首选推荐。当前快照 5 个农场账号 / 1,905 仓（`uckkk` 1,296，其中 1,006 仓 score=48.8 且仅 3 仓有下载）。
+- **basename 聚类去重**：取 `row[0]` 的仓库名，去掉 `dsh-` 或 `plugin-` 之一的前缀、尾部 `-plugin`、版本后缀与标点后归一化；同归一化名跨 owner 合并为一组（如 `dsh-purge` 28 仓 / `dsh-plugin-guard` 23 仓 / `dsh-guard` 23 仓）。`basenameClusters()` 出撞名视图，`sameOwnerClusters()` 出「同作者+近似名」视图，`dedupView()` 每组只留最高分代表。
+- **验证徽章**：基于 `row[3]=weekly>0`（有下载）、`row[2]=stars>0`（有 star）、非农场三条件，输出 `✅ 已验证` / `⚠ 弱信号` / `⚠ 未验证` / `🚫 农场` 四级；`applyVerificationFilter()` 与 `node data/dedup.mjs --filter --downloads --no-farm` 提供一键过滤。主榜每行行尾显示徽章。
+- **降权而非改分**：不修改 `row[1]=score`（保持 issue #12 的全局 score 排序契约），降权体现在「农场分区 + 去重视图 + 徽章过滤」三个消费入口。
+
 ---
 
 ## 5. velocity（增长率 / 连续快照）语义 — #11
