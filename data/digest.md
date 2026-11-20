@@ -20,6 +20,10 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 - [11] `coverage` — 信号覆盖率 = 星0.4+下载0.3+增长0.2+活跃0.1 中已有项权重和（空值：0 = 完全无信号；coverage=1 有 3838 仓）
 - [12] `lowSignal` — 低信号标志 0/1（coverage<0.5）
 - [13] `starVel` — star 增长速率（快照间 star 差）（空值：本快照恒为 null（无连续可比快照），保留列以兼容位置索引）
+- [14] `description` — 富化摘要文本（能力标签 + 赛道），仅富化仓生成（空值：null = 非富化仓或该快照无可生成摘要）
+- [15] `license` — 开源许可证（空值：null = 权威快照未提供，需用 GitHub API 补全（未知））
+- [16] `latest_version` — 最新发布版本号（空值：null = 权威快照未提供，需用 GitHub/npm API 补全（未知））
+- [17] `owner` — 仓库归属者（id 中 / 之前的部分）（空值：通常非空；id 格式异常时为空串）
 
 ## TAG ID CROSSWALK
 `meta.tags[].id` 是 slug，`rows[].tags` 存数字下标；用 `meta.tagIndex[slug]` 转换。
@@ -160,104 +164,104 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 ## ENRICHED SAMPLES (row[10]=1, label + summary)
 - **drscrewdriver/dsh-brief-sidebar** [score=93.4, cov=1]
   - 标签：工作区 / 插件市场 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：工作区 / 插件市场 / 网页界面；主赛道 其他；score 93.4，coverage 1。
+  - owner：drscrewdriver ｜ license：未知 ｜ version：未知
 - **openma-ai/deepseek-harness-acp** [score=90, cov=1]
   - 标签：智能体 / 框架/运行时 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：智能体 / 框架/运行时 / MCP；主赛道 框架/运行时；score 90，coverage 1。
+  - owner：openma-ai ｜ license：未知 ｜ version：未知
 - **perrylink/dsh-output-styles** [score=85.2, cov=1]
   - 标签：会话管理 / 编码/代码 / 技能/Prompt / 模型接入 / 导出/归档
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：会话管理 / 编码/代码 / 技能/Prompt / 模型接入 / 导出/归档；主赛道 框架/运行时；score 85.2，coverage 1。
+  - owner：perrylink ｜ license：未知 ｜ version：未知
 - **cloader/dsh-taskboard** [score=78.2, cov=1]
   - 标签：智能体 / 生产力/办公 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：智能体 / 生产力/办公 / 网页界面；主赛道 其他；score 78.2，coverage 1。
+  - owner：cloader ｜ license：未知 ｜ version：未知
 - **kira905/dsh-task-board-local** [score=77.2, cov=1]
   - 标签：会话管理 / 生产力/办公 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：会话管理 / 生产力/办公 / 网页界面；主赛道 其他；score 77.2，coverage 1。
+  - owner：kira905 ｜ license：未知 ｜ version：未知
 - **firefox2100/dsh-ai-providers** [score=75.3, cov=1]
   - 标签：模型接入 / 图像/绘图
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：模型接入 / 图像/绘图；主赛道 框架/运行时；score 75.3，coverage 1。
+  - owner：firefox2100 ｜ license：未知 ｜ version：未知
 - **skillnerds/xskill** [score=73.4, cov=0.5]
   - 标签：编码/代码 / 智能体 / 技能/Prompt / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：编码/代码 / 智能体 / 技能/Prompt / 网页界面；主赛道 工具/开发体验；score 73.4，coverage 0.5。
+  - owner：skillnerds ｜ license：未知 ｜ version：未知
 - **jayyuen666/dsh-session-rescue** [score=72.8, cov=1]
   - 标签：会话管理 / 生产力/办公
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：会话管理 / 生产力/办公；主赛道 其他；score 72.8，coverage 1。
+  - owner：jayyuen666 ｜ license：未知 ｜ version：未知
 - **gjj-star/dsh-conversation-navigator** [score=72.7, cov=1]
   - 标签：网页界面 / 会话管理 / 设计/排版 / 搜索/检索
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：网页界面 / 会话管理 / 设计/排版 / 搜索/检索；主赛道 UI/客户端；score 72.7，coverage 1。
+  - owner：gjj-star ｜ license：未知 ｜ version：未知
 - **xi-kari/dsh-amphoreus** [score=72.1, cov=1]
   - 标签：工作区 / 搜索/检索
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：工作区 / 搜索/检索；主赛道 框架/运行时；score 72.1，coverage 1。
+  - owner：xi-kari ｜ license：未知 ｜ version：未知
 - **lencx/minke** [score=71.9, cov=0.5]
   - 标签：桌面客户端 / 智能体 / 技能/Prompt / 浏览器
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：桌面客户端 / 智能体 / 技能/Prompt / 浏览器；主赛道 框架/运行时；score 71.9，coverage 0.5。
+  - owner：lencx ｜ license：未知 ｜ version：未知
 - **zju-real/polaris** [score=70.9, cov=0.5]
   - 标签：智能体 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：智能体 / MCP；主赛道 其他；score 70.9，coverage 0.5。
+  - owner：zju-real ｜ license：未知 ｜ version：未知
 - **taxueseek/plugin-fast-adapt** [score=70.7, cov=0.5]
   - 标签：记忆 / 文档/笔记 / 编码/代码 / 智能体 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：记忆 / 文档/笔记 / 编码/代码 / 智能体 / 网页界面；主赛道 记忆/上下文；score 70.7，coverage 0.5。
+  - owner：taxueseek ｜ license：未知 ｜ version：未知
 - **icycreamdas/shidi-skill** [score=70.5, cov=1]
   - 标签：文档/笔记 / 编码/代码 / 文件/目录 / 智能体 / 导出/归档
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：文档/笔记 / 编码/代码 / 文件/目录 / 智能体 / 导出/归档；主赛道 工具/开发体验；score 70.5，coverage 1。
+  - owner：icycreamdas ｜ license：未知 ｜ version：未知
 - **jerry2262/dsh-fingerprint** [score=68.2, cov=1]
   - 标签：模型接入 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：模型接入 / 网页界面；主赛道 框架/运行时；score 68.2，coverage 1。
+  - owner：jerry2262 ｜ license：未知 ｜ version：未知
 - **vonweller/dsh-skillhub** [score=67.5, cov=0.5]
   - 标签：技能/Prompt / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：技能/Prompt / MCP；主赛道 工具/开发体验；score 67.5，coverage 0.5。
+  - owner：vonweller ｜ license：未知 ｜ version：未知
 - **sidleo/llm-wiki** [score=66.9, cov=0.5]
   - 标签：文档/笔记 / 智能体 / 模型接入 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：文档/笔记 / 智能体 / 模型接入 / MCP；主赛道 搜索/知识；score 66.9，coverage 0.5。
+  - owner：sidleo ｜ license：未知 ｜ version：未知
 - **anil-matcha/awesome-dsh-plugin** [score=66.8, cov=0.5]
   - 标签：精选清单 / 网页界面 / 命令行 / 编码/代码 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：精选清单 / 网页界面 / 命令行 / 编码/代码 / MCP；主赛道 工具/开发体验；score 66.8，coverage 0.5。
+  - owner：anil-matcha ｜ license：未知 ｜ version：未知
 - **xizhi1024/deepseek-harness-dsh-for-vscode** [score=66, cov=0.5]
   - 标签：工作区 / 编码/代码 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：工作区 / 编码/代码 / MCP；主赛道 框架/运行时；score 66，coverage 0.5。
+  - owner：xizhi1024 ｜ license：未知 ｜ version：未知
 - **zhang-jiazhi/dsh-prompt-optimizer** [score=65.6, cov=0.5]
   - 标签：技能/Prompt / 图像/绘图
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：技能/Prompt / 图像/绘图；主赛道 框架/运行时；score 65.6，coverage 0.5。
+  - owner：zhang-jiazhi ｜ license：未知 ｜ version：未知
 - **gitroomhq/postiz-agent** [score=65, cov=1]
   - 标签：命令行 / 智能体 / 技能/Prompt / 模型接入 / MCP
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：命令行 / 智能体 / 技能/Prompt / 模型接入 / MCP；主赛道 其他；score 65，coverage 1。
+  - owner：gitroomhq ｜ license：未知 ｜ version：未知
 - **lidongbei/dsh-session-view** [score=64.5, cov=0.6]
   - 标签：会话管理 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：会话管理 / 网页界面；主赛道 其他；score 64.5，coverage 0.6。
+  - owner：lidongbei ｜ license：未知 ｜ version：未知
 - **ghang/dsh-cache-helper** [score=64.1, cov=0.6]
   - 标签：会话管理 / 智能体 / 生产力/办公 / 诊断/自检 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：会话管理 / 智能体 / 生产力/办公 / 诊断/自检 / 网页界面；主赛道 记忆/上下文；score 64.1，coverage 0.6。
+  - owner：ghang ｜ license：未知 ｜ version：未知
 - **a1141171521/dsh-thinking-effort** [score=63.9, cov=0.5]
   - 标签：工作区 / 文件/目录 / 模型接入 / 网页界面
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：工作区 / 文件/目录 / 模型接入 / 网页界面；主赛道 其他；score 63.9，coverage 0.5。
+  - owner：a1141171521 ｜ license：未知 ｜ version：未知
 - **wingoo/codex-plugin-dsh** [score=63.2, cov=0.5]
   - 标签：模型接入 / 图像/绘图
-  - 摘要：(no summary available in this snapshot)
-  - owner：- ｜ license：未知 ｜ version：未知
+  - 摘要：README/npm 关键词补全的能力标签：模型接入 / 图像/绘图；主赛道 框架/运行时；score 63.2，coverage 0.5。
+  - owner：wingoo ｜ license：未知 ｜ version：未知
 
 ## MATRIX (parent × capability cell counts)
 parents: 智能体 | 会话管理 | 技能/Prompt | 工作区 | 模型接入

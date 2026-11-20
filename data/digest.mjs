@@ -7,6 +7,7 @@ import { pathToFileURL } from 'node:url';
 //   [6] segIdx               [7] activity              [8] archived (0/1)
 //   [9] tagIdx[] (NUMERIC indexes into meta.tags)      [10] isEnriched (0/1, NOT isMain)
 //   [11] coverage            [12] lowSignal (0/1)      [13] starVel (dead in this snapshot: always null)
+//   [14] description         [15] license              [16] latest_version      [17] owner
 // NOTE: [10] is isEnriched (not isMain); [11] is coverage; [13] is star velocity,
 // kept for positional compatibility but null for all 38,549 rows (no comparable snapshot yet).
 const famOf = (TAGS, i) => TAGS[i]?.fam ?? '?';

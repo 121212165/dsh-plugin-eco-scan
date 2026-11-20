@@ -6,11 +6,12 @@ import { validateColumns } from '../data/validate.mjs';
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
 const D = JSON.parse(read('../data/eco-data.json'));
 
-test('meta.columns covers 14 positional fields in order', () => {
-  assert.deepEqual(validateColumns(D), { columns: 14 });
+test('meta.columns covers 18 positional fields in order (14 core + 4 enrichment)', () => {
+  assert.deepEqual(validateColumns(D), { columns: 18 });
   assert.deepEqual(D.meta.columns.map((c) => c.field), [
     'id', 'score', 'stars', 'weekly', 'growthRawPct', 'ageDays', 'segIdx',
     'activity', 'archived', 'tags', 'isEnriched', 'coverage', 'lowSignal', 'starVel',
+    'description', 'license', 'latest_version', 'owner',
   ]);
 });
 
