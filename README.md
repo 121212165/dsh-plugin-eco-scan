@@ -11,6 +11,54 @@ v2 把 v1 的「每天一个 JSONL + 名称启发式」重做成可查询的数�
 
 同系列：[price-aware](https://github.com/121212165/dsh-plugin-price-aware) · [cost-ledger](https://github.com/121212165/dsh-plugin-cost-ledger) · [relay-quota](https://github.com/121212165/dsh-plugin-relay-quota) · [transcript](https://github.com/121212165/dsh-plugin-transcript) · [transcript-search](https://github.com/121212165/dsh-plugin-transcript-search) · [obsidian-push](https://github.com/121212165/dsh-plugin-obsidian-push) · [session-insights](https://github.com/121212165/dsh-plugin-session-insights)。
 
+## 数据入口
+
+> 分析从哪拿数据、拿的是哪一期——每份报告都必须先回答这两个问题。踩坑记录见 [data/reports/RETRO.md](data/reports/RETRO.md) #1。
+
+### 权威数据源
+
+| 项 | 值 |
+|---|---|
+| 上游仓库 | `eco-report-2026-11-06`（**不是**本扫描器仓库） |
+| 文件 / 定位 | `index.html` 第 165 行 `window.__DATA__ = {...}`（约 3.2 MB） |
+| 本库机器可读产物 | [`data/eco-data.json`](data/eco-data.json)（`{meta, rows}`，38,549 仓 / 50 标签） |
+| 快照日期 | `meta.date = 2026-11-16`——所有报告以此为准，不要写成「今天」 |
+| 加工摘要 | [`data/digest.md`](data/digest.md)，由 `data/digest.mjs` 生成 |
+| 字段口径 | `data/DATA-DICTIONARY.md`——agent 唯一口径来源，禁止自行解释列含义 |
+
+### 刷新数据
+
+```sh
+# ① 从上游 HTML 重新抽取（clone 握手失败时加 schannel，见「Windows 环境备忘」）
+git -c http.sslBackend=schannel clone https://github.com/121212165/eco-report-2026-11-06.git
+# 定位 index.html:165 的 window.__DATA__ = {...}，落成 data/eco-data.json
+
+# ② 用扫描器导出机器可读快照（可复现命令）
+npx eco-core export --format json --out          # 写 <dataDir>/exports/
+
+# ③ 快照更新后必须同步重建摘要，否则 agent 读到旧口径
+node data/digest.mjs
+```
+
+刷新时同步更新：`data/eco-data.json`、`data/digest.md`、`data/AGENT_BRIEF.md` 头部快照日期，以及各报告的快照日期字段。
+
+### 发布约定
+
+release 固定附带 `data/eco-data.json`（机器可读快照）。若当次 release 未附产物，release notes 至少写明上面的导出命令与实际快照日期。
+
+### 报告强制字段
+
+所有分析报告（含 `data/reports/**`）必须以 [`data/reports/_TEMPLATE.md`](data/reports/_TEMPLATE.md) 的元数据块开头：
+
+```md
+> 数据快照日期：2026-11-16（data/eco-data.json → meta.date）
+> 数据来源：eco-report-2026-11-06 / index.html:165 window.__DATA__（本库 data/eco-data.json）
+> 采集起始周（heat）：2026-08-10；断点前的 0 = 无数据
+> 趋势判断：不可做（velocity 三项全空；见 data/DATA-DICTIONARY.md）
+```
+
+缺这四行的报告不视为交付完成。趋势判断字段由 `scripts/check-snapshot-readiness.mjs` 给出（见「数据积累与快照调度」）。
+
 ## 两个入口
 
 ### dsh 命令与工具
