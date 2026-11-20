@@ -4,6 +4,7 @@ import { ROW, stats } from './schema.mjs';
 import { mainBoard, renderQualityGate } from './quality-gate.mjs';
 import { countOwners, verificationBadge, renderDedup } from './dedup.mjs';
 import { growthCoverageNote, renderGrowthQuality, growthFlag } from './growth-quality.mjs';
+import { renderTaxonomy } from './taxonomy.mjs';
 
 // rows[] is a POSITIONAL array. Source of truth: data/DATA-DICTIONARY.md.
 //   [0] id (owner/repo)      [1] score                 [2] stars
@@ -71,6 +72,7 @@ export function buildDigest(D) {
   out += '\n' + renderQualityGate(ROWS, board);
   out += '\n' + renderDedup(ROWS);
   out += '\n' + renderGrowthQuality(ROWS);
+  out += '\n' + renderTaxonomy(ROWS, M);
 
   out += '\n## TOP 60 — MAIN BOARD (quality-gated, score-sorted)\n';
   out += '> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。\n';

@@ -189,6 +189,65 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
   9. cnkang/qdrant-memory-mcp growth=99.8 ★=1 wk=1317
   10. c10ck-p/dsh-checkpoint-dock growth=99.8 ★=1 wk=949
 
+## TAXONOMY SCHEMA — capability × vertical (issue #16)
+
+> `vertical` 与现有 50 个 capability 标签**正交**、可多标签；`general` 是无垂直信号时的兜底桶。安全标签（capability `security`）可再挂二级 `subclass`。派生标签全部标注「未校验/假阳性风险」，见 issue #18。
+
+vertical 维度：
+  - `education` 教育 / 学术 — 教学、课程、学生、论文/学术场景
+  - `healthcare` 医疗 / 健康 — 临床、病历、医学标准（HL7/FHIR）、患者场景；工具隐喻默认排除
+  - `finance` 金融 / 行情 — 股票、行情、交易、基金、加密资产
+  - `gov` 政企 / 合规 — 政府、政策、法务、审计、采购、合规留存
+  - `content` 内容创作 — 写作、小说、博客、文章、音视频内容
+  - `ecommerce` 电商 / 零售 — 店铺、商城、购物车、订单、电商平台
+  - `general` 通用 / 未分类 — 无垂直信号的兜底桶；不代表"没有其他行业"
+
+security 二级 subclass：
+  - `audit` 审计 — keywords: audit, 审计, log, 日志
+  - `masking` 脱敏 — keywords: mask, 脱敏, redact, sanitize
+  - `access-control` 权限 — keywords: rbac, permission, 权限, auth, access
+  - `supply-chain` 供应链 — keywords: supply, 供应链, sbom, dependency, 依赖
+  - `compliance-retention` 合规留存 — keywords: compliance, 合规, retention, 留存, archive, 归档
+
+## CAPABILITY × VERTICAL ROLLUP（按 capability family，机器可读全量见 `capabilityVerticalRollup(rows, meta, {granularity:"tag"})`）
+
+| capability family | education | healthcare | finance | gov | content | ecommerce | general |
+|---|---|---|---|---|---|---|---|
+| 交互 | 95 | 20 | 40 | 53 | 68 | 33 | 18213 |
+| 开发 | 54 | 23 | 11 | 52 | 36 | 27 | 9691 |
+| 编排 | 71 | 11 | 33 | 72 | 48 | 28 | 9252 |
+| 平台 | 39 | 17 | 39 | 28 | 25 | 47 | 9118 |
+| 模型 | 29 | 7 | 11 | 49 | 18 | 7 | 7328 |
+| 知识 | 107 | 4 | 12 | 17 | 32 | 14 | 4642 |
+| 媒体 | 24 | 1 | 11 | 4 | 15 | 8 | 4229 |
+| 设计 | 35 | 2 | 10 | 9 | 30 | 7 | 4471 |
+| 认知 | 13 | 6 | 7 | 14 | 13 | 3 | 3977 |
+| 其他 | 27 | 11 | 12 | 17 | 19 | 17 | 4158 |
+| 数据 | 15 | 7 | 65 | 19 | 2 | 10 | 2904 |
+| 连接 | 15 | 9 | 8 | 15 | 3 | 7 | 2861 |
+| 安全 | 11 | 4 | 6 | 93 | 5 | 1 | 1729 |
+| 基础设施 | 8 | 3 | 1 | 11 | 6 | 5 | 1761 |
+
+## VERTICAL ROLLUP（每仓可进多个 vertical，故各列仓数不可相加）
+
+| vertical | n | ★med | weekly med | weekly sum | +growth | new≤30d | top capabilities | risk |
+|---|---|---|---|---|---|---|---|---|
+| 教育 / 学术 | 242 | 0 | 247 | 28652 | 13 | 100 | doc:104, agent:46, webui:39, workspace:38, session:29 | 未校验/假阳性风险 |
+| 医疗 / 健康 | 60 | 0 | 283 | 10012 | 4 | 24 | health:16, misc:11, market:8, session:8, mcp:8 | 未校验/假阳性风险 |
+| 金融 / 行情 | 111 | 1 | 341 | 10223 | 3 | 44 | finance:60, market:26, webui:25, agent:23, skill:13 | 未校验/假阳性风险 |
+| 政企 / 合规 | 198 | 0 | 348 | 14933 | 6 | 76 | security:93, agent:45, llm:36, skill:28, code:25 | 未校验/假阳性风险 |
+| 内容创作 | 150 | 1 | 422 | 26478 | 7 | 59 | webui:36, workspace:28, agent:28, doc:24, skill:17 | 未校验/假阳性风险 |
+| 电商 / 零售 | 90 | 0 | 241 | 10872 | 2 | 27 | market:37, agent:19, webui:18, skill:14, manager:14 | 未校验/假阳性风险 |
+| 通用 / 未分类 | 37701 | 0 | 340 | 7736897 | 1786 | 14486 | webui:8533, session:7796, agent:6222, llm:5335, workspace:4200 | 未校验/假阳性风险 |
+
+## SECURITY SUBCLASS ROLLUP — 安全标签仓 1848 个，未细分 1577 个
+
+  - 审计 (audit): 96
+  - 脱敏 (masking): 7
+  - 权限 (access-control): 163
+  - 供应链 (supply-chain): 4
+  - 合规留存 (compliance-retention): 5
+
 ## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
 > 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。
 1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,会话管理,Git/提交]

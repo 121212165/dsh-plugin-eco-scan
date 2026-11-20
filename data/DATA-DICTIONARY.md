@@ -163,3 +163,20 @@
 **异常值清洗**：`|growth| > 100 且 stars < 100` 标记为异常（本快照 145 个），不进增长榜；原始极值 max=2607.4、min 见 digest `## GROWTH QUALITY`。`rankGrowthSafe()` 在排序前剔除异常值，`growthFlag()` 在榜单行内打 `⚠异常(未清洗)`。
 
 **当前结论**：单快照 `velocity` 三项全空，growth 只是单期样本信号。连续快照积累后应按第 5 节做校准，再谈趋势。
+
+---
+
+## 9. 垂直领域 / 安全子类分类法（issue #16）
+
+**设计**：新增 `vertical`（多标签）与 `security.subclass`（二级）两个维度，与既有 50 个 capability 标签**正交**。`rows[]` 仍为 18 列位置数组（issue #17 契约不变）；派生标签在分析时由 `data/taxonomy.mjs` 计算，不写回 `rows[]`。
+
+- **vertical 取值**：`education` 教育/学术、`healthcare` 医疗/健康、`finance` 金融/行情、`gov` 政企/合规、`content` 内容创作、`ecommerce` 电商/零售、`general` 通用/未分类。
+  - `general` 是**兜底桶**：无关键词垂直信号即落入，不表示"确认属于通用行业"。
+  - 空值语义：一行可有 0 个（→ `general`）、1 个或多个 vertical；多标签时各 vertical 的统计仓数**不可相加**。
+  - 赋值来源：`data/rules.mjs` 的关键词规则 + 排除词表，全部标注「未校验/假阳性风险」（issue #18），不是人工标注真值。
+- **security subclass**：仅当 `rows[9]` 含 capability `security`（slug 索引 39，可用 `meta.tagIndex` 转换）时才参与二级划分，取值为 `audit` 审计 / `masking` 脱敏 / `access-control` 权限 / `supply-chain` 供应链 / `compliance-retention` 合规留存。
+  - 空值语义：安全标签仓若未命中任何子类关键词 → `unsegmented`（未细分），不等于"没有子类需求"。非安全标签仓的 subclass 恒为空。
+- **两个 rollup（可复算）**：
+  - `capabilityVerticalRollup(rows, meta, {granularity:'fam'|'tag'})` → capability × vertical 交叉表（默认 14 个 capability family，`tag` 粒度覆盖全部 50 标签）。
+  - `verticalRollup(rows, meta)` → 每个 vertical 的仓数 / ★med / weekly / +growth / new≤30d 与 top capability。
+  - digest 在 `## TAXONOMY SCHEMA`、`## CAPABILITY × VERTICAL ROLLUP`、`## VERTICAL ROLLUP`、`## SECURITY SUBCLASS ROLLUP` 四节打印，均由上述函数生成。
