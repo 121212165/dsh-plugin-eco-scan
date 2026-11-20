@@ -11,6 +11,73 @@ v2 把 v1 的「每天一个 JSONL + 名称启发式」重做成可查询的数�
 
 同系列：[price-aware](https://github.com/121212165/dsh-plugin-price-aware) · [cost-ledger](https://github.com/121212165/dsh-plugin-cost-ledger) · [relay-quota](https://github.com/121212165/dsh-plugin-relay-quota) · [transcript](https://github.com/121212165/dsh-plugin-transcript) · [transcript-search](https://github.com/121212165/dsh-plugin-transcript-search) · [obsidian-push](https://github.com/121212165/dsh-plugin-obsidian-push) · [session-insights](https://github.com/121212165/dsh-plugin-session-insights)。
 
+## 数据入口
+
+> 分析从哪拿数据、拿的是哪一期——每份报告都必须先回答这两个问题。踩坑记录见 [data/reports/RETRO.md](data/reports/RETRO.md) #1。
+
+### 权威数据源
+
+| 项 | 值 |
+|---|---|
+| 上游仓库 | `eco-report-2026-11-06`（**不是**本扫描器仓库） |
+| 文件 / 定位 | `index.html` 第 165 行 `window.__DATA__ = {...}`（约 3.2 MB） |
+| 本库机器可读产物 | [`data/eco-data.json`](data/eco-data.json)（`{meta, rows}`，38,549 仓 / 50 标签） |
+| 快照日期 | `meta.date = 2026-11-16`——所有报告以此为准，不要写成「今天」 |
+| 加工摘要 | [`data/digest.md`](data/digest.md)，由 `data/digest.mjs` 生成 |
+| 字段口径 | `data/DATA-DICTIONARY.md`——agent 唯一口径来源，禁止自行解释列含义 |
+
+### 刷新数据
+
+```sh
+# ① 从上游 HTML 重新抽取（clone 握手失败时加 schannel，见「Windows 环境备忘」）
+git -c http.sslBackend=schannel clone https://github.com/121212165/eco-report-2026-11-06.git
+# 定位 index.html:165 的 window.__DATA__ = {...}，落成 data/eco-data.json
+
+# ② 用扫描器导出机器可读快照（可复现命令）
+npx eco-core export --format json --out          # 写 <dataDir>/exports/
+
+# ③ 快照更新后必须同步重建摘要，否则 agent 读到旧口径
+node data/digest.mjs
+```
+
+刷新时同步更新：`data/eco-data.json`、`data/digest.md`、`data/AGENT_BRIEF.md` 头部快照日期，以及各报告的快照日期字段。
+
+### 发布约定
+
+release 固定附带 `data/eco-data.json`（机器可读快照）。若当次 release 未附产物，release notes 至少写明上面的导出命令与实际快照日期。
+
+### 报告强制字段
+
+所有分析报告（含 `data/reports/**`）必须以 [`data/reports/_TEMPLATE.md`](data/reports/_TEMPLATE.md) 的元数据块开头：
+
+```md
+> 数据快照日期：2026-11-16（data/eco-data.json → meta.date）
+> 数据来源：eco-report-2026-11-06 / index.html:165 window.__DATA__（本库 data/eco-data.json）
+> 采集起始周（heat）：2026-08-10；断点前的 0 = 无数据
+> 趋势判断：不可做（velocity 三项全空；见 data/DATA-DICTIONARY.md）
+```
+
+缺这四行的报告不视为交付完成。趋势判断字段由 `scripts/check-snapshot-readiness.mjs` 给出（见「定时扫描 → 连续快照实操」）。
+
+### 趋势与校准状态（issue #11 / #14）
+
+| 项 | 当前值 | 含义 |
+|---|---|---|
+| `velocity.prevDate / days / overlap` | `null / null / 0` | 单快照，趋势判断**不可做** |
+| `meta.heat` 标签数 | 18 / 50 | 金融(47)、数据库(36)、统计(34)、导出(35) 未入选；见 `data/reports/HEAT-AUDIT.md` |
+| heat 采集起始周 | 2026-08-10（第 13 周） | 前 12 周近全 0，视为无数据；趋势只用断点后窗口 |
+| `/eco-calibrate` | 暂不能下结论 | v1 稀疏历史仅 09-30→10-17 一个窗口凑够 6 对，被单仓主导 |
+
+**校准回填步骤**（velocity 可用后执行，结果写回本表）：
+
+```sh
+node scripts/check-snapshot-readiness.mjs     # 先确认退出码 0
+npx eco-core calibrate                        # 或 dsh 命令 /eco-calibrate
+# 把 Spearman 秩相关 / Top-K 命中 / 样本对数 / 窗口日期记入本表与 data/DATA-DICTIONARY.md
+```
+
+语义与判据见 `data/DATA-DICTIONARY.md`；复算脚本见 `data/heat.mjs`。
+
 ## 两个入口
 
 ### dsh 命令与工具
@@ -101,6 +168,38 @@ alerts/alerts.yml       告警规则
 
 `schedule` 配置内置调度器（UTC 口径）：`off`（默认）/ `every 6h` / `every 30m` / `daily 03:30`。到点依次执行 扫描 → 告警（同日去重）→ webhook → 重画面板；上一轮没跑完不会叠加下一轮；失败只记录不终止排程；dsh 卸载插件时通过 `ctx.effect` 停表。`scheduleOnStart: true`（默认）时，启动发现今天还没有快照就立即补扫一次。不想要内置调度就把 `schedule` 留在 `off`，用系统 cron 调 `eco-core scan`。
 
+### 连续快照实操（issue #11）
+
+目标是积累 **≥ 2–3 期**可比较快照，让 `velocity` 不再全空。
+
+```yaml
+# 方案 A：内置调度器（写在 dsh profile 配置里，UTC）
+schedule: daily 03:30
+scheduleAlerts: true
+scheduleOnStart: true
+```
+
+```sh
+# 方案 B：系统 cron（Linux / macOS）——每天 03:30 UTC
+30 3 * * * cd /path/to/dsh-plugin-eco-scan && npx eco-core scan >> /var/log/eco-scan.log 2>&1
+```
+
+```powershell
+# 方案 C：Windows 计划任务（本机已封装）
+pwsh -File scripts/schedule-daily-scan.ps1 -TaskName eco-core-daily -Hour 3 -Minute 30
+Get-ScheduledTask -TaskName eco-core-daily | Select-Object TaskName,State   # 验证
+# 取消：pwsh -File scripts/schedule-daily-scan.ps1 -Unregister
+```
+
+每次扫描后检查是否可用（退出码 0 可做 / 2 不可做）：
+
+```sh
+node scripts/check-snapshot-readiness.mjs            # 默认要求 overlap >= 2
+node scripts/check-snapshot-readiness.mjs --min-overlap 3
+```
+
+`velocity` 可用后补跑校准 `npx eco-core calibrate`（或 `/eco-calibrate`），把结果回填到上面「数据入口 → 趋势与校准状态」。
+
 ## 校准（评分到底有没有用）
 
 `/eco-calibrate` 回答一个可证伪的问题：**T0 时刻的排名，能否预测 T0→T1 的真实变化？**
@@ -165,6 +264,30 @@ dsh plugin --profile web add github:121212165/dsh-plugin-eco-scan
 - 覆盖度与映射准确度仍取决于 token、语料规模与人工映射表：未认证 REST 每次 search 只有 10 次/分，拿不全 6 条语料查询；有 token 的 GraphQL 路径才能接近覆盖率目标。
 - scope 包的上周值受 range 预算限制（默认 200 个，按周下载降序），预算外的包只有周下载、无增长率——这是显式的 `null`，不是 0。
 - quality 的 issue 维度用「中位关闭时长」代理，非真实缺陷密度；release 下载是生命周期累计值，与 npm 周下载不同量纲，仅作规模代理。
+
+## Windows 环境备忘（已验证配方）
+
+> 这些命令在本机（Windows / PowerShell / pwsh）实测可用；踩坑记录见 [data/reports/RETRO.md](data/reports/RETRO.md) #4。
+
+| 场景 | ❌ 踩坑写法 | ✅ 可用写法 |
+|---|---|---|
+| clone / fetch 握手失败 | `git clone ...`（`schannel: failed to receive handshake`） | `git -c http.sslBackend=schannel clone https://github.com/121212165/<repo>.git`；已有仓库用 `git -c http.sslBackend=schannel fetch origin` |
+| 浅克隆 | `gh repo clone <repo> -- --depth 1`（`Too many arguments`） | 直接 `git clone`，不要经 `gh repo clone` 转发 `--depth` |
+| 读中文文件乱码 | `Get-Content file.md` | `Get-Content -Encoding UTF8 file.md` |
+| `gh api` 传 ref | `gh api ".../contents/path?ref=main"`（部分版本 404）或裸 `-f ref=main`（gh 会翻成 POST → 404） | `gh api ".../contents/path" --method GET -f ref=main`（**必须显式 `--method GET`**）；tree 用 `gh api ".../git/trees/main" --method GET -f recursive=1` |
+| 递归搜索 | 在 `C:\Users\lenovo` 全盘 `Get-ChildItem -Recurse`（120s 超时） | 先 `cd` 到目标 worktree，再用 `Get-ChildItem -Recurse -File -LiteralPath .`；git 仓库内优先 `git grep -n "关键词" -- data/`；脚本里用 `git ls-files` / `rg <pattern> <workdir>`，路径永远显式限定到工作目录 |
+
+约定：任何递归搜索都必须带一个明确的根目录参数（默认当前 worktree），禁止把 `$HOME` 或 `C:\Users\<user>` 当搜索根。
+
+### 一条命令验证交付
+
+```powershell
+pwsh -File scripts/verify-delivery.ps1 \
+  -Repo 121212165/dsh-plugin-eco-scan \
+  -Branch batch3-docs-process
+```
+
+脚本依次校验：本地 commit = 远端分支 commit、远端 tree 含必备文件、issue 列表含目标 issue、`git check-ignore -v data/reports/FINAL-SUMMARY.md` 无输出（即报告目录未被忽略）。推完分支后再跑；本地自测加 `-LocalOnly` 跳过远端检查。
 
 ## 设计与执行记录
 

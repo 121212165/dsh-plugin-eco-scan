@@ -1,5 +1,29 @@
 # 共享分析简报 — DSH 插件生态数据（快照 2026-11-16）
 
+## 共享文档（绝对路径固定，读任何文件前先看这里）
+
+> 下列路径以本 worktree 为基准写死，解决「RETRO 到底在 `data/` 还是 `data/reports/`」的路径不一致问题。
+> 换 worktree 时只替换公共前缀 `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3`，其余不变；不要凭记忆猜路径。
+
+| 文档 | 绝对路径 | 用途 |
+|---|---|---|
+| 复盘 RETRO | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\reports\RETRO.md` | 已发现的 7 条问题；领域扫描 B 段只写**此文之外**的新问题 |
+| 加工摘要 digest | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\digest.md` | 每标签统计 / 族汇总 / Top60 / 矩阵 / 热度 / 下载榜 |
+| digest 生成器 | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\digest.mjs` | 快照更新后重建 digest |
+| 数据字典 | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\DATA-DICTIONARY.md` | 字段口径**唯一**来源（含 velocity / heat / 下载语义） |
+| 原始快照 | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\eco-data.json` | `{meta, rows}`，38,549 仓 / 50 标签 |
+| 报告模板 | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\reports\_TEMPLATE.md` | 报告元数据块（快照日期 / 来源 / 采集起始周 / 趋势判断） |
+| 报告登记 | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\reports\MANIFEST.md` | 每份报告的 agent / 领域 / 日期 / 文件 |
+| Runbook | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\runbook.md` | 两波流程与质量门禁 |
+| 临时目录 scratch | `C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan-batch3\data\.scratch\` | 仅放临时脚本 / 中间产物，已被 `.gitignore` 忽略 |
+
+## 字段字典引用规则
+
+- 所有字段含义以 `data/DATA-DICTIONARY.md` 为**唯一**权威来源；agent **禁止手写字段映射、禁止各自解释数据口径**。
+- 本 brief 不列逐列字段映射；列定义见数据字典第 1 节与 `meta.columns`，一旦冲突以数据字典为准。
+- 历史教训：早期简报曾把富化标志与覆盖率两列读反（详见数据字典第 1 节），根因是各自解释列含义。
+- `null` 不等于 `0`：`weekly=null` 无周下载观测；`velocity.prevDate=null / overlap=0` 为单快照、不可做趋势判断；heat 断点前的 `0` 为无数据。
+
 ## 数据来源
 - 原始全量数据：`C:\Users\lenovo\AppData\Local\Temp\opencode\dsh-plugin-eco-scan\data\eco-data.json`（`window.__DATA__`，38,549 个仓库）
 - 已加工摘要：`...\data\digest.md`（含每标签统计、族汇总、Top60、矩阵、热度、下载榜）
@@ -37,6 +61,41 @@ caps: 网页界面(18) 桌面客户端(19) 设计/排版(37) 安装/管理(41) �
 - misc-only 3,425（8.9%），miscNoDesc 1,166 → 描述缺失导致无法分类
 - reachCoveragePct 18.16%（主榜 37.02%）→ 触达/覆盖低
 - velocity 数据积累中（无连续快照）
+
+## 领域扫描（D1–Dn）契约
+
+> 全局/家族分析之外的垂直领域任务，统一按本节执行，保证可复现、产物不丢、并发不冲突。
+
+### 固定输入
+
+1. `data/eco-data.json`（`{meta, rows}`，快照 2026-11-16）——结论必须来自这里的二次统计。
+2. `data/digest.md` + `data/digest.mjs`——加工摘要与可复算生成器。
+3. `data/DATA-DICTIONARY.md`——字段语义唯一来源；`null` / heat 断点语义按字典处理。
+4. `data/reports/RETRO.md`——已记录的 7 条问题；B 段只写**此文之外**的新问题，不要重复。
+5. `data/reports/_TEMPLATE.md`——报告元数据块。
+
+### 输出路径与命名规范
+
+- 每个领域 agent 只写自己的 `data/reports/domains/Dn.md`（`n = 1..N`，例 `D1.md`…`D5.md`），**不要写共享文件**；写完由编排者登记 `data/reports/MANIFEST.md` 后统一提交。
+- 文件内一级标题：`# Dn 领域扫描：<领域名>`（例 `# D1 领域扫描：教育 / 学术领域需求分析 + 新问题发现`）。
+- agent id 与文件名一致（`D1`、`D2`…）；临时脚本命名为 `data/.scratch/Dn-*.cjs`，只写 scratch，不散落到 `data/` 根。
+
+### 必备 A/B 两段结构
+
+- `## A. 领域需求分析`
+  - `### A0. 一句话结论`（带具体数字）
+  - `### A1. 需求现状（数字）`：领域仓库数 / 占比 / 周下载 / 有下载仓数 / 新仓占比，与全局对比
+  - `### A2. 未满足点（能力缺口）`：按标签/矩阵给出缺口与证据数字
+  - `### A3. 推荐开发清单`：必备表（插件设想 | 命中标签 | 需求证据(数字) | 目标用户 | 优先级 | 难度）
+- `## B. 新问题发现（RETRO 之外）`
+  - `### B1. …（工具缺陷 / 数据缺陷 / taxonomy 缺陷）` 逐条编号；每条写明现象、证据数字、建议。
+  - 不要复述 RETRO 已有 7 条；确实相关时引用编号并说明**新增**了什么。
+
+### 热度与趋势纪律
+
+- 报告元数据块照 `data/reports/_TEMPLATE.md`：必须写「采集起始周」（heat 断点后第一周，当前 2026-08-10）与「趋势判断」。
+- heat 断点前的 `0` = 无数据；趋势只用断点后窗口（复算用 `data/heat.mjs`）。
+- `velocity` 三项全空时标记「不可做趋势判断」，不要把单快照增长写成严格结论。
 
 ## 你的任务要求
 1. 用数据说话：任何结论必须引用具体数字/仓库名/标签计数，不能空谈。
