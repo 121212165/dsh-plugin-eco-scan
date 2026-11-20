@@ -6,11 +6,24 @@ Total repos: 38549
 Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositive":5639,"archived":415,"mainRows":18829,"lowSignal":19868,"weeklySum":7837245,"miscOnly":3425,"miscPct":8.9,"miscNoDesc":1166,"reachCoveragePct":18.16,"reachCoverageMainPct":37.02,"coverage":[{"cov":0.1,"n":19524},{"cov":0.4,"n":563},{"cov":0.5,"n":12024},{"cov":0.6,"n":1801},{"cov":0.7,"n":0},{"cov":0.8,"n":799},{"cov":0.9,"n":0},{"cov":1,"n":3838}],"velocity":{"prevDate":null,"days":null,"overlap":0,"note":"数据积累中：可比较的快照仓库太少"},"new30":14695,"young90":15963,"est":7891,"tags":50,"enriched":174}
 
 ## COLUMN NAMES (see data/DATA-DICTIONARY.md)
-
+- [0] `id` — owner/repo 全名
+- [1] `score` — 综合分（百分位加权 + (1−coverage)×50 中性先验）
+- [2] `stars` — GitHub star 数
+- [3] `weekly` — npm 最近一周下载量（空值：null = 未关联 npm 包或未取到下载数据（低信号来源））
+- [4] `growthRawPct` — 原始环比增长百分比（未除 coverage）（空值：null = 无可比快照/无增长信号）
+- [5] `ageDays` — 仓库创建至今天数（空值：null = 未取到 created_at）
+- [6] `segIdx` — 主赛道数字下标（meta.segments 索引）
+- [7] `activity` — 活跃分（0–100）
+- [8] `archived` — 是否归档 0/1
+- [9] `tags` — 能力标签数字下标数组（meta.tags 索引）（空值：[] = 无能力标签；用 meta.tagIndex 做 slug↔下标转换）
+- [10] `isEnriched` — 是否富化 0/1（README/npm 关键词补全标签，全库 174）（空值：非 null；注意这不是 isMain）
+- [11] `coverage` — 信号覆盖率 = 星0.4+下载0.3+增长0.2+活跃0.1 中已有项权重和（空值：0 = 完全无信号；coverage=1 有 3838 仓）
+- [12] `lowSignal` — 低信号标志 0/1（coverage<0.5）
+- [13] `starVel` — star 增长速率（快照间 star 差）（空值：本快照恒为 null（无连续可比快照），保留列以兼容位置索引）
 
 ## TAG ID CROSSWALK
 `meta.tags[].id` 是 slug，`rows[].tags` 存数字下标；用 `meta.tagIndex[slug]` 转换。
-示例：(no tagIndex)
+示例：video→0, image→1, voice→2, screen→3, vision→4
 
 ## PER-TAG STATS
 | tagIdx | slug | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |

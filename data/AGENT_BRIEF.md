@@ -5,9 +5,10 @@
 - 已加工摘要：`...\data\digest.md`（含每标签统计、族汇总、Top60、矩阵、热度、下载榜）
 - 可用 Node 脚本自行深挖（`node -e` 或临时脚本）：`eco-data.json` 结构为 `{meta, rows}`。
 
-## 行结构 rows[] = [id, score, stars, weekly, growth, age, seg, act, arch, tags, isMain, isEnriched, x, y]
-- id: owner/repo；score: 综合分；stars: star 数；weekly: npm 周下载；growth: 增长率%；age: 仓库天数；seg: 主赛道 id；act: 活跃分；arch: 是否归档；tags: 能力标签 id 数组。
-- 注意：很多高分仓库 weekly=null（低信号）。`isMain=1` 为主榜仓库。
+## 行结构 rows[] — 唯一口径来源
+**禁止手写字段映射。** 逐列字段名 / 含义 / 空值语义一律引用 `data/DATA-DICTIONARY.md`；机器可读版本见 `eco-data.json` 的 `meta.columns`，`data/digest.mjs` 会在 `digest.md` 顶部打印列名表（`## COLUMN NAMES`）。
+- 标签 id 一律通过 `meta.tagIndex` / `data/tag-index.mjs` 转换（`meta.tags[].id` 是 slug，`rows[].tags` 是数字下标），禁止按 slug 直接查 `rows[].tags`。
+- 任何字段口径疑问以数据字典为准，不要在简报或报告里重新列举列下标。
 
 ## 50 个能力标签（id: name [fam]）
 媒体: 0视频/分镜 1图像/绘图 2语音/音频 3屏幕感知 4视觉/多模态
