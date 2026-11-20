@@ -19,3 +19,7 @@ tools/eco-report/wechat*.png
 tools/eco-report/potential-v4.json
 tools/eco-report/npm-search-cache*.json
 tools/eco-report/wechat-*.png
+
+# Eco demand-analysis reports must be tracked (override the reports/ rule above)
+!data/reports/
+!data/reports/**

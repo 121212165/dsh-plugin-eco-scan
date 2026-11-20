@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+const D = JSON.parse(fs.readFileSync(new URL('./eco-data.json', import.meta.url), 'utf8'));
+const M = D.meta, ROWS = D.rows;
+console.log('=== META COUNTS ===');
+console.log(JSON.stringify(M.counts, null, 2));
+console.log('\n=== META KEYS ===', Object.keys(M));
+console.log('\n=== TAGS (count=' + M.tags.length + ') ===');
+M.tags.forEach((t, i) => console.log(i, '|', t.name, '|', t.fam, '|', JSON.stringify(t)));
+console.log('\n=== FIRST 5 ROWS (raw) ===');
+ROWS.slice(0, 5).forEach(r => console.log(JSON.stringify(r)));
+console.log('\n=== MATRIX ===');
+if (M.matrix) console.log('parents:', JSON.stringify(M.matrix.parents), '\ncaps:', JSON.stringify(M.matrix.caps));
+console.log('\n=== HEAT ===');
+if (M.heat) console.log('heat entries:', M.heat.length, JSON.stringify(M.heat.slice(0,3)));
