@@ -23,3 +23,6 @@ tools/eco-report/wechat-*.png
 # Eco demand-analysis reports must be tracked (override the reports/ rule above)
 !data/reports/
 !data/reports/**
+
+# agent scratch (domain scans) - never commit
+data/.scratch/
