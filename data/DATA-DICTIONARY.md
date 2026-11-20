@@ -180,3 +180,15 @@
   - `capabilityVerticalRollup(rows, meta, {granularity:'fam'|'tag'})` → capability × vertical 交叉表（默认 14 个 capability family，`tag` 粒度覆盖全部 50 标签）。
   - `verticalRollup(rows, meta)` → 每个 vertical 的仓数 / ★med / weekly / +growth / new≤30d 与 top capability。
   - digest 在 `## TAXONOMY SCHEMA`、`## CAPABILITY × VERTICAL ROLLUP`、`## VERTICAL ROLLUP`、`## SECURITY SUBCLASS ROLLUP` 四节打印，均由上述函数生成。
+
+---
+
+## 10. 关键词→领域辅助打标与置信度（issue #18）
+
+**实现**：`data/rules.mjs`。关键词只对 `row[0]` 的**仓库 basename**匹配（不匹配 owner，消除 `songoao25` 之类的 owner 假阳性）；短词允许子串以覆盖 `eduwork`，但受排除词表硬 veto。
+
+- **排除词表**（`EXCLUDE_TERMS`）：`wallpaper`（挡 `paper`）、`classic`（挡 `class`）、`schedule`（挡 `edu`，因 `schedule` 含 `edu` 子串）、`simplify`/`simulator`/`similar`（挡 `sim`）、`doctor`/`triage` + `preset`/`provider`/`memory` 上下文（医疗工具隐喻）、`deck`（技能集）、`bottom-info-bar`（信息栏，挡 `song`）。
+- **置信度**：`KEYWORD_RULES` 每条给出 0.35–0.95 的规则先验，随命中一起输出；它是规则强度，不是判定真值。
+- **语义二次校验**：`semanticVerify(row, meta, classification)` 基于 `row[14]=description`（来自 #17）+ `row[9]` 能力标签名做 capability 一致性确认；无 description 的 38,375 仓返回 `unavailable`。**重要限制**：本快照的 description 是「能力标签名 + 主赛道 + score/coverage」派生的摘要，**不是原始 README**；因此「capability 一致性确认」不等于真实语义确认，所有命中仍标注「未校验/假阳性风险」。
+- **禁止直接当领域总量**：digest 的 `## DOMAIN KEYWORD HITS` 只给命中数 / 排除数 / 未校验数 / 一致性确认数，并显式声明不可作领域总量。
+- **回归基线**：`REGRESSION_CASES` 钉死 5 个已知案例（wallpaper / schedule / classic / simplify / 工具隐喻 doctor），要求全部排除或降级；`## KEYWORD REGRESSION` 打印 PASS/FAIL。

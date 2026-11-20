@@ -248,6 +248,54 @@ security 二级 subclass：
   - 供应链 (supply-chain): 4
   - 合规留存 (compliance-retention): 5
 
+## KEYWORD TAGGING RULES (issue #18)
+
+> 辅助打标规则；所有命中一律标注「未校验/假阳性风险」，不得直接当领域总量。关键词只对仓库 basename 匹配（不匹配 owner），短词支持子串以覆盖 `eduwork` 等形态，但受排除词表硬 veto。
+
+排除词表（term / 影响的 keyword / 原因）：
+  - `wallpaper` → `paper`：paper→wallpaper 116/213 假阳性
+  - `classic` → `class`：class→classic 23/38 假阳性
+  - `schedule` → `edu`：edu→schedule 55/86 假阳性（schedule 含 edu 子串）
+  - `simplify` → `sim`：sim→simplify 假阳性
+  - `simulator` → `sim`：sim→simulator 信息栏/模拟器假阳性
+  - `similar` → `sim`：sim→similar 假阳性
+  - `doctor` → `doctor`：医疗域工具隐喻，非临床仓
+  - `triage` → `triage`：医疗域工具隐喻（日志/诊断分诊），非临床仓
+  - `deck` → `deck`：deck=技能集，不是内容创作
+  - `bottom-info-bar` → `song`：信息栏插件，非音乐创作
+  - `preset` → `doctor`：preset-doctor 是配置诊断工具
+  - `provider` → `doctor`：provider-doctor 是配置诊断工具
+  - `memory` → `doctor`：memory-doctor 是记忆维护工具
+
+关键词规则共 45 条，覆盖 6 个 vertical；完整机器可读表见 `data/rules.mjs` 的 `KEYWORD_RULES`。
+
+## KEYWORD REGRESSION — 5 known false positives (issue #18)
+
+| 案例 | 关键词 | 期望 | 实际 | 结论 |
+|---|---|---|---|---|
+| weilv-d/wallpaper-engine-dsh | `paper` | 排除（paper→wallpaper 116/213） | excluded by wallpaper | PASS |
+| loyalchiiina/dsh-schedule-calendar | `edu` | 排除（edu→schedule 55/86） | excluded by schedule | PASS |
+| classicxtx/dsh-plugin-ctf | `class` | 排除（class→classic 23/38） | no-hit（owner 名假阳性被 basename-only 匹配消除） | PASS |
+| michengai/dsh-simplify | `sim` | 排除（sim→simplify） | excluded by simplify | PASS |
+| drscrewdriver/dsh-preset-doctor | `doctor` | 排除（doctor=工具隐喻，非临床仓） | excluded by doctor | PASS |
+
+5/5 通过（全部被排除或降级标注，未计入领域总量）。
+
+## DOMAIN KEYWORD HITS — 未校验，不得当领域总量 (issue #18)
+
+> 所有数字都是 basename 关键词命中数，不是领域仓库总量；排除词表与语义二次校验后仍需标注「未校验/假阳性风险」。无 description 的仓=38,375（其中 1,157 仓有关键词命中，语义校验不可用）。
+
+| vertical | 关键词命中 | 排除(假阳性) | 未校验 | capability 一致性确认 |
+|---|---|---|---|---|
+| education | 433 | 188 | 245 | 0 |
+| content | 223 | 32 | 191 | 0 |
+| gov | 198 | 0 | 198 | 0 |
+| healthcare | 161 | 100 | 61 | 0 |
+| finance | 116 | 0 | 116 | 0 |
+| ecommerce | 93 | 0 | 93 | 0 |
+
+语义二次校验基于 issue #17 的 `row[14]=description`，但它是能力标签派生摘要、非原始 README；确认仅代表 capability 一致。
+
 ## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
 > 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。
 1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
