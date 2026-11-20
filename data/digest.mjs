@@ -34,7 +34,8 @@ export function buildDigest(D) {
   const name = (i) => nameOf(T, i);
 
   let out = '# ECO DATA DIGEST (snapshot ' + M.date + ')\n\n';
-  out += '> 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。\n\n';
+  out += '> 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。\n';
+  out += '> 第二批口径已修正（2026-11-20）：主榜加归档 / coverage<0.4 门禁、农场去重与验证徽章、growth 覆盖率注记、vertical × capability rollup、关键词假阳性排除与留存风险标注；复算报告见 `data/reports/BATCH2-QUALITY.md`。\n\n';
   out += 'Total repos: ' + ROWS.length + '\n';
   out += 'Counts: ' + JSON.stringify(M.counts) + '\n\n';
 

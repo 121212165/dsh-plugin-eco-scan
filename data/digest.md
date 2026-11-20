@@ -1,6 +1,7 @@
 # ECO DATA DIGEST (snapshot 2026-11-16)
 
 > 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。
+> 第二批口径已修正（2026-11-20）：主榜加归档 / coverage<0.4 门禁、农场去重与验证徽章、growth 覆盖率注记、vertical × capability rollup、关键词假阳性排除与留存风险标注；复算报告见 `data/reports/BATCH2-QUALITY.md`。
 
 Total repos: 38549
 Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositive":5639,"archived":415,"mainRows":18829,"lowSignal":19868,"weeklySum":7837245,"miscOnly":3425,"miscPct":8.9,"miscNoDesc":1166,"reachCoveragePct":18.16,"reachCoverageMainPct":37.02,"coverage":[{"cov":0.1,"n":19524},{"cov":0.4,"n":563},{"cov":0.5,"n":12024},{"cov":0.6,"n":1801},{"cov":0.7,"n":0},{"cov":0.8,"n":799},{"cov":0.9,"n":0},{"cov":1,"n":3838}],"velocity":{"prevDate":null,"days":null,"overlap":0,"note":"数据积累中：可比较的快照仓库太少"},"new30":14695,"young90":15963,"est":7891,"tags":50,"enriched":174}
