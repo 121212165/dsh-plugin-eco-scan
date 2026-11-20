@@ -49,6 +49,6 @@
 | 复盘 | 已发现的 7 条问题（RETRO） | 2026-11-16 | `data/reports/RETRO.md` |
 | 模板 | 报告元数据块与章节模板 | — | `data/reports/_TEMPLATE.md` |
 | 登记 | 本文件 | — | `data/reports/MANIFEST.md` |
-| 派生报告 | heat 全 50 标签审计（由 `data/heat.mjs` 生成） | 2026-11-16 | `data/reports/HEAT-AUDIT.md`（#14 生成后登记） |
+| 派生报告 | heat 全 50 标签审计（由 `data/heat.mjs` 生成） | 2026-11-16 | `data/reports/HEAT-AUDIT.md` |
 
-> 派生报告 `HEAT-AUDIT.md` 由第三批 #14 的 `data/heat.mjs` 生成并登记；若尚未生成，以脚本输出为准。
+> 派生报告 `HEAT-AUDIT.md` 由第三批 #14 的 `data/heat.mjs` 生成并登记；复算命令 `node data/heat.mjs`。采集起始周当前声明为 2026-08-10，真实日期待数据提供方确认。
