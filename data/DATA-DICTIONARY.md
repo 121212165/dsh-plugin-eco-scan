@@ -62,8 +62,17 @@
 
 - `coverage = (star>0 ? 0.4 : 0) + (weekly>0 ? 0.3 : 0) + (growth 有值 ? 0.2 : 0) + (pushDays 有值 ? 0.1 : 0)`
 - `score = 四项百分位加权 + (1 − coverage) × 50`（缺项用中性先验 50 填补，不按 0 惩罚）
-- `lowSignal = coverage < 0.5`；主榜 = 未归档且 `coverage ≥ 0.4`
-- Top60 榜单 = **全局 score 排序**（见 `digest.mjs` 的 `topByScore`），不再按 `r[10]===1 || r[2]>2000` 过滤
+- `lowSignal = coverage < 0.5`（**字段 `row[12]` 的定义**）；榜单门禁阈值是 `coverage < 0.4`，两者不同，勿混用
+- **榜单质量门禁（issue #19）**：主榜 / 推荐表先剔除 `row[8]=archived` 与 `row[11]=coverage<0.4`，再按 score 全局降序。门禁由 `data/quality-gate.mjs` 的 `passesQualityGate` / `mainBoard` 实现；`digest.md` 的 `## QUALITY GATE SELF-CHECK` 打印 `archived`、`lowSignal`、交集、排除合计、可入榜数，并断言「归档入榜=0、低信号入榜=0」。当前快照：归档 415、coverage<0.4 为 19,524、门禁排除 19,524+415−交集。
+- Top60 榜单 = **全局 score 排序**（见 `digest.mjs` 的 `topByScore`），不再按 `r[10]===1 || r[2]>2000` 过滤；`topByScore` 保留为无门禁参照函数，实际发布的主榜是门禁后的 `mainBoard`
+
+## 4b. 农场与重复簇去重口径（issue #20）
+
+- 实现在 `data/dedup.mjs`，digest 输出 `## FARM / DEDUP VIEW` 与 `## VERIFICATION BADGES` 两节。
+- **农场**：单账号 `row[17]=owner` 仓库数 > 100（`FARM_OWNER_THRESHOLD`）即降权并单列「农场」分区，不进首选推荐。当前快照 5 个农场账号 / 1,905 仓（`uckkk` 1,296，其中 1,006 仓 score=48.8 且仅 3 仓有下载）。
+- **basename 聚类去重**：取 `row[0]` 的仓库名，去掉 `dsh-` 或 `plugin-` 之一的前缀、尾部 `-plugin`、版本后缀与标点后归一化；同归一化名跨 owner 合并为一组（如 `dsh-purge` 28 仓 / `dsh-plugin-guard` 23 仓 / `dsh-guard` 23 仓）。`basenameClusters()` 出撞名视图，`sameOwnerClusters()` 出「同作者+近似名」视图，`dedupView()` 每组只留最高分代表。
+- **验证徽章**：基于 `row[3]=weekly>0`（有下载）、`row[2]=stars>0`（有 star）、非农场三条件，输出 `✅ 已验证` / `⚠ 弱信号` / `⚠ 未验证` / `🚫 农场` 四级；`applyVerificationFilter()` 与 `node data/dedup.mjs --filter --downloads --no-farm` 提供一键过滤。主榜每行行尾显示徽章。
+- **降权而非改分**：不修改 `row[1]=score`（保持 issue #12 的全局 score 排序契约），降权体现在「农场分区 + 去重视图 + 徽章过滤」三个消费入口。
 
 ---
 
@@ -134,3 +143,76 @@
 | `growth` / velocity | `rows[4]` / `meta.counts.velocity` | 见第 5 节 velocity 段；单快照时只作方向参考。 |
 
 **统一禁用规则**：`null`/`—` 一律按「无数据」处理，不填 0；不同量纲不相加；报告必须带数据快照日期与来源，避免结果与快照对不上。
+
+---
+
+## 8. growth 口径、覆盖率与异常值（issue #15）
+
+**字段**：`row[4]=growthRawPct`，本快照为原始环比百分比 `raw = (latest − prev) / prev × 100`，**未做平滑、无 minPrev 下限**。
+
+| 口径 | 位置 | 公式 / 阈值 | 用途 |
+|---|---|---|---|
+| 原始 growth | `rows[4]` | `(latest−prev)/prev × 100`；`prev<=0` 或缺失 → `null` | 领域扫描的单快照方向信号；**必须带覆盖率注记** |
+| 评分 velocity | `src/core/scoring.ts` | `g = (weekly−prev)/(prev + VELOCITY_PRIOR)`，`VELOCITY_PRIOR = 20`；`MIN_PREV_FOR_VELOCITY = 5`，`prev<5` → `insufficient`（半分且出榜） | 综合分的 velocity 分项 |
+| 告警增长 | `src/core/alerts.ts` | `growth-pct` 规则默认 `minPrev = 20`，`prev<20` 不触发告警 | 运行时告警触发下限 |
+
+**「README minPrev:20 对不上」的澄清**：README 的 `minPrev:20` 是**告警规则**的触发下限，不是 `rows[4]` 的门槛；平滑公式里的 `+20` 是贝叶斯先验分母；评分体系的 `MIN_PREV_FOR_VELOCITY` 是 **5**。三者名字里都有「prev/20」但是三个不同概念，不能互相替代。
+
+**覆盖率纪律（强制）**：本快照 growth 仅 5,639 / 38,549 有值，覆盖 **14.6%**（缺失 32,910）。任何引用 growth 的报告/榜单必须写「n=5,639，覆盖 14.6%」，由 `data/growth-quality.mjs` 的 `growthCoverageNote()` 生成；中位数等统计量只能解释为「有值样本的中位数」，不可当全量结论。
+
+**异常值清洗**：`|growth| > 100 且 stars < 100` 标记为异常（本快照 145 个），不进增长榜；原始极值 max=2607.4、min 见 digest `## GROWTH QUALITY`。`rankGrowthSafe()` 在排序前剔除异常值，`growthFlag()` 在榜单行内打 `⚠异常(未清洗)`。
+
+**当前结论**：单快照 `velocity` 三项全空，growth 只是单期样本信号。连续快照积累后应按第 5 节做校准，再谈趋势。
+
+---
+
+## 9. 垂直领域 / 安全子类分类法（issue #16）
+
+**设计**：新增 `vertical`（多标签）与 `security.subclass`（二级）两个维度，与既有 50 个 capability 标签**正交**。`rows[]` 仍为 18 列位置数组（issue #17 契约不变）；派生标签在分析时由 `data/taxonomy.mjs` 计算，不写回 `rows[]`。
+
+- **vertical 取值**：`education` 教育/学术、`healthcare` 医疗/健康、`finance` 金融/行情、`gov` 政企/合规、`content` 内容创作、`ecommerce` 电商/零售、`general` 通用/未分类。
+  - `general` 是**兜底桶**：无关键词垂直信号即落入，不表示"确认属于通用行业"。
+  - 空值语义：一行可有 0 个（→ `general`）、1 个或多个 vertical；多标签时各 vertical 的统计仓数**不可相加**。
+  - 赋值来源：`data/rules.mjs` 的关键词规则 + 排除词表，全部标注「未校验/假阳性风险」（issue #18），不是人工标注真值。
+- **security subclass**：仅当 `rows[9]` 含 capability `security`（slug 索引 39，可用 `meta.tagIndex` 转换）时才参与二级划分，取值为 `audit` 审计 / `masking` 脱敏 / `access-control` 权限 / `supply-chain` 供应链 / `compliance-retention` 合规留存。
+  - 空值语义：安全标签仓若未命中任何子类关键词 → `unsegmented`（未细分），不等于"没有子类需求"。非安全标签仓的 subclass 恒为空。
+- **两个 rollup（可复算）**：
+  - `capabilityVerticalRollup(rows, meta, {granularity:'fam'|'tag'})` → capability × vertical 交叉表（默认 14 个 capability family，`tag` 粒度覆盖全部 50 标签）。
+  - `verticalRollup(rows, meta)` → 每个 vertical 的仓数 / ★med / weekly / +growth / new≤30d 与 top capability。
+  - digest 在 `## TAXONOMY SCHEMA`、`## CAPABILITY × VERTICAL ROLLUP`、`## VERTICAL ROLLUP`、`## SECURITY SUBCLASS ROLLUP` 四节打印，均由上述函数生成。
+
+---
+
+## 10. 关键词→领域辅助打标与置信度（issue #18）
+
+**实现**：`data/rules.mjs`。关键词只对 `row[0]` 的**仓库 basename**匹配（不匹配 owner，消除 `songoao25` 之类的 owner 假阳性）；短词允许子串以覆盖 `eduwork`，但受排除词表硬 veto。
+
+- **排除词表**（`EXCLUDE_TERMS`）：`wallpaper`（挡 `paper`）、`classic`（挡 `class`）、`schedule`（挡 `edu`，因 `schedule` 含 `edu` 子串）、`simplify`/`simulator`/`similar`（挡 `sim`）、`doctor`/`triage` + `preset`/`provider`/`memory` 上下文（医疗工具隐喻）、`deck`（技能集）、`bottom-info-bar`（信息栏，挡 `song`）。
+- **置信度**：`KEYWORD_RULES` 每条给出 0.35–0.95 的规则先验，随命中一起输出；它是规则强度，不是判定真值。
+- **语义二次校验**：`semanticVerify(row, meta, classification)` 基于 `row[14]=description`（来自 #17）+ `row[9]` 能力标签名做 capability 一致性确认；无 description 的 38,375 仓返回 `unavailable`。**重要限制**：本快照的 description 是「能力标签名 + 主赛道 + score/coverage」派生的摘要，**不是原始 README**；因此「capability 一致性确认」不等于真实语义确认，所有命中仍标注「未校验/假阳性风险」。
+- **禁止直接当领域总量**：digest 的 `## DOMAIN KEYWORD HITS` 只给命中数 / 排除数 / 未校验数 / 一致性确认数，并显式声明不可作领域总量。
+- **回归基线**：`REGRESSION_CASES` 钉死 5 个已知案例（wallpaper / schedule / classic / simplify / 工具隐喻 doctor），要求全部排除或降级；`## KEYWORD REGRESSION` 打印 PASS/FAIL。
+
+---
+
+## 11. 留存代理指标与下载语义（issue #22）
+
+**下载语义（覆盖并强化第 7 节）**：`row[3]=weekly` 与 `meta.downloadTop[].weekly` 是**装机代理，不是活跃用户数**。周下载只说明「装了多少次」，不能推断「多少人在用」，也不能跨量纲与 release 累计下载相加；`null` 是无观测，不是 0。
+
+**待补快照字段**（`data/retention.mjs` 的 `RETENTION_FIELDS`，当前权威快照全部缺失 → 真实留存**不可计算**）：
+
+| 字段 | 含义 | 用途 |
+|---|---|---|
+| `installs_new` | 本期首次安装数 | 新装机代理 |
+| `installs_returning` | 本期复装 / 回访安装数 | 留存代理 |
+| `weekly_prev` | 上一连续快照周下载 | 连续序列代理 |
+
+**代理公式（字段到位后启用）**：
+
+- `returningShare = installs_returning / (installs_new + installs_returning)`（复装占比）；
+- `reinstallRatio = installs_returning / weekly_prev`（回访比，`weekly_prev<=0` → null）；
+- `continuity = min(1, weekly / weekly_prev)`（连续性代理，仅为周下载比值封顶，不等同留存率）。
+
+三者均为代理指标，不能当真实 7 日留存 / 卸载率；需要连续每日快照才能真正闭环。
+
+**存量留存风险标注**：`weekly ≥ 1000 且 growth < 0` 标为 `⚠ 存量留存风险`，**不列入首选推荐**。当前 `meta.downloadTop` 中 11/20 为负增长，典型 `dsh-pet` −33.4% / `dsh-skins` −25.7% / `dsh-deep-whale` −23.2%。digest 在 `## RETENTION PROXY & RISK` 与下载榜行内标注。

@@ -1,5 +1,12 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { ROW, stats } from './schema.mjs';
+import { mainBoard, renderQualityGate } from './quality-gate.mjs';
+import { countOwners, verificationBadge, renderDedup } from './dedup.mjs';
+import { growthCoverageNote, renderGrowthQuality, growthFlag } from './growth-quality.mjs';
+import { renderTaxonomy } from './taxonomy.mjs';
+import { renderRules, renderRuleRegression, renderKeywordHits } from './rules.mjs';
+import { renderRetention, riskFlag, RISK_LABEL as RETENTION_RISK_LABEL } from './retention.mjs';
 
 // rows[] is a POSITIONAL array. Source of truth: data/DATA-DICTIONARY.md.
 //   [0] id (owner/repo)      [1] score                 [2] stars
@@ -13,30 +20,9 @@ import { pathToFileURL } from 'node:url';
 const famOf = (TAGS, i) => TAGS[i]?.fam ?? '?';
 const nameOf = (TAGS, i) => TAGS[i]?.name ?? '?';
 
-function pct(arr, p) {
-  if (!arr.length) return null;
-  const s = [...arr].sort((a,b)=>a-b);
-  return s[Math.min(s.length-1, Math.floor(p*(s.length-1)))];
-}
-
-function stats(list) {
-  const stars = list.map(r=>r[2]).filter(x=>x!=null);
-  const weekly = list.map(r=>r[3]).filter(x=>x>0);
-  const growth = list.map(r=>r[4]).filter(x=>x!=null && Number.isFinite(x));
-  const ages = list.map(r=>r[5]).filter(x=>x!=null);
-  return {
-    n: list.length,
-    starsMedian: pct(stars,0.5), starsP90: pct(stars,0.9),
-    weeklyMedian: pct(weekly,0.5), weeklyP90: pct(weekly,0.9),
-    weeklySum: weekly.reduce((a,b)=>a+b,0),
-    growthMedian: growth.length? pct(growth,0.5): null,
-    growthPositive: growth.filter(x=>x>0).length,
-    new30: ages.filter(x=>x<=30).length,
-  };
-}
-
-/** The digest leaderboard is a plain global score sort. No isEnriched/star
- * shortcut, no low-signal prefilter — what the title says is what it does. */
+/** Reference global score sort kept intact for the issue #12 contract:
+ *  no isEnriched/star shortcut. The *published* leaderboard below additionally
+ *  applies the issue #19 quality gate via `mainBoard`. */
 export function topByScore(rows, n = 60) {
   return [...rows].sort((a, b) => b[1] - a[1]).slice(0, n);
 }
@@ -48,7 +34,8 @@ export function buildDigest(D) {
   const name = (i) => nameOf(T, i);
 
   let out = '# ECO DATA DIGEST (snapshot ' + M.date + ')\n\n';
-  out += '> 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。\n\n';
+  out += '> 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。\n';
+  out += '> 第二批口径已修正（2026-11-20）：主榜加归档 / coverage<0.4 门禁、农场去重与验证徽章、growth 覆盖率注记、vertical × capability rollup、关键词假阳性排除与留存风险标注；复算报告见 `data/reports/BATCH2-QUALITY.md`。\n\n';
   out += 'Total repos: ' + ROWS.length + '\n';
   out += 'Counts: ' + JSON.stringify(M.counts) + '\n\n';
 
@@ -64,6 +51,7 @@ export function buildDigest(D) {
   ROWS.forEach(r => (r[9]||[]).forEach(t => { if(!byTag.has(t)) byTag.set(t,[]); byTag.get(t).push(r); }));
 
   out += '## PER-TAG STATS\n';
+  out += `> ${growthCoverageNote(ROWS)}（下表 growth med / +growth 只覆盖有值样本）\n`;
   out += '| tagIdx | slug | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |\n';
   out += '|---|---|---|---|---|---|---|---|---|---|---|---|\n';
   for (const [t, list] of [...byTag.entries()].sort((a,b)=>b[1].length-a[1].length)) {
@@ -73,6 +61,7 @@ export function buildDigest(D) {
   }
 
   out += '\n## FAMILY ROLLUP\n';
+  out += `> ${growthCoverageNote(ROWS)}（growth med 仅基于有值样本，不可当全量结论）\n`;
   const famMap = new Map();
   T.forEach((t,i)=> { if(!famMap.has(t.fam)) famMap.set(t.fam,[]); famMap.get(t.fam).push(i); });
   for (const [f, ids] of famMap) {
@@ -81,9 +70,22 @@ export function buildDigest(D) {
     out += `- **${f}** (tags: ${ids.map(name).join(', ')}): repos=${s.n}, ★med=${s.starsMedian}, weekly med=${s.weeklyMedian}, weekly sum=${s.weeklySum}, growth med=${s.growthMedian}, new≤30d=${s.new30}\n`;
   }
 
-  out += '\n## TOP 60 BY SCORE (global, all rows)\n';
-  for (const [i, r] of topByScore(ROWS, 60).entries()) {
-    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
+  const board = mainBoard(ROWS, 60);
+  const ownerCounts = countOwners(ROWS);
+  out += '\n' + renderQualityGate(ROWS, board);
+  out += '\n' + renderDedup(ROWS);
+  out += '\n' + renderGrowthQuality(ROWS);
+  out += '\n' + renderTaxonomy(ROWS, M);
+  out += '\n' + renderRules();
+  out += '\n' + renderRuleRegression(ROWS);
+  out += '\n' + renderKeywordHits(ROWS, M);
+  out += '\n' + renderRetention(ROWS, M, M.downloadTop || []);
+
+  out += '\n## TOP 60 — MAIN BOARD (quality-gated, score-sorted)\n';
+  out += '> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。\n';
+  for (const [i, r] of board.entries()) {
+    const badge = verificationBadge(r, ownerCounts);
+    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]}${growthFlag(r)}${riskFlag(r)} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | ${badge.label} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
   }
 
   out += '\n## ENRICHED SAMPLES (row[10]=1, label + summary)\n';
@@ -110,7 +112,11 @@ export function buildDigest(D) {
   (M.heat||[]).forEach(h => { out += `${name(h.tag)} (total=${h.total}): ${h.cells.join(',')}\n`; });
 
   out += '\n## DOWNLOAD TOP 30\n';
-  (M.downloadTop||[]).slice(0,30).forEach((x,i)=>{ out += `${i+1}. ${x.repo} wk=${x.weekly} ★=${x.stars} grow=${x.growth}\n`; });
+  out += `> ${growthCoverageNote(ROWS)}；高下载+负增长标注「${RETENTION_RISK_LABEL}」，不列入首选推荐（issue #22）。\n`;
+  (M.downloadTop||[]).slice(0,30).forEach((x,i)=>{
+    const flag = x.growth != null && x.growth < 0 ? ` ${RETENTION_RISK_LABEL}` : '';
+    out += `${i+1}. ${x.repo} wk=${x.weekly} ★=${x.stars} grow=${x.growth}${flag}\n`;
+  });
 
   return out;
 }
