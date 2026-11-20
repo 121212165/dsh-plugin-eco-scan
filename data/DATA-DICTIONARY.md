@@ -192,3 +192,27 @@
 - **语义二次校验**：`semanticVerify(row, meta, classification)` 基于 `row[14]=description`（来自 #17）+ `row[9]` 能力标签名做 capability 一致性确认；无 description 的 38,375 仓返回 `unavailable`。**重要限制**：本快照的 description 是「能力标签名 + 主赛道 + score/coverage」派生的摘要，**不是原始 README**；因此「capability 一致性确认」不等于真实语义确认，所有命中仍标注「未校验/假阳性风险」。
 - **禁止直接当领域总量**：digest 的 `## DOMAIN KEYWORD HITS` 只给命中数 / 排除数 / 未校验数 / 一致性确认数，并显式声明不可作领域总量。
 - **回归基线**：`REGRESSION_CASES` 钉死 5 个已知案例（wallpaper / schedule / classic / simplify / 工具隐喻 doctor），要求全部排除或降级；`## KEYWORD REGRESSION` 打印 PASS/FAIL。
+
+---
+
+## 11. 留存代理指标与下载语义（issue #22）
+
+**下载语义（覆盖并强化第 7 节）**：`row[3]=weekly` 与 `meta.downloadTop[].weekly` 是**装机代理，不是活跃用户数**。周下载只说明「装了多少次」，不能推断「多少人在用」，也不能跨量纲与 release 累计下载相加；`null` 是无观测，不是 0。
+
+**待补快照字段**（`data/retention.mjs` 的 `RETENTION_FIELDS`，当前权威快照全部缺失 → 真实留存**不可计算**）：
+
+| 字段 | 含义 | 用途 |
+|---|---|---|
+| `installs_new` | 本期首次安装数 | 新装机代理 |
+| `installs_returning` | 本期复装 / 回访安装数 | 留存代理 |
+| `weekly_prev` | 上一连续快照周下载 | 连续序列代理 |
+
+**代理公式（字段到位后启用）**：
+
+- `returningShare = installs_returning / (installs_new + installs_returning)`（复装占比）；
+- `reinstallRatio = installs_returning / weekly_prev`（回访比，`weekly_prev<=0` → null）；
+- `continuity = min(1, weekly / weekly_prev)`（连续性代理，仅为周下载比值封顶，不等同留存率）。
+
+三者均为代理指标，不能当真实 7 日留存 / 卸载率；需要连续每日快照才能真正闭环。
+
+**存量留存风险标注**：`weekly ≥ 1000 且 growth < 0` 标为 `⚠ 存量留存风险`，**不列入首选推荐**。当前 `meta.downloadTop` 中 11/20 为负增长，典型 `dsh-pet` −33.4% / `dsh-skins` −25.7% / `dsh-deep-whale` −23.2%。digest 在 `## RETENTION PROXY & RISK` 与下载榜行内标注。

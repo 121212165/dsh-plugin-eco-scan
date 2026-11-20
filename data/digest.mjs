@@ -6,6 +6,7 @@ import { countOwners, verificationBadge, renderDedup } from './dedup.mjs';
 import { growthCoverageNote, renderGrowthQuality, growthFlag } from './growth-quality.mjs';
 import { renderTaxonomy } from './taxonomy.mjs';
 import { renderRules, renderRuleRegression, renderKeywordHits } from './rules.mjs';
+import { renderRetention, riskFlag, RISK_LABEL as RETENTION_RISK_LABEL } from './retention.mjs';
 
 // rows[] is a POSITIONAL array. Source of truth: data/DATA-DICTIONARY.md.
 //   [0] id (owner/repo)      [1] score                 [2] stars
@@ -77,12 +78,13 @@ export function buildDigest(D) {
   out += '\n' + renderRules();
   out += '\n' + renderRuleRegression(ROWS);
   out += '\n' + renderKeywordHits(ROWS, M);
+  out += '\n' + renderRetention(ROWS, M, M.downloadTop || []);
 
   out += '\n## TOP 60 — MAIN BOARD (quality-gated, score-sorted)\n';
   out += '> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。\n';
   for (const [i, r] of board.entries()) {
     const badge = verificationBadge(r, ownerCounts);
-    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]}${growthFlag(r)} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | ${badge.label} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
+    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]}${growthFlag(r)}${riskFlag(r)} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | ${badge.label} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
   }
 
   out += '\n## ENRICHED SAMPLES (row[10]=1, label + summary)\n';
@@ -109,8 +111,11 @@ export function buildDigest(D) {
   (M.heat||[]).forEach(h => { out += `${name(h.tag)} (total=${h.total}): ${h.cells.join(',')}\n`; });
 
   out += '\n## DOWNLOAD TOP 30\n';
-  out += `> ${growthCoverageNote(ROWS)}；高下载+负增长按 issue #22 标注为「存量留存风险」。\n`;
-  (M.downloadTop||[]).slice(0,30).forEach((x,i)=>{ out += `${i+1}. ${x.repo} wk=${x.weekly} ★=${x.stars} grow=${x.growth}\n`; });
+  out += `> ${growthCoverageNote(ROWS)}；高下载+负增长标注「${RETENTION_RISK_LABEL}」，不列入首选推荐（issue #22）。\n`;
+  (M.downloadTop||[]).slice(0,30).forEach((x,i)=>{
+    const flag = x.growth != null && x.growth < 0 ? ` ${RETENTION_RISK_LABEL}` : '';
+    out += `${i+1}. ${x.repo} wk=${x.weekly} ★=${x.stars} grow=${x.growth}${flag}\n`;
+  });
 
   return out;
 }

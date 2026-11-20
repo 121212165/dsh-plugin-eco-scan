@@ -296,6 +296,41 @@ security 二级 subclass：
 
 语义二次校验基于 issue #17 的 `row[14]=description`，但它是能力标签派生摘要、非原始 README；确认仅代表 capability 一致。
 
+## RETENTION PROXY & RISK (issue #22)
+
+> **下载 = 装机代理，非活跃用户数**：周下载只说明「装了多少次」，不能推断「多少人在用」；`weekly=null` 是无观测，不是 0。
+
+快照需补字段（当前权威快照全部缺失 → 留存代理不可计算）：
+  - `installs_new` ✗ — 本期首次安装数（新装机代理）
+  - `installs_returning` ✗ — 本期复装/回访安装数（留存代理）
+  - `weekly_prev` ✗ — 上一连续快照的 npm 周下载；用于连续序列代理
+
+- 可用性：不可计算（待连续快照）。权威快照未提供连续 install 序列；留存代理不可计算，必须写明"待连续快照"
+- 高下载（weekly≥1,000）+ 负增长 = ⚠ 存量留存风险：全库 421 仓；`meta.downloadTop` 中 11/20 仓为负增长。
+- 处理规则：列入留存风险观察，不列入首选推荐；连续快照到位后用 `retentionProxy()` 的复装占比 / 回访比 / 连续性代理复算。
+
+issue #22 点名案例（无论周下载排名都显式列出）：
+  - pc2005-cloud/dsh-pet wk=95892 grow=-33.4 → ⚠ 存量留存风险
+  - zhu1090093659/dsh-skins wk=22105 grow=-25.7 → ⚠ 存量留存风险
+  - small-tailqwq/dsh-deep-whale wk=12767 grow=-23.2 → ⚠ 存量留存风险
+
+风险样本（按周下载降序，前 15）：
+  - deepseek-ai/deepseek-harness wk=1208788 grow=-9.1 score=83.6 — ⚠ 存量留存风险
+  - dsh-market/dsh-market wk=293468 grow=-11.7 score=83.2 — ⚠ 存量留存风险
+  - bowenliang123/dsh-context wk=133085 grow=-9.4 score=83.6 — ⚠ 存量留存风险
+  - awesome-dsh-plugin/awesome-dsh-plugin wk=103410 grow=-0.6 score=89.4 — ⚠ 存量留存风险
+  - pc2005-cloud/dsh-pet wk=95892 grow=-33.4 score=80.8 — ⚠ 存量留存风险
+  - liustack/modlens wk=70692 grow=-7.4 score=84.2 — ⚠ 存量留存风险
+  - meteornox/deepseek-balance-whale-widget wk=50556 grow=-41.8 score=77.3 — ⚠ 存量留存风险
+  - hellohub1212/dsh-windows-mcp wk=41368 grow=-94.4 score=79.7 — ⚠ 存量留存风险
+  - han-1413141/dsh-cost-meter wk=38681 grow=-2.5 score=86.9 — ⚠ 存量留存风险
+  - michengai/dsh-skills-manager wk=37213 grow=-26.7 score=80.9 — ⚠ 存量留存风险
+  - omdsh-dev/dsh-mnemon wk=32930 grow=-10.4 score=83.2 — ⚠ 存量留存风险
+  - zhu1090093659/dsh-web wk=30620 grow=-18.5 score=82.2 — ⚠ 存量留存风险
+  - elysia395/dsh-wallpaper-engine wk=28333 grow=-26.7 score=81.3 — ⚠ 存量留存风险
+  - xmanrui/dsh-im wk=27898 grow=-24.8 score=80.5 — ⚠ 存量留存风险
+  - michengai/dsh-archive-manager wk=27252 grow=-28.4 score=80.5 — ⚠ 存量留存风险
+
 ## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
 > 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。
 1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
@@ -491,24 +526,24 @@ MCP (total=1903): 2,8,5,4,3,5,7,11,13,10,10,17,261,185,184,62,50,51,52,78,80,141
 安全 (total=1838): 0,1,1,0,0,0,0,0,1,0,1,4,322,207,103,85,44,75,59,61,69,153,161,173,165,153
 
 ## DOWNLOAD TOP 30
-> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）；高下载+负增长按 issue #22 标注为「存量留存风险」。
-1. deepseek-ai/deepseek-harness wk=1208788 ★=281724 grow=-9.1
-2. dsh-market/dsh-market wk=293468 ★=12542 grow=-11.7
-3. bowenliang123/dsh-context wk=133085 ★=5149 grow=-9.4
-4. awesome-dsh-plugin/awesome-dsh-plugin wk=103410 ★=24798 grow=-0.6
+> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）；高下载+负增长标注「⚠ 存量留存风险」，不列入首选推荐（issue #22）。
+1. deepseek-ai/deepseek-harness wk=1208788 ★=281724 grow=-9.1 ⚠ 存量留存风险
+2. dsh-market/dsh-market wk=293468 ★=12542 grow=-11.7 ⚠ 存量留存风险
+3. bowenliang123/dsh-context wk=133085 ★=5149 grow=-9.4 ⚠ 存量留存风险
+4. awesome-dsh-plugin/awesome-dsh-plugin wk=103410 ★=24798 grow=-0.6 ⚠ 存量留存风险
 5. omdsh-dev/dsh-better-sidebar wk=96487 ★=5182 grow=11.8
-6. pc2005-cloud/dsh-pet wk=95892 ★=6327 grow=-33.4
+6. pc2005-cloud/dsh-pet wk=95892 ★=6327 grow=-33.4 ⚠ 存量留存风险
 7. lijiaqi-ai-product-manager/dsh-agent-compare wk=92759 ★=425 grow=951.5
 8. flymysql/dsh-remote wk=79516 ★=291 grow=76.8
 9. t-auto/dsh-ops wk=73476 ★=5850 grow=26.9
-10. liustack/modlens wk=70692 ★=4984 grow=-7.4
+10. liustack/modlens wk=70692 ★=4984 grow=-7.4 ⚠ 存量留存风险
 11. wnluo/dsh-mobile-plugin wk=58280 ★=61 grow=60
-12. meteornox/deepseek-balance-whale-widget wk=50556 ★=7247 grow=-41.8
+12. meteornox/deepseek-balance-whale-widget wk=50556 ★=7247 grow=-41.8 ⚠ 存量留存风险
 13. kenryu42/cc-safety-net wk=49920 ★=2053 grow=0.6
-14. hellohub1212/dsh-windows-mcp wk=41368 ★=1352 grow=-94.4
+14. hellohub1212/dsh-windows-mcp wk=41368 ★=1352 grow=-94.4 ⚠ 存量留存风险
 15. dddmuc/dsh-free-search wk=39301 ★=1223 grow=10.1
-16. han-1413141/dsh-cost-meter wk=38681 ★=703 grow=-2.5
-17. michengai/dsh-skills-manager wk=37213 ★=574 grow=-26.7
+16. han-1413141/dsh-cost-meter wk=38681 ★=703 grow=-2.5 ⚠ 存量留存风险
+17. michengai/dsh-skills-manager wk=37213 ★=574 grow=-26.7 ⚠ 存量留存风险
 18. dingminhua/dsh-connect-workbuddy wk=34342 ★=1649 grow=12.3
-19. omdsh-dev/dsh-mnemon wk=32930 ★=1015 grow=-10.4
+19. omdsh-dev/dsh-mnemon wk=32930 ★=1015 grow=-10.4 ⚠ 存量留存风险
 20. suifei/dsh-ai-team wk=32083 ★=25 grow=null
