@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { ROW, stats } from './schema.mjs';
+import { mainBoard, renderQualityGate } from './quality-gate.mjs';
 
 // rows[] is a POSITIONAL array. Source of truth: data/DATA-DICTIONARY.md.
 //   [0] id (owner/repo)      [1] score                 [2] stars
@@ -13,30 +15,9 @@ import { pathToFileURL } from 'node:url';
 const famOf = (TAGS, i) => TAGS[i]?.fam ?? '?';
 const nameOf = (TAGS, i) => TAGS[i]?.name ?? '?';
 
-function pct(arr, p) {
-  if (!arr.length) return null;
-  const s = [...arr].sort((a,b)=>a-b);
-  return s[Math.min(s.length-1, Math.floor(p*(s.length-1)))];
-}
-
-function stats(list) {
-  const stars = list.map(r=>r[2]).filter(x=>x!=null);
-  const weekly = list.map(r=>r[3]).filter(x=>x>0);
-  const growth = list.map(r=>r[4]).filter(x=>x!=null && Number.isFinite(x));
-  const ages = list.map(r=>r[5]).filter(x=>x!=null);
-  return {
-    n: list.length,
-    starsMedian: pct(stars,0.5), starsP90: pct(stars,0.9),
-    weeklyMedian: pct(weekly,0.5), weeklyP90: pct(weekly,0.9),
-    weeklySum: weekly.reduce((a,b)=>a+b,0),
-    growthMedian: growth.length? pct(growth,0.5): null,
-    growthPositive: growth.filter(x=>x>0).length,
-    new30: ages.filter(x=>x<=30).length,
-  };
-}
-
-/** The digest leaderboard is a plain global score sort. No isEnriched/star
- * shortcut, no low-signal prefilter — what the title says is what it does. */
+/** Reference global score sort kept intact for the issue #12 contract:
+ *  no isEnriched/star shortcut. The *published* leaderboard below additionally
+ *  applies the issue #19 quality gate via `mainBoard`. */
 export function topByScore(rows, n = 60) {
   return [...rows].sort((a, b) => b[1] - a[1]).slice(0, n);
 }
@@ -81,8 +62,12 @@ export function buildDigest(D) {
     out += `- **${f}** (tags: ${ids.map(name).join(', ')}): repos=${s.n}, ★med=${s.starsMedian}, weekly med=${s.weeklyMedian}, weekly sum=${s.weeklySum}, growth med=${s.growthMedian}, new≤30d=${s.new30}\n`;
   }
 
-  out += '\n## TOP 60 BY SCORE (global, all rows)\n';
-  for (const [i, r] of topByScore(ROWS, 60).entries()) {
+  const board = mainBoard(ROWS, 60);
+  out += '\n' + renderQualityGate(ROWS, board);
+
+  out += '\n## TOP 60 — MAIN BOARD (quality-gated, score-sorted)\n';
+  out += '> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。\n';
+  for (const [i, r] of board.entries()) {
     out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
   }
 

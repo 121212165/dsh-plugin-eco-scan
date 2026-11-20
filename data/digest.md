@@ -99,7 +99,23 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 - **安全** (tags: 安全): repos=1848, ★med=0, weekly med=295, weekly sum=279742, growth med=-1.3, new≤30d=702
 - **基础设施** (tags: 框架/运行时): repos=1795, ★med=0, weekly med=257, weekly sum=1337335, growth med=0, new≤30d=557
 
-## TOP 60 BY SCORE (global, all rows)
+## QUALITY GATE SELF-CHECK (issue #19)
+
+> 门禁：排除 `archived=1` 与 `coverage<0.4`（低信号空壳）。注意 `row[12]=lowSignal` 用的是 coverage<0.5，与门禁阈值不同。
+
+- 全库=38549 ｜ 归档=415 ｜ coverage<0.4=19524 ｜ 两者交集=219 ｜ 门禁排除合计=19720 ｜ 可入榜=18829
+- 主榜自检：检查 60 行 → 归档入榜 0 ｜ 低信号入榜 0（必须为 0）
+
+被门禁排除的最高分样本（证明门禁真实生效，不是空规则）：
+  - [归档] perrylink/dsh-session-pin score=82.9 cov=1 wk=978
+  - [归档] perrylink/dsh-background-agents score=82.8 cov=1 wk=858
+  - [归档] howmp/dsh-pentest score=78.4 cov=1 wk=836
+  - [低信号] 0xlucifereth/xhs-job-hunter score=55 cov=0.1 age=0d wk=null
+  - [低信号] 18874530790/dsh-default-full-permission score=55 cov=0.1 age=2d wk=null
+  - [低信号] 1997liuyh-boop/dsh-desktop-tools score=55 cov=0.1 age=6d wk=null
+
+## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
+> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。
 1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
 2. zilliztech/memsearch | score=99.1 | ★=2883 | wk=13548 | grow=123.5 | age=280d | seg=5 | cov=1 | enr=0 | tags=[记忆,知识库/RAG,搜索/检索,文档/笔记]
 3. tt-a1i/archify | score=98.8 | ★=96845 | wk=16124 | grow=40.3 | age=215d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,网页界面,编码/代码,智能体]

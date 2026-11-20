@@ -62,8 +62,9 @@
 
 - `coverage = (star>0 ? 0.4 : 0) + (weekly>0 ? 0.3 : 0) + (growth 有值 ? 0.2 : 0) + (pushDays 有值 ? 0.1 : 0)`
 - `score = 四项百分位加权 + (1 − coverage) × 50`（缺项用中性先验 50 填补，不按 0 惩罚）
-- `lowSignal = coverage < 0.5`；主榜 = 未归档且 `coverage ≥ 0.4`
-- Top60 榜单 = **全局 score 排序**（见 `digest.mjs` 的 `topByScore`），不再按 `r[10]===1 || r[2]>2000` 过滤
+- `lowSignal = coverage < 0.5`（**字段 `row[12]` 的定义**）；榜单门禁阈值是 `coverage < 0.4`，两者不同，勿混用
+- **榜单质量门禁（issue #19）**：主榜 / 推荐表先剔除 `row[8]=archived` 与 `row[11]=coverage<0.4`，再按 score 全局降序。门禁由 `data/quality-gate.mjs` 的 `passesQualityGate` / `mainBoard` 实现；`digest.md` 的 `## QUALITY GATE SELF-CHECK` 打印 `archived`、`lowSignal`、交集、排除合计、可入榜数，并断言「归档入榜=0、低信号入榜=0」。当前快照：归档 415、coverage<0.4 为 19,524、门禁排除 19,524+415−交集。
+- Top60 榜单 = **全局 score 排序**（见 `digest.mjs` 的 `topByScore`），不再按 `r[10]===1 || r[2]>2000` 过滤；`topByScore` 保留为无门禁参照函数，实际发布的主榜是门禁后的 `mainBoard`
 
 ---
 
