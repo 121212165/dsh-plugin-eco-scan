@@ -57,7 +57,26 @@ release 固定附带 `data/eco-data.json`（机器可读快照）。若当次 re
 > 趋势判断：不可做（velocity 三项全空；见 data/DATA-DICTIONARY.md）
 ```
 
-缺这四行的报告不视为交付完成。趋势判断字段由 `scripts/check-snapshot-readiness.mjs` 给出（见「数据积累与快照调度」）。
+缺这四行的报告不视为交付完成。趋势判断字段由 `scripts/check-snapshot-readiness.mjs` 给出（见「定时扫描 → 连续快照实操」）。
+
+### 趋势与校准状态（issue #11 / #14）
+
+| 项 | 当前值 | 含义 |
+|---|---|---|
+| `velocity.prevDate / days / overlap` | `null / null / 0` | 单快照，趋势判断**不可做** |
+| `meta.heat` 标签数 | 18 / 50 | 金融(47)、数据库(36)、统计(34)、导出(35) 未入选；见 `data/reports/HEAT-AUDIT.md` |
+| heat 采集起始周 | 2026-08-10（第 13 周） | 前 12 周近全 0，视为无数据；趋势只用断点后窗口 |
+| `/eco-calibrate` | 暂不能下结论 | v1 稀疏历史仅 09-30→10-17 一个窗口凑够 6 对，被单仓主导 |
+
+**校准回填步骤**（velocity 可用后执行，结果写回本表）：
+
+```sh
+node scripts/check-snapshot-readiness.mjs     # 先确认退出码 0
+npx eco-core calibrate                        # 或 dsh 命令 /eco-calibrate
+# 把 Spearman 秩相关 / Top-K 命中 / 样本对数 / 窗口日期记入本表与 data/DATA-DICTIONARY.md
+```
+
+语义与判据见 `data/DATA-DICTIONARY.md`；复算脚本见 `data/heat.mjs`。
 
 ## 两个入口
 
@@ -148,6 +167,38 @@ alerts/alerts.yml       告警规则
 ## 定时扫描
 
 `schedule` 配置内置调度器（UTC 口径）：`off`（默认）/ `every 6h` / `every 30m` / `daily 03:30`。到点依次执行 扫描 → 告警（同日去重）→ webhook → 重画面板；上一轮没跑完不会叠加下一轮；失败只记录不终止排程；dsh 卸载插件时通过 `ctx.effect` 停表。`scheduleOnStart: true`（默认）时，启动发现今天还没有快照就立即补扫一次。不想要内置调度就把 `schedule` 留在 `off`，用系统 cron 调 `eco-core scan`。
+
+### 连续快照实操（issue #11）
+
+目标是积累 **≥ 2–3 期**可比较快照，让 `velocity` 不再全空。
+
+```yaml
+# 方案 A：内置调度器（写在 dsh profile 配置里，UTC）
+schedule: daily 03:30
+scheduleAlerts: true
+scheduleOnStart: true
+```
+
+```sh
+# 方案 B：系统 cron（Linux / macOS）——每天 03:30 UTC
+30 3 * * * cd /path/to/dsh-plugin-eco-scan && npx eco-core scan >> /var/log/eco-scan.log 2>&1
+```
+
+```powershell
+# 方案 C：Windows 计划任务（本机已封装）
+pwsh -File scripts/schedule-daily-scan.ps1 -TaskName eco-core-daily -Hour 3 -Minute 30
+Get-ScheduledTask -TaskName eco-core-daily | Select-Object TaskName,State   # 验证
+# 取消：pwsh -File scripts/schedule-daily-scan.ps1 -Unregister
+```
+
+每次扫描后检查是否可用（退出码 0 可做 / 2 不可做）：
+
+```sh
+node scripts/check-snapshot-readiness.mjs            # 默认要求 overlap >= 2
+node scripts/check-snapshot-readiness.mjs --min-overlap 3
+```
+
+`velocity` 可用后补跑校准 `npx eco-core calibrate`（或 `/eco-calibrate`），把结果回填到上面「数据入口 → 趋势与校准状态」。
 
 ## 校准（评分到底有没有用）
 
