@@ -214,6 +214,30 @@ dsh plugin --profile web add github:121212165/dsh-plugin-eco-scan
 - scope 包的上周值受 range 预算限制（默认 200 个，按周下载降序），预算外的包只有周下载、无增长率——这是显式的 `null`，不是 0。
 - quality 的 issue 维度用「中位关闭时长」代理，非真实缺陷密度；release 下载是生命周期累计值，与 npm 周下载不同量纲，仅作规模代理。
 
+## Windows 环境备忘（已验证配方）
+
+> 这些命令在本机（Windows / PowerShell / pwsh）实测可用；踩坑记录见 [data/reports/RETRO.md](data/reports/RETRO.md) #4。
+
+| 场景 | ❌ 踩坑写法 | ✅ 可用写法 |
+|---|---|---|
+| clone / fetch 握手失败 | `git clone ...`（`schannel: failed to receive handshake`） | `git -c http.sslBackend=schannel clone https://github.com/121212165/<repo>.git`；已有仓库用 `git -c http.sslBackend=schannel fetch origin` |
+| 浅克隆 | `gh repo clone <repo> -- --depth 1`（`Too many arguments`） | 直接 `git clone`，不要经 `gh repo clone` 转发 `--depth` |
+| 读中文文件乱码 | `Get-Content file.md` | `Get-Content -Encoding UTF8 file.md` |
+| `gh api` 传 ref | `gh api ".../contents/path?ref=main"`（部分版本 404）或裸 `-f ref=main`（gh 会翻成 POST → 404） | `gh api ".../contents/path" --method GET -f ref=main`（**必须显式 `--method GET`**）；tree 用 `gh api ".../git/trees/main" --method GET -f recursive=1` |
+| 递归搜索 | 在 `C:\Users\lenovo` 全盘 `Get-ChildItem -Recurse`（120s 超时） | 先 `cd` 到目标 worktree，再用 `Get-ChildItem -Recurse -File -LiteralPath .`；git 仓库内优先 `git grep -n "关键词" -- data/`；脚本里用 `git ls-files` / `rg <pattern> <workdir>`，路径永远显式限定到工作目录 |
+
+约定：任何递归搜索都必须带一个明确的根目录参数（默认当前 worktree），禁止把 `$HOME` 或 `C:\Users\<user>` 当搜索根。
+
+### 一条命令验证交付
+
+```powershell
+pwsh -File scripts/verify-delivery.ps1 \
+  -Repo 121212165/dsh-plugin-eco-scan \
+  -Branch batch3-docs-process
+```
+
+脚本依次校验：本地 commit = 远端分支 commit、远端 tree 含必备文件、issue 列表含目标 issue、`git check-ignore -v data/reports/FINAL-SUMMARY.md` 无输出（即报告目录未被忽略）。推完分支后再跑；本地自测加 `-LocalOnly` 跳过远端检查。
+
 ## 设计与执行记录
 
 v2 的重做计划、决策记录与验收记分板见 [docs/market-audit-redo-plan.md](docs/market-audit-redo-plan.md)：为什么从 JSONL 迁到 SQLite、为什么用 `node:sqlite`、为什么面板是单文件 HTML、哪些验收项还没达标（分支覆盖率、有 token 的全量复测、映射 ground truth、校准样本），以及 v2.0 草案的逐条勘误。
