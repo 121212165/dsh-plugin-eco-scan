@@ -1,3 +1,5 @@
+> 榜单口径已修正（2026-11-20）：Top60 排行榜已改为全局 score 排序（见 data/digest.mjs）。本报告如引用旧榜单，请以新 digest 为准。
+
 # 最终总结：DSH 插件生态需求扫描（基于 dsh-plugin-eco-scan 数据）
 
 > 数据源：`dsh-plugin-eco-scan` + `eco-report-2026-11-06`（快照 2026-11-16，38,549 仓、50 能力标签、周下载合计 7,837,245）。

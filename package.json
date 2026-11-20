@@ -47,7 +47,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "npm run build",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --test \"test/**/*.test.ts\" \"test/**/*.test.mjs\"",
     "test:core": "node --test \"test/core/**/*.test.ts\"",
     "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/core/**\" \"test/core/**/*.test.ts\"",
     "typecheck": "tsc --noEmit",

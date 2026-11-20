@@ -1,61 +1,70 @@
 # ECO DATA DIGEST (snapshot 2026-11-16)
 
+> 榜单口径已修正（2026-11-20）：Top60 现为**全局 score 排序**，不再使用 `r[10]===1 || r[2]>2000` 过滤。
+
 Total repos: 38549
 Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositive":5639,"archived":415,"mainRows":18829,"lowSignal":19868,"weeklySum":7837245,"miscOnly":3425,"miscPct":8.9,"miscNoDesc":1166,"reachCoveragePct":18.16,"reachCoverageMainPct":37.02,"coverage":[{"cov":0.1,"n":19524},{"cov":0.4,"n":563},{"cov":0.5,"n":12024},{"cov":0.6,"n":1801},{"cov":0.7,"n":0},{"cov":0.8,"n":799},{"cov":0.9,"n":0},{"cov":1,"n":3838}],"velocity":{"prevDate":null,"days":null,"overlap":0,"note":"数据积累中：可比较的快照仓库太少"},"new30":14695,"young90":15963,"est":7891,"tags":50,"enriched":174}
 
+## COLUMN NAMES (see data/DATA-DICTIONARY.md)
+
+
+## TAG ID CROSSWALK
+`meta.tags[].id` 是 slug，`rows[].tags` 存数字下标；用 `meta.tagIndex[slug]` 转换。
+示例：(no tagIndex)
+
 ## PER-TAG STATS
-| id | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 18 | 网页界面 | 交互 | 8678 | 0 | 5 | 341 | 1686812 | -0.9 | 449 | 3012 |
-| 21 | 会话管理 | 交互 | 7884 | 0 | 4 | 352 | 1405163 | 0 | 470 | 3572 |
-| 28 | 智能体 | 编排 | 6389 | 1 | 9 | 351 | 1133314 | -0.4 | 339 | 2296 |
-| 31 | 模型接入 | 模型 | 5420 | 0 | 6 | 350 | 964553 | -0.3 | 323 | 1991 |
-| 22 | 工作区 | 交互 | 4293 | 0 | 4 | 369 | 1019993 | 0 | 246 | 2228 |
-| 19 | 桌面客户端 | 交互 | 4005 | 1 | 6 | 349 | 760290 | -1 | 172 | 1498 |
-| 37 | 设计/排版 | 设计 | 3937 | 0 | 5 | 324 | 668156 | -1.4 | 172 | 1559 |
-| 26 | 编码/代码 | 开发 | 3591 | 1 | 10 | 342 | 789923 | 0 | 200 | 1208 |
-| 49 | 其他 | 其他 | 3425 | 0 | 1 | 285 | 182924 | 0 | 98 | 869 |
-| 30 | 技能/Prompt | 编排 | 3232 | 0 | 8 | 372 | 387424 | 0 | 153 | 1190 |
-| 41 | 安装/管理 | 平台 | 3001 | 0 | 4 | 356 | 507178 | -0.5 | 140 | 1109 |
-| 27 | 文件/目录 | 开发 | 2769 | 0 | 4 | 358 | 562817 | 0 | 141 | 1169 |
-| 10 | 文档/笔记 | 知识 | 2706 | 0 | 7 | 387 | 435472 | -0.6 | 147 | 1151 |
-| 40 | 插件市场 | 平台 | 2457 | 0 | 5 | 357 | 792621 | 0 | 148 | 977 |
-| 9 | 搜索/检索 | 知识 | 2177 | 0 | 6 | 351 | 876889 | -0.7 | 112 | 903 |
-| 33 | 成本/额度 | 模型 | 2152 | 0 | 4 | 356 | 501042 | -1.4 | 105 | 848 |
-| 1 | 图像/绘图 | 媒体 | 2035 | 1 | 7 | 436 | 503262 | -0.7 | 105 | 735 |
-| 13 | MCP | 连接 | 1962 | 0 | 12 | 356 | 360148 | 0 | 119 | 722 |
-| 39 | 安全 | 安全 | 1848 | 0 | 5 | 295 | 279742 | -1.3 | 93 | 702 |
-| 34 | 统计/监控 | 数据 | 1816 | 0 | 3 | 289 | 253609 | -0.4 | 83 | 718 |
-| 45 | 框架/运行时 | 基础设施 | 1795 | 0 | 5 | 257 | 1337335 | 0 | 70 | 557 |
-| 6 | 人格/陪伴 | 认知 | 1792 | 1 | 9 | 462 | 531439 | -4.6 | 65 | 868 |
-| 5 | 记忆 | 认知 | 1760 | 1 | 7 | 452 | 438224 | -2.4 | 105 | 780 |
-| 25 | Git/提交 | 开发 | 1658 | 0 | 7 | 348 | 586932 | 0 | 106 | 588 |
-| 29 | 工作流 | 编排 | 1418 | 1 | 7 | 388 | 172156 | -0.7 | 85 | 505 |
-| 16 | 社交/IM | 平台 | 1410 | 0 | 7 | 570 | 361993 | -2.7 | 60 | 750 |
-| 12 | 浏览器 | 开发 | 1295 | 0 | 7 | 405 | 374468 | 0 | 75 | 456 |
-| 23 | 自动化 | 开发 | 1283 | 1 | 10 | 386 | 423430 | -1.3 | 70 | 527 |
-| 32 | 路由/网关 | 模型 | 1191 | 0 | 6 | 380 | 171911 | -0.3 | 78 | 431 |
-| 48 | 插件合集 | 平台 | 1081 | 0 | 1 | 285 | 69643 | 0 | 28 | 468 |
-| 2 | 语音/音频 | 媒体 | 1043 | 0 | 5 | 433 | 207900 | -1.7 | 44 | 532 |
-| 14 | 远程/隧道 | 连接 | 1024 | 1 | 9 | 447 | 363371 | 0 | 66 | 375 |
-| 4 | 视觉/多模态 | 媒体 | 966 | 1 | 8 | 346 | 238260 | -3.1 | 40 | 260 |
-| 7 | 上下文/压缩 | 认知 | 945 | 0 | 6 | 413 | 274519 | 0 | 62 | 421 |
-| 35 | 导出/归档 | 数据 | 898 | 0 | 3 | 404 | 138018 | -0.9 | 48 | 438 |
-| 42 | 通知/提醒 | 平台 | 872 | 0 | 3 | 330 | 87949 | -1.8 | 41 | 376 |
-| 20 | 命令行 | 交互 | 871 | 1 | 23 | 329 | 233770 | -2.2 | 46 | 255 |
-| 43 | 生产力/办公 | 平台 | 805 | 0 | 3 | 385 | 81793 | 0 | 45 | 433 |
-| 38 | 中文本地化 | 设计 | 744 | 0 | 5 | 297 | 86605 | -1.8 | 36 | 350 |
-| 0 | 视频/分镜 | 媒体 | 698 | 1 | 11 | 725 | 318205 | -3.5 | 39 | 373 |
-| 24 | Shell/执行 | 开发 | 696 | 0 | 6 | 307 | 94930 | -0.3 | 37 | 204 |
-| 15 | 移动端 | 平台 | 687 | 1 | 15 | 415 | 251867 | 0 | 42 | 279 |
-| 3 | 屏幕感知 | 媒体 | 625 | 0 | 4 | 338 | 111561 | -3.4 | 26 | 318 |
-| 8 | 知识库/RAG | 知识 | 507 | 1 | 20 | 405 | 201848 | -1.3 | 34 | 175 |
-| 11 | 精选清单 | 其他 | 493 | 0 | 18 | 304 | 168056 | 0 | 12 | 150 |
-| 44 | 娱乐/游戏 | 其他 | 345 | 1 | 11 | 405 | 36386 | 0 | 18 | 148 |
-| 46 | 诊断/自检 | 开发 | 312 | 0 | 3 | 324 | 35519 | -1.7 | 14 | 139 |
-| 36 | 数据库 | 数据 | 227 | 0 | 3 | 384 | 39779 | -1.8 | 8 | 98 |
-| 17 | 终端 TUI | 交互 | 186 | 1 | 23 | 290 | 45285 | 0 | 12 | 28 |
-| 47 | 金融/行情 | 数据 | 171 | 0 | 5 | 392 | 16948 | -1.9 | 5 | 66 |
+| tagIdx | slug | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 18 | webui | 网页界面 | 交互 | 8678 | 0 | 5 | 341 | 1686812 | -0.9 | 449 | 3012 |
+| 21 | session | 会话管理 | 交互 | 7884 | 0 | 4 | 352 | 1405163 | 0 | 470 | 3572 |
+| 28 | agent | 智能体 | 编排 | 6389 | 1 | 9 | 351 | 1133314 | -0.4 | 339 | 2296 |
+| 31 | llm | 模型接入 | 模型 | 5420 | 0 | 6 | 350 | 964553 | -0.3 | 323 | 1991 |
+| 22 | workspace | 工作区 | 交互 | 4293 | 0 | 4 | 369 | 1019993 | 0 | 246 | 2228 |
+| 19 | desktop | 桌面客户端 | 交互 | 4005 | 1 | 6 | 349 | 760290 | -1 | 172 | 1498 |
+| 37 | design | 设计/排版 | 设计 | 3937 | 0 | 5 | 324 | 668156 | -1.4 | 172 | 1559 |
+| 26 | code | 编码/代码 | 开发 | 3591 | 1 | 10 | 342 | 789923 | 0 | 200 | 1208 |
+| 49 | misc | 其他 | 其他 | 3425 | 0 | 1 | 285 | 182924 | 0 | 98 | 869 |
+| 30 | skill | 技能/Prompt | 编排 | 3232 | 0 | 8 | 372 | 387424 | 0 | 153 | 1190 |
+| 41 | manager | 安装/管理 | 平台 | 3001 | 0 | 4 | 356 | 507178 | -0.5 | 140 | 1109 |
+| 27 | file | 文件/目录 | 开发 | 2769 | 0 | 4 | 358 | 562817 | 0 | 141 | 1169 |
+| 10 | doc | 文档/笔记 | 知识 | 2706 | 0 | 7 | 387 | 435472 | -0.6 | 147 | 1151 |
+| 40 | market | 插件市场 | 平台 | 2457 | 0 | 5 | 357 | 792621 | 0 | 148 | 977 |
+| 9 | search | 搜索/检索 | 知识 | 2177 | 0 | 6 | 351 | 876889 | -0.7 | 112 | 903 |
+| 33 | cost | 成本/额度 | 模型 | 2152 | 0 | 4 | 356 | 501042 | -1.4 | 105 | 848 |
+| 1 | image | 图像/绘图 | 媒体 | 2035 | 1 | 7 | 436 | 503262 | -0.7 | 105 | 735 |
+| 13 | mcp | MCP | 连接 | 1962 | 0 | 12 | 356 | 360148 | 0 | 119 | 722 |
+| 39 | security | 安全 | 安全 | 1848 | 0 | 5 | 295 | 279742 | -1.3 | 93 | 702 |
+| 34 | analytics | 统计/监控 | 数据 | 1816 | 0 | 3 | 289 | 253609 | -0.4 | 83 | 718 |
+| 45 | runtime | 框架/运行时 | 基础设施 | 1795 | 0 | 5 | 257 | 1337335 | 0 | 70 | 557 |
+| 6 | persona | 人格/陪伴 | 认知 | 1792 | 1 | 9 | 462 | 531439 | -4.6 | 65 | 868 |
+| 5 | memory | 记忆 | 认知 | 1760 | 1 | 7 | 452 | 438224 | -2.4 | 105 | 780 |
+| 25 | git | Git/提交 | 开发 | 1658 | 0 | 7 | 348 | 586932 | 0 | 106 | 588 |
+| 29 | workflow | 工作流 | 编排 | 1418 | 1 | 7 | 388 | 172156 | -0.7 | 85 | 505 |
+| 16 | social | 社交/IM | 平台 | 1410 | 0 | 7 | 570 | 361993 | -2.7 | 60 | 750 |
+| 12 | browser | 浏览器 | 开发 | 1295 | 0 | 7 | 405 | 374468 | 0 | 75 | 456 |
+| 23 | automation | 自动化 | 开发 | 1283 | 1 | 10 | 386 | 423430 | -1.3 | 70 | 527 |
+| 32 | routing | 路由/网关 | 模型 | 1191 | 0 | 6 | 380 | 171911 | -0.3 | 78 | 431 |
+| 48 | collection | 插件合集 | 平台 | 1081 | 0 | 1 | 285 | 69643 | 0 | 28 | 468 |
+| 2 | voice | 语音/音频 | 媒体 | 1043 | 0 | 5 | 433 | 207900 | -1.7 | 44 | 532 |
+| 14 | remote | 远程/隧道 | 连接 | 1024 | 1 | 9 | 447 | 363371 | 0 | 66 | 375 |
+| 4 | vision | 视觉/多模态 | 媒体 | 966 | 1 | 8 | 346 | 238260 | -3.1 | 40 | 260 |
+| 7 | context | 上下文/压缩 | 认知 | 945 | 0 | 6 | 413 | 274519 | 0 | 62 | 421 |
+| 35 | export | 导出/归档 | 数据 | 898 | 0 | 3 | 404 | 138018 | -0.9 | 48 | 438 |
+| 42 | notify | 通知/提醒 | 平台 | 872 | 0 | 3 | 330 | 87949 | -1.8 | 41 | 376 |
+| 20 | cli | 命令行 | 交互 | 871 | 1 | 23 | 329 | 233770 | -2.2 | 46 | 255 |
+| 43 | productivity | 生产力/办公 | 平台 | 805 | 0 | 3 | 385 | 81793 | 0 | 45 | 433 |
+| 38 | i18n | 中文本地化 | 设计 | 744 | 0 | 5 | 297 | 86605 | -1.8 | 36 | 350 |
+| 0 | video | 视频/分镜 | 媒体 | 698 | 1 | 11 | 725 | 318205 | -3.5 | 39 | 373 |
+| 24 | shell | Shell/执行 | 开发 | 696 | 0 | 6 | 307 | 94930 | -0.3 | 37 | 204 |
+| 15 | mobile | 移动端 | 平台 | 687 | 1 | 15 | 415 | 251867 | 0 | 42 | 279 |
+| 3 | screen | 屏幕感知 | 媒体 | 625 | 0 | 4 | 338 | 111561 | -3.4 | 26 | 318 |
+| 8 | rag | 知识库/RAG | 知识 | 507 | 1 | 20 | 405 | 201848 | -1.3 | 34 | 175 |
+| 11 | awesome | 精选清单 | 其他 | 493 | 0 | 18 | 304 | 168056 | 0 | 12 | 150 |
+| 44 | game | 娱乐/游戏 | 其他 | 345 | 1 | 11 | 405 | 36386 | 0 | 18 | 148 |
+| 46 | health | 诊断/自检 | 开发 | 312 | 0 | 3 | 324 | 35519 | -1.7 | 14 | 139 |
+| 36 | database | 数据库 | 数据 | 227 | 0 | 3 | 384 | 39779 | -1.8 | 8 | 98 |
+| 17 | tui | 终端 TUI | 交互 | 186 | 1 | 23 | 290 | 45285 | 0 | 12 | 28 |
+| 47 | finance | 金融/行情 | 数据 | 171 | 0 | 5 | 392 | 16948 | -1.9 | 5 | 66 |
 
 ## FAMILY ROLLUP
 - **媒体** (tags: 视频/分镜, 图像/绘图, 语音/音频, 屏幕感知, 视觉/多模态): repos=4291, ★med=0, weekly med=434, weekly sum=1023001, growth med=-1.9, new≤30d=1805
@@ -73,67 +82,169 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 - **安全** (tags: 安全): repos=1848, ★med=0, weekly med=295, weekly sum=279742, growth med=-1.3, new≤30d=702
 - **基础设施** (tags: 框架/运行时): repos=1795, ★med=0, weekly med=257, weekly sum=1337335, growth med=0, new≤30d=557
 
-## TOP 60 BY SCORE (main rows)
-1. zilliztech/memsearch | score=99.1 | ★=2883 | wk=13548 | grow=123.5 | age=280d | seg=5 | tags=[记忆,知识库/RAG,搜索/检索,文档/笔记]
-2. tt-a1i/archify | score=98.8 | ★=96845 | wk=16124 | grow=40.3 | age=215d | seg=2 | tags=[图像/绘图,网页界面,编码/代码,智能体]
-3. ebony-vinyl/dsh-our-free-model | score=98.4 | ★=76025 | wk=20708 | grow=25.7 | age=52d | seg=3 | tags=[模型接入,成本/额度,统计/监控]
-4. t-auto/dsh-ops | score=98.4 | ★=5850 | wk=73476 | grow=26.9 | age=39d | seg=2 | tags=[自动化,成本/额度,统计/监控,设计/排版]
-5. omdsh-dev/dsh-better-sidebar | score=97.6 | ★=5182 | wk=96487 | grow=11.8 | age=100d | seg=2 | tags=[会话管理,工作区,Git/提交,文件/目录]
-6. fei2411/ds-bot | score=97 | ★=7958 | wk=21813 | grow=8.1 | age=39d | seg=0 | tags=[智能体]
-7. liguobao/ds-harness-remote | score=97 | ★=2986 | wk=30117 | grow=7.8 | age=93d | seg=0 | tags=[远程/隧道,移动端,网页界面,工作区]
-8. sixtysevenlf/dsh-blender-plugin | score=95.8 | ★=2122 | wk=4897 | grow=6.4 | age=63d | seg=2 | tags=[终端 TUI,桌面客户端,自动化,技能/Prompt]
-9. dayuanjiang/next-ai-draw-io | score=95.1 | ★=36975 | wk=1591 | grow=13.2 | age=602d | seg=1 | tags=[图像/绘图,MCP,网页界面,桌面客户端]
-10. nanmicoder/dsh-agent-teams | score=94.7 | ★=2959 | wk=14493 | grow=1.8 | age=95d | seg=0 | tags=[智能体]
-11. kenryu42/cc-safety-net | score=93.8 | ★=2053 | wk=49920 | grow=0.6 | age=325d | seg=2 | tags=[命令行,Git/提交,编码/代码,文件/目录]
-12. drscrewdriver/dsh-brief-sidebar | score=93.4 | ★=11 | wk=2283 | grow=113 | age=59d | seg=3 | tags=[工作区,插件市场,网页界面]
-13. agentscope-ai/reme | score=93 | ★=3807 | wk=1471 | grow=3.4 | age=809d | seg=5 | tags=[记忆,知识库/RAG,智能体,安装/管理]
-14. lingfengqaq/webnovel-writer | score=90 | ★=7975 | wk=732 | grow=11.2 | age=317d | seg=1 | tags=[编码/代码,智能体,中文本地化]
-15. openma-ai/deepseek-harness-acp | score=90 | ★=65 | wk=2358 | grow=0 | age=94d | seg=0 | tags=[智能体,框架/运行时,MCP]
-16. awesome-dsh-plugin/awesome-dsh-plugin | score=89.4 | ★=24798 | wk=103410 | grow=-0.6 | age=94d | seg=0 | tags=[精选清单]
-17. perrylink/dsh-output-styles | score=85.2 | ★=13 | wk=895 | grow=1.9 | age=94d | seg=0 | tags=[会话管理,编码/代码,技能/Prompt,模型接入,导出/归档]
-18. tencent/browserskill | score=84.6 | ★=10434 | wk=14082 | grow=-6.4 | age=147d | seg=2 | tags=[浏览器,命令行,自动化,Shell/执行]
-19. liustack/modlens | score=84.2 | ★=4984 | wk=70692 | grow=-7.4 | age=267d | seg=0 | tags=[图像/绘图,视觉/多模态,知识库/RAG,编码/代码]
-20. tw93/mole | score=84 | ★=75202 | wk=849 | grow=null | age=419d | seg=3 | tags=[命令行,Shell/执行,文件/目录,技能/Prompt]
-21. deepseek-ai/deepseek-harness | score=83.6 | ★=281724 | wk=1208788 | grow=-9.1 | age=95d | seg=0 | tags=[框架/运行时]
-22. bowenliang123/dsh-context | score=83.6 | ★=5149 | wk=133085 | grow=-9.4 | age=94d | seg=5 | tags=[上下文/压缩,浏览器,网页界面,工作区]
-23. dsh-market/dsh-market | score=83.2 | ★=12542 | wk=293468 | grow=-11.7 | age=94d | seg=0 | tags=[搜索/检索,插件市场]
-24. ccch1mneyyy/dsh-tui | score=83.2 | ★=7761 | wk=19082 | grow=-11.2 | age=94d | seg=3 | tags=[终端 TUI,自动化,编码/代码,智能体]
-25. volcengine/openviking | score=82.3 | ★=42282 | wk=10920 | grow=-15.9 | age=315d | seg=5 | tags=[记忆,知识库/RAG,智能体,技能/Prompt]
-26. zhu1090093659/dsh-web | score=82.2 | ★=10436 | wk=30620 | grow=-18.5 | age=96d | seg=1 | tags=[网页界面,设计/排版,插件市场]
-27. shaobeichen/dsh-pocket | score=81.7 | ★=2985 | wk=5147 | grow=-17.1 | age=93d | seg=0 | tags=[屏幕感知,远程/隧道,移动端,网页界面]
-28. small-tailqwq/dsh-deep-whale | score=81.4 | ★=3114 | wk=12767 | grow=-23.2 | age=94d | seg=0 | tags=[人格/陪伴,设计/排版]
-29. elysia395/dsh-wallpaper-engine | score=81.3 | ★=7087 | wk=28333 | grow=-26.7 | age=91d | seg=1 | tags=[语音/音频,移动端,网页界面,自动化]
-30. tencent/weknora | score=81.1 | ★=37492 | wk=3107 | grow=-15 | age=482d | seg=4 | tags=[知识库/RAG,搜索/检索,文档/笔记,智能体]
-31. pc2005-cloud/dsh-pet | score=80.8 | ★=6327 | wk=95892 | grow=-33.4 | age=94d | seg=3 | tags=[视频/分镜,人格/陪伴,桌面客户端,设计/排版]
-32. xmanrui/dsh-im | score=80.5 | ★=3627 | wk=27898 | grow=-24.8 | age=93d | seg=0 | tags=[社交/IM,自动化,编码/代码,智能体]
-33. iflytek/skillhub | score=78.9 | ★=5429 | wk=621 | grow=-3 | age=249d | seg=2 | tags=[智能体,工作流,技能/Prompt,统计/监控]
-34. cloader/dsh-taskboard | score=78.2 | ★=84 | wk=1972 | grow=-20.7 | age=93d | seg=3 | tags=[智能体,生产力/办公,网页界面]
-35. meteornox/deepseek-balance-whale-widget | score=77.3 | ★=7247 | wk=50556 | grow=-41.8 | age=90d | seg=0 | tags=[人格/陪伴,社交/IM,网页界面,成本/额度]
-36. kira905/dsh-task-board-local | score=77.2 | ★=2 | wk=788 | grow=71.7 | age=55d | seg=3 | tags=[会话管理,生产力/办公,网页界面]
-37. firefox2100/dsh-ai-providers | score=75.3 | ★=1 | wk=1775 | grow=64.2 | age=43d | seg=0 | tags=[模型接入,图像/绘图]
-38. morluto/rea | score=75 | ★=462187 | wk=null | grow=null | age=216d | seg=2 | tags=[MCP,移动端,命令行,智能体]
-39. nexu-io/open-design | score=75 | ★=107783 | wk=null | grow=null | age=202d | seg=3 | tags=[视频/分镜,网页界面,桌面客户端,工作区]
-40. ccch1mneyyy/dsh-go | score=75 | ★=23895 | wk=null | grow=null | age=22d | seg=0 | tags=[移动端,终端 TUI,编码/代码,智能体]
-41. reactive-resume/reactive-resume | score=74.9 | ★=45794 | wk=null | grow=null | age=2426d | seg=3 | tags=[MCP,生产力/办公]
-42. alchaincyf/nuwa-skill | score=74.9 | ★=38361 | wk=null | grow=null | age=225d | seg=2 | tags=[人格/陪伴,命令行,编码/代码,智能体]
-43. walkinglabs/learn-harness-engineering | score=74.9 | ★=25065 | wk=null | grow=null | age=231d | seg=0 | tags=[文档/笔记,智能体,模型接入,框架/运行时]
-44. dataelement/dsh-desktop | score=74.9 | ★=19178 | wk=null | grow=null | age=94d | seg=1 | tags=[桌面客户端,智能体]
-45. dataelement/bisheng | score=74.9 | ★=12324 | wk=null | grow=null | age=1176d | seg=4 | tags=[视觉/多模态,知识库/RAG,桌面客户端,编码/代码]
-46. nexu-io/openmotion | score=74.9 | ★=10002 | wk=null | grow=null | age=189d | seg=3 | tags=[视频/分镜,语音/音频,视觉/多模态,MCP]
-47. anbeime/skill | score=74.9 | ★=9597 | wk=null | grow=null | age=287d | seg=2 | tags=[文档/笔记,精选清单,自动化,Git/提交]
-48. superdesigndev/treg | score=74.9 | ★=8105 | wk=null | grow=null | age=123d | seg=2 | tags=[MCP,社交/IM,命令行,智能体]
-49. q00/ouroboros | score=74.9 | ★=6369 | wk=null | grow=null | age=306d | seg=2 | tags=[MCP,命令行,编码/代码,智能体]
-50. qingyuna/answer-me-with-html | score=74.9 | ★=6345 | wk=null | grow=null | age=45d | seg=2 | tags=[图像/绘图,命令行,编码/代码,智能体]
-51. openbitfun/openbitfun | score=74.9 | ★=4031 | wk=null | grow=null | age=287d | seg=0 | tags=[桌面客户端,自动化,编码/代码,智能体]
-52. dsh-tauri/deepseek-harness-desktop | score=74.9 | ★=3636 | wk=null | grow=null | age=94d | seg=0 | tags=[桌面客户端]
-53. evermind-ai/everos | score=74.8 | ★=13921 | wk=null | grow=null | age=383d | seg=5 | tags=[记忆,知识库/RAG,文档/笔记,MCP]
-54. kunkundi/crossdesk | score=74.8 | ★=4772 | wk=null | grow=null | age=1092d | seg=1 | tags=[视频/分镜,MCP,远程/隧道,网页界面]
-55. strukto-ai/mirage | score=74.8 | ★=3788 | wk=339 | grow=null | age=193d | seg=2 | tags=[远程/隧道,Shell/执行,文件/目录,智能体]
-56. whiteguo233/openbiliclaw | score=74.8 | ★=3768 | wk=null | grow=null | age=253d | seg=0 | tags=[人格/陪伴,浏览器,社交/IM,网页界面]
-57. edison7009/echobird | score=74.8 | ★=3561 | wk=null | grow=null | age=273d | seg=1 | tags=[语音/音频,人格/陪伴,桌面客户端,命令行]
-58. poco-ai/agentero | score=74.8 | ★=2539 | wk=null | grow=null | age=132d | seg=5 | tags=[上下文/压缩,知识库/RAG,文档/笔记,MCP]
-59. dream-num/univer-workspace | score=74.8 | ★=2286 | wk=null | grow=null | age=94d | seg=0 | tags=[文档/笔记,工作区,智能体,数据库]
-60. memtensor/memmy-agent | score=74.8 | ★=2217 | wk=null | grow=null | age=123d | seg=5 | tags=[记忆,人格/陪伴,MCP,终端 TUI]
+## TOP 60 BY SCORE (global, all rows)
+1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
+2. zilliztech/memsearch | score=99.1 | ★=2883 | wk=13548 | grow=123.5 | age=280d | seg=5 | cov=1 | enr=0 | tags=[记忆,知识库/RAG,搜索/检索,文档/笔记]
+3. tt-a1i/archify | score=98.8 | ★=96845 | wk=16124 | grow=40.3 | age=215d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,网页界面,编码/代码,智能体]
+4. woniuniuniu/dsh-media-desk | score=98.8 | ★=1402 | wk=8119 | grow=74.1 | age=14d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,工作区]
+5. flymysql/dsh-remote | score=98.8 | ★=291 | wk=79516 | grow=76.8 | age=94d | seg=2 | cov=1 | enr=0 | tags=[搜索/检索,远程/隧道,工作区,Git/提交]
+6. fourzkw/dsh-drawai | score=98.7 | ★=667 | wk=7817 | grow=92.4 | age=61d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,模型接入]
+7. ikalus1988/misakanet | score=98.7 | ★=561 | wk=4360 | grow=257.4 | age=200d | seg=3 | cov=1 | enr=0 | tags=[记忆,MCP,Git/提交,编码/代码]
+8. ebony-vinyl/dsh-our-free-model | score=98.4 | ★=76025 | wk=20708 | grow=25.7 | age=52d | seg=3 | cov=1 | enr=0 | tags=[模型接入,成本/额度,统计/监控]
+9. t-auto/dsh-ops | score=98.4 | ★=5850 | wk=73476 | grow=26.9 | age=39d | seg=2 | cov=1 | enr=0 | tags=[自动化,成本/额度,统计/监控,设计/排版]
+10. michengai/dsh-codex-ui | score=98.3 | ★=297 | wk=24226 | grow=41 | age=93d | seg=1 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,会话管理,工作区]
+11. ssamurias/dsh-fish | score=98 | ★=155 | wk=5620 | grow=92.1 | age=22d | seg=1 | cov=1 | enr=0 | tags=[人格/陪伴,文档/笔记,社交/IM,网页界面]
+12. xdtrees/dsh-xdpool | score=97.7 | ★=531 | wk=4734 | grow=34.6 | age=73d | seg=7 | cov=1 | enr=0 | tags=[自动化,模型接入,路由/网关,成本/额度]
+13. jialaoliu/dsh-baton | score=97.7 | ★=230 | wk=4372 | grow=83.5 | age=29d | seg=0 | cov=1 | enr=0 | tags=[MCP,编码/代码,智能体,模型接入]
+14. omdsh-dev/dsh-better-sidebar | score=97.6 | ★=5182 | wk=96487 | grow=11.8 | age=100d | seg=2 | cov=1 | enr=0 | tags=[会话管理,工作区,Git/提交,文件/目录]
+15. wnluo/dsh-mobile-plugin | score=97.6 | ★=61 | wk=58280 | grow=60 | age=36d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,移动端]
+16. dingminhua/dsh-connect-workbuddy | score=97.5 | ★=1649 | wk=34342 | grow=12.3 | age=79d | seg=0 | cov=1 | enr=0 | tags=[模型接入,成本/额度,插件市场,安装/管理]
+17. tranquillitatis-lab/dsh-live-compact | score=97.5 | ★=288 | wk=4146 | grow=37.5 | age=13d | seg=5 | cov=1 | enr=0 | tags=[上下文/压缩]
+18. chromoany/dsh-notify-me | score=97.5 | ★=136 | wk=7531 | grow=40.9 | age=68d | seg=1 | cov=1 | enr=0 | tags=[网页界面,桌面客户端,通知/提醒]
+19. songoao25/dsh-bottom-info-bar | score=97.5 | ★=61 | wk=20551 | grow=64.4 | age=93d | seg=7 | cov=1 | enr=0 | tags=[精选清单,网页界面,会话管理,模型接入]
+20. duhu2000/dsh-mcp-connector | score=97.4 | ★=130 | wk=12624 | grow=29.4 | age=87d | seg=0 | cov=1 | enr=0 | tags=[搜索/检索,MCP,模型接入,安全]
+21. drscrewdriver/dsh-browser-cdp | score=97.4 | ★=45 | wk=9607 | grow=138.7 | age=54d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,浏览器,远程/隧道,自动化]
+22. ebony-vinyl/eac-design-world | score=97.2 | ★=1550 | wk=3538 | grow=46.3 | age=30d | seg=6 | cov=1 | enr=0 | tags=[视频/分镜,MCP,工作区,编码/代码]
+23. dddmuc/dsh-free-search | score=97.2 | ★=1223 | wk=39301 | grow=10.1 | age=93d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,模型接入,成本/额度]
+24. poco-ai/agentero-dsh-plugin | score=97.2 | ★=227 | wk=4206 | grow=50 | age=17d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,文档/笔记,会话管理,智能体]
+25. wsl043/dsh-codex-subscription | score=97.1 | ★=489 | wk=10764 | grow=13.8 | age=94d | seg=7 | cov=1 | enr=0 | tags=[图像/绘图,搜索/检索,远程/隧道,移动端]
+26. aik358/dsh-auto-memory | score=97.1 | ★=202 | wk=3191 | grow=64.8 | age=94d | seg=5 | cov=1 | enr=0 | tags=[记忆,上下文/压缩,自动化,技能/Prompt]
+27. fei2411/ds-bot | score=97 | ★=7958 | wk=21813 | grow=8.1 | age=39d | seg=0 | cov=1 | enr=0 | tags=[智能体]
+28. liguobao/ds-harness-remote | score=97 | ★=2986 | wk=30117 | grow=7.8 | age=93d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,移动端,网页界面,工作区]
+29. sirilee/dsh-rewind | score=97 | ★=273 | wk=14207 | grow=15.3 | age=91d | seg=6 | cov=1 | enr=0 | tags=[图像/绘图,知识库/RAG,会话管理,工作区]
+30. orderg-x/dsh-design-studio | score=97 | ★=78 | wk=4931 | grow=49.3 | age=28d | seg=1 | cov=1 | enr=0 | tags=[图像/绘图,网页界面,桌面客户端,工作区]
+31. saya-ch/dsh-mobile | score=96.9 | ★=862 | wk=8954 | grow=10.9 | age=93d | seg=1 | cov=1 | enr=0 | tags=[屏幕感知,远程/隧道,移动端,网页界面]
+32. 2026heshao/dsh-armory | score=96.9 | ★=123 | wk=2913 | grow=60.8 | age=37d | seg=2 | cov=1 | enr=0 | tags=[MCP,网页界面,技能/Prompt,模型接入]
+33. literaf/dsh-ai4scholar | score=96.8 | ★=49 | wk=3897 | grow=71.7 | age=92d | seg=0 | cov=1 | enr=0 | tags=[搜索/检索,文档/笔记]
+34. lishize20040802-rgb/dsh-deep-ptc-mode | score=96.8 | ★=48 | wk=5273 | grow=61.9 | age=19d | seg=1 | cov=1 | enr=0 | tags=[图像/绘图,上下文/压缩,远程/隧道,网页界面]
+35. op7418/dsh-guizang-design | score=96.7 | ★=922 | wk=9039 | grow=25.8 | age=16d | seg=2 | cov=1 | enr=0 | tags=[网页界面,工作流,技能/Prompt,设计/排版]
+36. nwflower/dsh-chat-import | score=96.7 | ★=315 | wk=5383 | grow=14.4 | age=94d | seg=6 | cov=1 | enr=0 | tags=[会话管理,自动化,编码/代码,文件/目录]
+37. perrylink/dsh-auto-review | score=96.7 | ★=249 | wk=2071 | grow=76.6 | age=94d | seg=0 | cov=1 | enr=0 | tags=[会话管理,自动化,Shell/执行,编码/代码]
+38. topmindspace/dsh-super-kanban | score=96.7 | ★=107 | wk=2311 | grow=82.3 | age=11d | seg=0 | cov=1 | enr=0 | tags=[会话管理,工作区,设计/排版,安装/管理]
+39. liujiangnanchenjbguo/dsh-gufa-code | score=96.5 | ★=44 | wk=11085 | grow=44.2 | age=11d | seg=0 | cov=1 | enr=0 | tags=[远程/隧道,会话管理,Git/提交,编码/代码]
+40. hkkz9522/dsh-session-manager | score=96.4 | ★=122 | wk=3741 | grow=24.9 | age=92d | seg=6 | cov=1 | enr=0 | tags=[会话管理,工作区,智能体,导出/归档]
+41. aa728848/dsh-chatgpt-subscription | score=96.4 | ★=98 | wk=6375 | grow=17.8 | age=94d | seg=3 | cov=1 | enr=0 | tags=[成本/额度]
+42. xingxingbk-git/dsh-deepseek-chat | score=96.4 | ★=36 | wk=3333 | grow=113.9 | age=38d | seg=0 | cov=1 | enr=0 | tags=[桌面客户端,会话管理,Git/提交,插件市场]
+43. yu-tao-li/dsh-computer-use-win | score=96.3 | ★=752 | wk=10649 | grow=6.6 | age=91d | seg=0 | cov=1 | enr=0 | tags=[MCP,桌面客户端,自动化]
+44. mexiaosqwq/dsh-web-mobile | score=96.3 | ★=191 | wk=5244 | grow=13.6 | age=93d | seg=1 | cov=1 | enr=0 | tags=[移动端,网页界面,设计/排版]
+45. hyhmrright/brooks-lint | score=96.2 | ★=1578 | wk=1563 | grow=50.7 | age=235d | seg=2 | cov=1 | enr=0 | tags=[命令行,Git/提交,编码/代码,智能体]
+46. anionex/dsh-vision-toolkit | score=96.2 | ★=945 | wk=3184 | grow=12.9 | age=94d | seg=2 | cov=1 | enr=0 | tags=[图像/绘图,屏幕感知,视觉/多模态,网页界面]
+47. eternalnight996/memory-eternal | score=96.2 | ★=189 | wk=5228 | grow=11.3 | age=77d | seg=5 | cov=1 | enr=0 | tags=[记忆,MCP,编码/代码,智能体]
+48. liustack/modsearch | score=96.1 | ★=989 | wk=21924 | grow=4.6 | age=267d | seg=4 | cov=1 | enr=0 | tags=[搜索/检索,网页界面,编码/代码,智能体]
+49. q253595422/dsh-imagegen-video | score=96.1 | ★=103 | wk=3176 | grow=19.4 | age=31d | seg=0 | cov=1 | enr=0 | tags=[视频/分镜,图像/绘图,工作区,工作流]
+50. asktheway/dsh-auto-memory | score=96 | ★=132 | wk=3609 | grow=15.2 | age=54d | seg=5 | cov=1 | enr=0 | tags=[记忆,文档/笔记,自动化,编码/代码]
+51. aliboder/dsh-music-panel | score=95.9 | ★=32 | wk=20041 | grow=24.7 | age=11d | seg=1 | cov=1 | enr=0 | tags=[语音/音频,网页界面,工作区]
+52. sixtysevenlf/dsh-blender-plugin | score=95.8 | ★=2122 | wk=4897 | grow=6.4 | age=63d | seg=2 | cov=1 | enr=0 | tags=[终端 TUI,桌面客户端,自动化,技能/Prompt]
+53. microqian2th/dsh-codex-effort-slider | score=95.8 | ★=275 | wk=2851 | grow=12.9 | age=42d | seg=0 | cov=1 | enr=0 | tags=[桌面客户端,模型接入]
+54. perrylink/dsh-permission-rules | score=95.8 | ★=136 | wk=2221 | grow=30.5 | age=94d | seg=2 | cov=1 | enr=0 | tags=[会话管理,工作区,Shell/执行,编码/代码]
+55. songoao25/dsh-chatgpt-sub | score=95.8 | ★=50 | wk=2582 | grow=59.7 | age=92d | seg=7 | cov=1 | enr=0 | tags=[精选清单,会话管理,模型接入,成本/额度]
+56. omdsh-dev/dsh-llm-fallbacks | score=95.8 | ★=26 | wk=3572 | grow=65.1 | age=100d | seg=3 | cov=1 | enr=0 | tags=[智能体,模型接入]
+57. slow-stack/mneme | score=95.7 | ★=235 | wk=3840 | grow=8.7 | age=94d | seg=0 | cov=1 | enr=0 | tags=[记忆,知识库/RAG,搜索/检索,MCP]
+58. drscrewdriver/dsh-prime-memory | score=95.7 | ★=33 | wk=7038 | grow=22.8 | age=76d | seg=5 | cov=1 | enr=0 | tags=[记忆,插件市场]
+59. dingminhua/dsh-connect-qoder | score=95.6 | ★=68 | wk=5046 | grow=17.4 | age=36d | seg=0 | cov=1 | enr=0 | tags=[模型接入,路由/网关,成本/额度,插件市场]
+60. perrylink/dsh-doublecheck | score=95.6 | ★=58 | wk=2109 | grow=66.9 | age=94d | seg=0 | cov=1 | enr=0 | tags=[编码/代码,技能/Prompt,安全,插件市场]
+
+## ENRICHED SAMPLES (row[10]=1, label + summary)
+- **drscrewdriver/dsh-brief-sidebar** [score=93.4, cov=1]
+  - 标签：工作区 / 插件市场 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **openma-ai/deepseek-harness-acp** [score=90, cov=1]
+  - 标签：智能体 / 框架/运行时 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **perrylink/dsh-output-styles** [score=85.2, cov=1]
+  - 标签：会话管理 / 编码/代码 / 技能/Prompt / 模型接入 / 导出/归档
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **cloader/dsh-taskboard** [score=78.2, cov=1]
+  - 标签：智能体 / 生产力/办公 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **kira905/dsh-task-board-local** [score=77.2, cov=1]
+  - 标签：会话管理 / 生产力/办公 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **firefox2100/dsh-ai-providers** [score=75.3, cov=1]
+  - 标签：模型接入 / 图像/绘图
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **skillnerds/xskill** [score=73.4, cov=0.5]
+  - 标签：编码/代码 / 智能体 / 技能/Prompt / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **jayyuen666/dsh-session-rescue** [score=72.8, cov=1]
+  - 标签：会话管理 / 生产力/办公
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **gjj-star/dsh-conversation-navigator** [score=72.7, cov=1]
+  - 标签：网页界面 / 会话管理 / 设计/排版 / 搜索/检索
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **xi-kari/dsh-amphoreus** [score=72.1, cov=1]
+  - 标签：工作区 / 搜索/检索
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **lencx/minke** [score=71.9, cov=0.5]
+  - 标签：桌面客户端 / 智能体 / 技能/Prompt / 浏览器
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **zju-real/polaris** [score=70.9, cov=0.5]
+  - 标签：智能体 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **taxueseek/plugin-fast-adapt** [score=70.7, cov=0.5]
+  - 标签：记忆 / 文档/笔记 / 编码/代码 / 智能体 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **icycreamdas/shidi-skill** [score=70.5, cov=1]
+  - 标签：文档/笔记 / 编码/代码 / 文件/目录 / 智能体 / 导出/归档
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **jerry2262/dsh-fingerprint** [score=68.2, cov=1]
+  - 标签：模型接入 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **vonweller/dsh-skillhub** [score=67.5, cov=0.5]
+  - 标签：技能/Prompt / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **sidleo/llm-wiki** [score=66.9, cov=0.5]
+  - 标签：文档/笔记 / 智能体 / 模型接入 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **anil-matcha/awesome-dsh-plugin** [score=66.8, cov=0.5]
+  - 标签：精选清单 / 网页界面 / 命令行 / 编码/代码 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **xizhi1024/deepseek-harness-dsh-for-vscode** [score=66, cov=0.5]
+  - 标签：工作区 / 编码/代码 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **zhang-jiazhi/dsh-prompt-optimizer** [score=65.6, cov=0.5]
+  - 标签：技能/Prompt / 图像/绘图
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **gitroomhq/postiz-agent** [score=65, cov=1]
+  - 标签：命令行 / 智能体 / 技能/Prompt / 模型接入 / MCP
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **lidongbei/dsh-session-view** [score=64.5, cov=0.6]
+  - 标签：会话管理 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **ghang/dsh-cache-helper** [score=64.1, cov=0.6]
+  - 标签：会话管理 / 智能体 / 生产力/办公 / 诊断/自检 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **a1141171521/dsh-thinking-effort** [score=63.9, cov=0.5]
+  - 标签：工作区 / 文件/目录 / 模型接入 / 网页界面
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
+- **wingoo/codex-plugin-dsh** [score=63.2, cov=0.5]
+  - 标签：模型接入 / 图像/绘图
+  - 摘要：(no summary available in this snapshot)
+  - owner：- ｜ license：未知 ｜ version：未知
 
 ## MATRIX (parent × capability cell counts)
 parents: 智能体 | 会话管理 | 技能/Prompt | 工作区 | 模型接入
