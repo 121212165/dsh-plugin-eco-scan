@@ -23,3 +23,23 @@ pwsh -File scripts/verify-delivery.ps1 -Repo 121212165/dsh-plugin-eco-scan -Bran
 ```
 
 详见 [`scripts/verify-delivery.ps1`](scripts/verify-delivery.ps1) 头部说明。
+
+## Agent onboarding 与暂存区（issue #9）
+
+### 一等资产：brief + digest
+
+- [`data/AGENT_BRIEF.md`](data/AGENT_BRIEF.md) 与 [`data/digest.mjs`](data/digest.mjs)（产出 [`data/digest.md`](data/digest.md)）是仓库一等资产，**不要**在每个 agent 提示词里重写数据口径。
+- 快照更新时（替换 `data/eco-data.json` 后）**必须**同步重建摘要：
+
+  ```sh
+  node data/digest.mjs        # 重建 data/digest.md
+  ```
+
+  同时更新 `data/AGENT_BRIEF.md` 头部快照日期与报告模板里的「数据快照日期」字段。
+- 所有 agent 提示词统一引用 [`data/prompts/_common.md`](data/prompts/_common.md)（内含 brief / digest / 数据字典引用与 scratch 约定），禁止各自解释数据口径——字段映射错误（如 `row[10]`/`row[11]` 读反）正是口径各自解释造成的。
+
+### 暂存区约定
+
+- agent 的临时脚本、中间产物**只能**写到 `data/.scratch/`，提交前不要清理到 `data/` 根目录以外的地方；`data/.scratch/` 已在 `.gitignore` 忽略。
+- 可复算的最终分析器（如 `data/heat.mjs`）不属于 scratch，直接放 `data/`。
+- 自检：`git check-ignore -v data/.scratch/probe.cjs` 应有输出；`git status --untracked-files=all` 不应出现散落在 `data/` 根的临时文件。
