@@ -30,6 +30,7 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 示例：video→0, image→1, voice→2, screen→3, vision→4
 
 ## PER-TAG STATS
+> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）（下表 growth med / +growth 只覆盖有值样本）
 | tagIdx | slug | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 18 | webui | 网页界面 | 交互 | 8678 | 0 | 5 | 341 | 1686812 | -0.9 | 449 | 3012 |
@@ -84,6 +85,7 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 | 47 | finance | 金融/行情 | 数据 | 171 | 0 | 5 | 392 | 16948 | -1.9 | 5 | 66 |
 
 ## FAMILY ROLLUP
+> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）（growth med 仅基于有值样本，不可当全量结论）
 - **媒体** (tags: 视频/分镜, 图像/绘图, 语音/音频, 屏幕感知, 视觉/多模态): repos=4291, ★med=0, weekly med=434, weekly sum=1023001, growth med=-1.9, new≤30d=1805
 - **认知** (tags: 记忆, 人格/陪伴, 上下文/压缩): repos=4033, ★med=1, weekly med=441, weekly sum=1105911, growth med=-1.3, new≤30d=1793
 - **知识** (tags: 知识库/RAG, 搜索/检索, 文档/笔记): repos=4826, ★med=0, weekly med=356, weekly sum=1337202, growth med=-0.8, new≤30d=2024
@@ -160,6 +162,33 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 
 一键过滤：`applyVerificationFilter(rows, ownerCounts, {requireDownloads:true, requireStars:false, excludeFarm:true})`；CLI：`node data/dedup.mjs --filter --downloads --no-farm --limit 20`。
 
+## GROWTH QUALITY (issue #15)
+
+> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）
+
+- |growth|>100 的仓=150 ｜ 其中 |growth|>100 且 stars<100 标记为异常=145（不进增长榜）
+- 原始极值 max=2607.4 / min=-94.4；异常判据：|row[4]|>100 且 row[2]<100
+- 口径辨析：本字段是 raw=(latest−prev)/prev，无平滑先验；评分 velocity 用 (weekly−prev)/(prev+20) 且 prev<5 记 insufficient；告警 minPrev=20 是告警触发下限。三者不是同一个阈值（见 DATA-DICTIONARY.md §8）。
+
+被排除的异常样本（score 高也不放行）：
+  - lhwwxy/dsh-agentic-router growth=2607.4 ★=1 score=71.2
+  - sweet560/dsh-plugin-deepseek-chat growth=2200 ★=1 score=75.4
+  - eehcx/dsh-gentle-engram growth=1209.7 ★=1 score=65
+  - having5548/dsh-downloader growth=1103.8 ★=0 score=71.5
+  - ckarefulon/dsh-codespace-workspace growth=1070.2 ★=1 score=68.4
+
+清洗后增长榜（正数、非异常，仍必须带覆盖率注记）：
+  1. lijiaqi-ai-product-manager/dsh-agent-compare growth=951.5 ★=425 wk=92759
+  2. ikalus1988/misakanet growth=257.4 ★=561 wk=4360
+  3. toby-bridges/api-relay-audit growth=143.9 ★=914 wk=839
+  4. zilliztech/memsearch growth=123.5 ★=2883 wk=13548
+  5. qkycir-123/dsh-run2skill growth=122.9 ★=110 wk=994
+  6. aladdinslamp/dsh-plugin-input-history growth=100 ★=1 wk=24
+  7. khellendros97/dsh-launch growth=100 ★=1 wk=24
+  8. yiyunet/dsh-chatgpt-connect growth=99.9 ★=0 wk=2133
+  9. cnkang/qdrant-memory-mcp growth=99.8 ★=1 wk=1317
+  10. c10ck-p/dsh-checkpoint-dock growth=99.8 ★=1 wk=949
+
 ## TOP 60 — MAIN BOARD (quality-gated, score-sorted)
 > 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。
 1. lijiaqi-ai-product-manager/dsh-agent-compare | score=99.4 | ★=425 | wk=92759 | grow=951.5 | age=14d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,会话管理,Git/提交]
@@ -182,7 +211,7 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 18. chromoany/dsh-notify-me | score=97.5 | ★=136 | wk=7531 | grow=40.9 | age=68d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[网页界面,桌面客户端,通知/提醒]
 19. songoao25/dsh-bottom-info-bar | score=97.5 | ★=61 | wk=20551 | grow=64.4 | age=93d | seg=7 | cov=1 | enr=0 | ✅ 已验证 | tags=[精选清单,网页界面,会话管理,模型接入]
 20. duhu2000/dsh-mcp-connector | score=97.4 | ★=130 | wk=12624 | grow=29.4 | age=87d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,MCP,模型接入,安全]
-21. drscrewdriver/dsh-browser-cdp | score=97.4 | ★=45 | wk=9607 | grow=138.7 | age=54d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,浏览器,远程/隧道,自动化]
+21. drscrewdriver/dsh-browser-cdp | score=97.4 | ★=45 | wk=9607 | grow=138.7 ⚠异常(未清洗) | age=54d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,浏览器,远程/隧道,自动化]
 22. ebony-vinyl/eac-design-world | score=97.2 | ★=1550 | wk=3538 | grow=46.3 | age=30d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[视频/分镜,MCP,工作区,编码/代码]
 23. dddmuc/dsh-free-search | score=97.2 | ★=1223 | wk=39301 | grow=10.1 | age=93d | seg=4 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,网页界面,模型接入,成本/额度]
 24. poco-ai/agentero-dsh-plugin | score=97.2 | ★=227 | wk=4206 | grow=50 | age=17d | seg=4 | cov=1 | enr=0 | ✅ 已验证 | tags=[搜索/检索,文档/笔记,会话管理,智能体]
@@ -203,7 +232,7 @@ Counts: {"repos":38549,"starPositive":16661,"weeklyPositive":7001,"growthPositiv
 39. liujiangnanchenjbguo/dsh-gufa-code | score=96.5 | ★=44 | wk=11085 | grow=44.2 | age=11d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[远程/隧道,会话管理,Git/提交,编码/代码]
 40. hkkz9522/dsh-session-manager | score=96.4 | ★=122 | wk=3741 | grow=24.9 | age=92d | seg=6 | cov=1 | enr=0 | ✅ 已验证 | tags=[会话管理,工作区,智能体,导出/归档]
 41. aa728848/dsh-chatgpt-subscription | score=96.4 | ★=98 | wk=6375 | grow=17.8 | age=94d | seg=3 | cov=1 | enr=0 | ✅ 已验证 | tags=[成本/额度]
-42. xingxingbk-git/dsh-deepseek-chat | score=96.4 | ★=36 | wk=3333 | grow=113.9 | age=38d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[桌面客户端,会话管理,Git/提交,插件市场]
+42. xingxingbk-git/dsh-deepseek-chat | score=96.4 | ★=36 | wk=3333 | grow=113.9 ⚠异常(未清洗) | age=38d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[桌面客户端,会话管理,Git/提交,插件市场]
 43. yu-tao-li/dsh-computer-use-win | score=96.3 | ★=752 | wk=10649 | grow=6.6 | age=91d | seg=0 | cov=1 | enr=0 | ✅ 已验证 | tags=[MCP,桌面客户端,自动化]
 44. mexiaosqwq/dsh-web-mobile | score=96.3 | ★=191 | wk=5244 | grow=13.6 | age=93d | seg=1 | cov=1 | enr=0 | ✅ 已验证 | tags=[移动端,网页界面,设计/排版]
 45. hyhmrright/brooks-lint | score=96.2 | ★=1578 | wk=1563 | grow=50.7 | age=235d | seg=2 | cov=1 | enr=0 | ✅ 已验证 | tags=[命令行,Git/提交,编码/代码,智能体]
@@ -355,6 +384,7 @@ MCP (total=1903): 2,8,5,4,3,5,7,11,13,10,10,17,261,185,184,62,50,51,52,78,80,141
 安全 (total=1838): 0,1,1,0,0,0,0,0,1,0,1,4,322,207,103,85,44,75,59,61,69,153,161,173,165,153
 
 ## DOWNLOAD TOP 30
+> growth：n=5,639，覆盖 14.6%（全库 38,549，缺失 32,910；单快照样本信号，不可当全量结论）；高下载+负增长按 issue #22 标注为「存量留存风险」。
 1. deepseek-ai/deepseek-harness wk=1208788 ★=281724 grow=-9.1
 2. dsh-market/dsh-market wk=293468 ★=12542 grow=-11.7
 3. bowenliang123/dsh-context wk=133085 ★=5149 grow=-9.4

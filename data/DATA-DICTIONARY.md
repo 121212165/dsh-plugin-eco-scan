@@ -143,3 +143,23 @@
 | `growth` / velocity | `rows[4]` / `meta.counts.velocity` | 见第 5 节 velocity 段；单快照时只作方向参考。 |
 
 **统一禁用规则**：`null`/`—` 一律按「无数据」处理，不填 0；不同量纲不相加；报告必须带数据快照日期与来源，避免结果与快照对不上。
+
+---
+
+## 8. growth 口径、覆盖率与异常值（issue #15）
+
+**字段**：`row[4]=growthRawPct`，本快照为原始环比百分比 `raw = (latest − prev) / prev × 100`，**未做平滑、无 minPrev 下限**。
+
+| 口径 | 位置 | 公式 / 阈值 | 用途 |
+|---|---|---|---|
+| 原始 growth | `rows[4]` | `(latest−prev)/prev × 100`；`prev<=0` 或缺失 → `null` | 领域扫描的单快照方向信号；**必须带覆盖率注记** |
+| 评分 velocity | `src/core/scoring.ts` | `g = (weekly−prev)/(prev + VELOCITY_PRIOR)`，`VELOCITY_PRIOR = 20`；`MIN_PREV_FOR_VELOCITY = 5`，`prev<5` → `insufficient`（半分且出榜） | 综合分的 velocity 分项 |
+| 告警增长 | `src/core/alerts.ts` | `growth-pct` 规则默认 `minPrev = 20`，`prev<20` 不触发告警 | 运行时告警触发下限 |
+
+**「README minPrev:20 对不上」的澄清**：README 的 `minPrev:20` 是**告警规则**的触发下限，不是 `rows[4]` 的门槛；平滑公式里的 `+20` 是贝叶斯先验分母；评分体系的 `MIN_PREV_FOR_VELOCITY` 是 **5**。三者名字里都有「prev/20」但是三个不同概念，不能互相替代。
+
+**覆盖率纪律（强制）**：本快照 growth 仅 5,639 / 38,549 有值，覆盖 **14.6%**（缺失 32,910）。任何引用 growth 的报告/榜单必须写「n=5,639，覆盖 14.6%」，由 `data/growth-quality.mjs` 的 `growthCoverageNote()` 生成；中位数等统计量只能解释为「有值样本的中位数」，不可当全量结论。
+
+**异常值清洗**：`|growth| > 100 且 stars < 100` 标记为异常（本快照 145 个），不进增长榜；原始极值 max=2607.4、min 见 digest `## GROWTH QUALITY`。`rankGrowthSafe()` 在排序前剔除异常值，`growthFlag()` 在榜单行内打 `⚠异常(未清洗)`。
+
+**当前结论**：单快照 `velocity` 三项全空，growth 只是单期样本信号。连续快照积累后应按第 5 节做校准，再谈趋势。

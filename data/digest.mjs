@@ -3,6 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { ROW, stats } from './schema.mjs';
 import { mainBoard, renderQualityGate } from './quality-gate.mjs';
 import { countOwners, verificationBadge, renderDedup } from './dedup.mjs';
+import { growthCoverageNote, renderGrowthQuality, growthFlag } from './growth-quality.mjs';
 
 // rows[] is a POSITIONAL array. Source of truth: data/DATA-DICTIONARY.md.
 //   [0] id (owner/repo)      [1] score                 [2] stars
@@ -46,6 +47,7 @@ export function buildDigest(D) {
   ROWS.forEach(r => (r[9]||[]).forEach(t => { if(!byTag.has(t)) byTag.set(t,[]); byTag.get(t).push(r); }));
 
   out += '## PER-TAG STATS\n';
+  out += `> ${growthCoverageNote(ROWS)}（下表 growth med / +growth 只覆盖有值样本）\n`;
   out += '| tagIdx | slug | name | fam | n | ★med | ★p90 | weekly med | weekly sum | growth med | +growth | new≤30d |\n';
   out += '|---|---|---|---|---|---|---|---|---|---|---|---|\n';
   for (const [t, list] of [...byTag.entries()].sort((a,b)=>b[1].length-a[1].length)) {
@@ -55,6 +57,7 @@ export function buildDigest(D) {
   }
 
   out += '\n## FAMILY ROLLUP\n';
+  out += `> ${growthCoverageNote(ROWS)}（growth med 仅基于有值样本，不可当全量结论）\n`;
   const famMap = new Map();
   T.forEach((t,i)=> { if(!famMap.has(t.fam)) famMap.set(t.fam,[]); famMap.get(t.fam).push(i); });
   for (const [f, ids] of famMap) {
@@ -67,12 +70,13 @@ export function buildDigest(D) {
   const ownerCounts = countOwners(ROWS);
   out += '\n' + renderQualityGate(ROWS, board);
   out += '\n' + renderDedup(ROWS);
+  out += '\n' + renderGrowthQuality(ROWS);
 
   out += '\n## TOP 60 — MAIN BOARD (quality-gated, score-sorted)\n';
   out += '> 排序仍是全局 score 降序（issue #12），但先经 issue #19 门禁剔除归档与 coverage<0.4 的空壳；`topByScore()` 保留为无门禁的参照函数。行尾徽章来自 issue #20 的 `verificationBadge()`。\n';
   for (const [i, r] of board.entries()) {
     const badge = verificationBadge(r, ownerCounts);
-    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | ${badge.label} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
+    out += `${i+1}. ${r[0]} | score=${r[1]} | ★=${r[2]} | wk=${r[3]} | grow=${r[4]}${growthFlag(r)} | age=${r[5]}d | seg=${r[6]} | cov=${r[11]} | enr=${r[10]} | ${badge.label} | tags=[${(r[9]||[]).map(name).join(',')}]\n`;
   }
 
   out += '\n## ENRICHED SAMPLES (row[10]=1, label + summary)\n';
@@ -99,6 +103,7 @@ export function buildDigest(D) {
   (M.heat||[]).forEach(h => { out += `${name(h.tag)} (total=${h.total}): ${h.cells.join(',')}\n`; });
 
   out += '\n## DOWNLOAD TOP 30\n';
+  out += `> ${growthCoverageNote(ROWS)}；高下载+负增长按 issue #22 标注为「存量留存风险」。\n`;
   (M.downloadTop||[]).slice(0,30).forEach((x,i)=>{ out += `${i+1}. ${x.repo} wk=${x.weekly} ★=${x.stars} grow=${x.growth}\n`; });
 
   return out;
